@@ -28,6 +28,7 @@ O sistema é independente e totalmente auto-contido, não necessitando interagir
 ### Estrutura de Diretório do Projeto
 Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 
+```
 /project-root
 │   README.md
 │   package.json
@@ -46,3 +47,4 @@ Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 └───/test
     ├───/unit
     └───/integration
+```
