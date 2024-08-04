@@ -11,8 +11,8 @@ São os requisitos que definem os critérios de qualidade e restrições que o s
 ## Especificação Correta
 Cada requisito reflete exatamente o que se espera do sistema, sendo tecnicamente viável e validado junto aos stakeholders para garantir que está correto.
 
-## Consistência
+## Especificação Consistente
 Os requisitos são harmoniosos entre si, sem apresentar conflitos ou contradições. Tanto os requisitos funcionais quanto os não funcionais estão alinhados e integrados de forma coerente.
 
-## Ausência de Ambiguidade
+## Especificação Sem Ambiguidade
 Cada requisito é descrito de forma clara e precisa, sem ambiguidades. O uso de termos vagos como "geralmente", "normalmente" ou "adequado" foi evitado.
