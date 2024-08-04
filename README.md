@@ -111,15 +111,15 @@ Permite aos administradores remover funcionários do sistema, caso seja necessá
 ## Requisitos Não Funcionais 
 
 
-### [RNF001] Responsividade e Acessibilidade:
+### [RNF001] Responsividade e Acessibilidade
 O sistema deve ser responsivo e acessível em dispositivos móveis, tablets e desktops, garantindo uma boa experiência de uso em diferentes tamanhos de tela.
 
 ### [RNF002] Tolerância a Falhas
 O sistema deve ser capaz de detectar e recuperar-se automaticamente de falhas sem intervenção do usuário, garantindo que o tempo de inatividade não exceda 1 minuto por mês.
 
-### [RNF003] Capacidade de Acesso Simultâneo:
+### [RNF003] Capacidade de Acesso Simultâneo
 O sistema deve ser capaz de suportar até 1000 acessos simultâneos de usuários sem degradação perceptível de desempenho.
 
-### [RNF004] Criptografia de Comunicações:
+### [RNF004] Criptografia de Comunicações
 Todas as comunicações entre o cliente e o servidor devem ser criptografadas utilizando HTTPS.
 
