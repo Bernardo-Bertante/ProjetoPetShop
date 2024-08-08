@@ -1,9 +1,4 @@
 # ProjetoPetShop
-```markdown
-![Progresso](https://progress-bar.dev/50/)  
-Progresso: 50%
-```
-
 ![Imagem](./TabelaUML.drawio.svg)
 
 ## Visão Geral do Produto
