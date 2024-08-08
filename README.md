@@ -1,5 +1,8 @@
 # ProjetoPetShop
-![Progress](https://progress-bar.dev/0/?title=Progress)
+```markdown
+![Progresso](https://progress-bar.dev/50/)  
+Progresso: 50%
+```
 
 ![Imagem](./TabelaUML.drawio.svg)
 
