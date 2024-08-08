@@ -108,13 +108,13 @@ Permite aos administradores remover funcionários do sistema, caso seja necessá
 
 
 ### [RNF001] Responsividade e Acessibilidade
-O sistema deve ser responsivo e acessível em dispositivos móveis, tablets e desktops, garantindo uma boa experiência de uso em diferentes tamanhos de tela.
+O sistema deve ser responsivo e acessível em dispositivos desktop, garantindo uma boa experiência de uso em telas HD.
 
 ### [RNF002] Tolerância a Falhas
-O sistema deve ser capaz de detectar e recuperar-se automaticamente de falhas sem intervenção do usuário, garantindo que o tempo de inatividade não exceda 1 minuto por mês.
+O sistema deve ser capaz de detectar e recuperar-se automaticamente de falhas de software e falhas de rede temporárias, sem intervenção do usuário, garantindo que o tempo de inatividade não exceda 1 minuto por mês.
 
 ### [RNF003] Capacidade de Acesso Simultâneo
-O sistema deve ser capaz de suportar até 1000 acessos simultâneos de usuários sem degradação perceptível de desempenho.
+O sistema deve ser capaz de suportar até 1000 acessos simultâneos de usuários sem degradação de 30% de desempenho.
 
 ### [RNF004] Criptografia de Comunicações
 Todas as comunicações entre o cliente e o servidor devem ser criptografadas utilizando HTTPS.
