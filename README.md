@@ -50,6 +50,7 @@ Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 │   README.md
 │   TabelaUML.drawio
 |   TabelaUML.drawio.svg
+|   TabelaUML.png
 ```
 
 ## Requisitos Funcionais (Casos de Uso)
