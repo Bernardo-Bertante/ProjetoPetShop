@@ -37,23 +37,19 @@ Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 
 ```
 /project-root
+│  
+├───/Padrões Adotados
+│   └───Regras de Verificação e Analise de Requisitos.md
+│
+├───/Requisitos
+│   ├───Diagrama de Classes.drawio.png
+│   ├───Diagrama de Pacotes.drawio.png
+│   ├───Diagrama de Sequência.drawio
+│   └───DocumentoRequisitos.docx
+│
 │   README.md
-│   package.json
-│
-├───/src
-│   ├───/controllers
-│   ├───/models
-│   ├───/routes
-│   ├───/services
-│   ├───/repositories
-│   └───/config
-│
-├───/public
-│   ├───/images
-│
-└───/test
-    ├───/unit
-    └───/integration
+│   TabelaUML.drawio
+|   TabelaUML.drawio.svg
 ```
 
 ## Requisitos Funcionais (Casos de Uso)
