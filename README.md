@@ -1,4 +1,6 @@
 # ProjetoPetShop
+![Progress](https://progress-bar.dev/0/?title=Progress)
+
 ![Imagem](./TabelaUML.drawio.svg)
 
 ## Visão Geral do Produto
