@@ -8,11 +8,21 @@ São os requisitos que definem os critérios de qualidade e restrições que o s
 
 # Especificação de Requisitos
 
-## Especificação Correta
-Cada requisito reflete exatamente o que se espera do sistema, sendo tecnicamente viável e validado junto aos stakeholders para garantir que está correto.
+## Definir somente um requisito por vez
+Cada requisito deve ser descrito de forma isolada, sem combinar múltiplos requisitos em uma única frase. <br>
 
-## Especificação Consistente
-Os requisitos são harmoniosos entre si, sem apresentar conflitos ou contradições. Tanto os requisitos funcionais quanto os não funcionais estão alinhados e integrados de forma coerente.
+INCORRETO: O software DEVE permitir o registro de clientes E não DEVE permitir o registro de dois clientes com o mesmo CPF <br>
+CORRETO: O software DEVE permitir o registro de clientes <br>
+O software não DEVE permitir o registro de dois clientes com o mesmo CPF
 
-## Especificação Sem Ambiguidade
-Cada requisito é descrito de forma clara e precisa, sem ambiguidades. O uso de termos vagos como "geralmente", "normalmente" ou "adequado" foi evitado.
+## Evitar frases grandes
+As frases devem ser concisas, facilitando a leitura e compreensão dos requisitos. <br>
+
+INCORRETO: O software DEVE permitir o registro dos clientes do nosso Pet Shop <br>
+CORRETO: O software DEVE permitir o registro dos clientes da empresa
+
+## Sem Ambiguidade
+Cada requisito é descrito de forma clara e precisa, sem ambiguidades. O uso de termos vagos como "geralmente", "normalmente" ou "adequado" foi evitado. <br>
+
+INCORRETO: O sistema DEVE carregar a página rapidamente. <br>
+CORRETO: O sistema DEVE carregar a página em até 3 segundos, em uma conexão de internet com velocidade de 5 Mbps ou superior.
