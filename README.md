@@ -109,7 +109,7 @@ Permite aos administradores remover funcionários do sistema, caso seja necessá
 
 
 ### [RNF001] Responsividade e Acessibilidade
-O sistema deve ser responsivo e acessível em dispositivos desktop, garantindo uma boa experiência de uso em telas HD.
+O sistema deve ser responsivo e acessível em dispositivos desktop, garantindo uma boa experiência de uso em telas Full HD.
 
 ### [RNF002] Tolerância a Falhas
 O sistema deve ser capaz de detectar e recuperar-se automaticamente de falhas de software e falhas de rede temporárias, sem intervenção do usuário, garantindo que o tempo de inatividade não exceda 1 minuto por mês.
