@@ -127,24 +127,15 @@ router.put(
     }
 );
 
-router.get(
-    "/profile",
-    ensureAuthenticated,
-    async (req, res, next: NextFunction) => {
-        const user: any = req.user;
+// get no profile do funcionario
 
-        if (!user) {
-            res.send("User not found!");
-        }
-
-        try {
-            const Resultuser = await FuncionarioService.getFuncionario(
-                user.username
-            );
-            res.status(200).send({ user: Resultuser });
-        } catch (error) {
-            next(error);
-        }
+router.get("/profile", ensureAuthenticated, async (req, res, next) => {
+    try {
+        const user = await FuncionarioService.getFuncionario(req.body.email);
+        return res.status(200).send({ user });
+    } catch (error) {
+        next(error);
     }
-);
+});
+
 export { router as FuncionarioRouter };
