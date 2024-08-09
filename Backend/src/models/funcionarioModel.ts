@@ -5,7 +5,7 @@ import PasswordValidator from "password-validator";
 const passwordSchema = new PasswordValidator();
 passwordSchema
     .is()
-    .min(8)
+    .min(6)
     .is()
     .max(30)
     .has()

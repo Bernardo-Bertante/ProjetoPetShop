@@ -5,6 +5,7 @@ const createFuncionario = async (user: FuncionarioType) => {
     try {
         await FuncionarioModel.sync();
         await FuncionarioModel.create(user);
+
         return user;
     } catch (error) {
         throw error;
@@ -17,10 +18,10 @@ const deleteFuncionario = async (email: string) => {
             where: { email: email },
         });
         if (!userForDelete) {
-            throw new Error("User not found");
+            throw new Error("Funcionário não encontrado.");
         }
         await userForDelete.destroy();
-        return "User deleted successfully!";
+        return "Funcionário deletado com sucesso!";
     } catch (error) {
         throw error;
     }

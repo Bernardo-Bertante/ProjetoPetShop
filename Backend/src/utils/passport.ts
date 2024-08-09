@@ -3,28 +3,32 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { FuncionarioModel } from "../models/FuncionarioModel";
 
 passport.use(
-    new LocalStrategy(async (email, password, done) => {
-        console.log("Local Strategy");
-        try {
-            const user = await FuncionarioModel.findOne({
-                where: { email: email },
-            });
-            if (!user) {
-                return done(null, false, {
-                    message: "Usuário ou senha incorretos.",
+    new LocalStrategy(
+        { usernameField: "email", passwordField: "password" }, // Specify the field names
+        async (email, password, done) => {
+            console.log("Local Strategy");
+            try {
+                const user = await FuncionarioModel.findOne({
+                    where: { email: email },
                 });
-            }
-            if (!(await user.comparePassword(password))) {
-                return done(null, false, {
-                    message: "Usuário ou senha incorretos.",
-                });
-            }
+                if (!user) {
+                    return done(null, false, {
+                        message: "Usuário ou senha incorretos.",
+                    });
+                }
+                if (!(await user.comparePassword(password))) {
+                    return done(null, false, {
+                        message: "Usuário ou senha incorretos.",
+                    });
+                }
 
-            return done(null, user);
-        } catch (error) {
-            return done(error);
+                return done(null, user);
+            } catch (error) {
+                console.log("Error in LocalStrategy:", error);
+                return done(error);
+            }
         }
-    })
+    )
 );
 
 passport.serializeUser((user: any, done) => {
