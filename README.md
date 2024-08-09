@@ -120,3 +120,34 @@ O sistema deve ser capaz de suportar até 1000 acessos simultâneos de usuários
 ### [RNF004] Criptografia de Comunicações
 Todas as comunicações entre o cliente e o servidor devem ser criptografadas utilizando HTTPS.
 
+# Regras de Clean Code
+
+- **Funções Pequenas e Coesas**: Cada função deve fazer apenas uma coisa.
+
+- **Evite Código Duplicado**: Reutilize funções para evitar duplicação.
+
+- **Separe a Lógica de Negócio da Infraestrutura**: Mantenha a lógica de negócio separada da infraestrutura. Utilize interfaces e injeção de dependências para facilitar a manutenção e os testes.
+
+- **Nomes Claros e Descritivos**: Use nomes que expliquem a intenção.
+
+- **Use Objetos para Agrupar Parâmetros Relacionados**: Torne as funções mais fáceis de chamar e entender.
+
+- **Controle o Fluxo de Forma Clara e Linear**: Evite condicionais aninhadas complexas. Mantenha funções curtas e com responsabilidades únicas.
+
+# Mensagens de Commit
+
+- Mensagens curtas e descritivas.
+
+- Utilizar um prefixo que indique o tipo de mudança:
+
+## Regras de Commit
+
+- **feat**: Implementação de uma nova funcionalidade.
+- **fix**: Correção de um problema ou erro.
+- **docs**: Alterações na documentação.
+- **style**: Ajustes de formatação que não afetam a lógica do código (espaços, formatação, pontuação, etc).
+- **refactor**: Modificações no código que não envolvem correções de bugs ou novas funcionalidades.
+- **test**: Inclusão ou atualização de testes.
+- **chore**: Alterações na configuração do projeto ou tarefas de manutenção e suporte.
+
+
