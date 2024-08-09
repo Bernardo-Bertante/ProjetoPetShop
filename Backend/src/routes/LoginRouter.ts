@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { FuncionarioRouter } from "../controllers/FuncionarioController";
+import { LoginRoutes } from "../controllers/LoginController";
 import errorHandler from "../middleware/errorHandler";
 
 const router = Router();
-router.use("/funcionario", FuncionarioRouter, errorHandler);
+router.use("/", LoginRoutes, errorHandler);
 
 export { router as LoginRouter };

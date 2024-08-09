@@ -1,10 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import FuncionarioService from "../services/FuncionarioService";
 import { config } from "dotenv";
-import { FuncionarioModel } from "../models/FuncionarioModel";
 import { FuncionarioType } from "../types/FuncionarioType";
-import { ValidationError } from "sequelize";
-//import { ensureAuthenticated } from "../middlewares/protectedRoute";
 import passport from "../utils/passport";
 import errorHandler from "../middleware/errorHandler";
 
@@ -91,12 +88,6 @@ router.post(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const user: any = req.body.email;
-            if (user.allowsession) {
-                await FuncionarioModel.update(
-                    { allowsession: false },
-                    { where: { email: user.email } }
-                );
-            }
 
             req.logout(function (err) {
                 if (err) {
@@ -147,4 +138,4 @@ router.get("/all", async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-export { router as FuncionarioRouter };
+export { router as FuncionarioRoutes };

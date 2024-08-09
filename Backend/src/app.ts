@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "passport";
 import flash from "express-flash";
+import { AdminRouter } from "./routes/AdminRouter";
 import { LoginRouter } from "./routes/LoginRouter";
 import { config } from "dotenv";
 
@@ -46,6 +47,7 @@ app.use(
 app.use(flash());
 
 // Rotas
+app.use(AdminRouter);
 app.use(LoginRouter);
 
 // Manipulador de erro para mensagens flash
