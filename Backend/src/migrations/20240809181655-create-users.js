@@ -1,6 +1,7 @@
 "use strict";
 module.exports = {
     up: async (queryInterface, Sequelize) => {
+        // Criação das tabelas
         await queryInterface.createTable("Funcionarios", {
             id: {
                 allowNull: false,
@@ -158,8 +159,78 @@ module.exports = {
                 type: Sequelize.DATE,
             },
         });
+
+        await queryInterface.createTable("Agendamentos", {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: Sequelize.INTEGER,
+            },
+            nomeDonoAgendamento: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "Clientes",
+                    key: "id",
+                },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
+            },
+            nomeAnimalAgendamento: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            especieAnimalAgendamento: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            tipoServicoAgendamento: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "Servicos",
+                    key: "id",
+                },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
+            },
+            horarioAgendamento: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "Horario",
+                    key: "id",
+                },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
+            },
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE,
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE,
+            },
+        });
+
+        // Inserir dados na tabela Horario
+        await queryInterface.bulkInsert(
+            "Horario",
+            [
+                {
+                    horario: new Date("2024-08-09T15:30:00"),
+                    disponibilidade: true,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+            ],
+            {}
+        );
     },
     down: async (queryInterface, Sequelize) => {
+        await queryInterface.dropTable("Agendamentos");
         await queryInterface.dropTable("Funcionarios");
         await queryInterface.dropTable("Clientes");
         await queryInterface.dropTable("Servicos");

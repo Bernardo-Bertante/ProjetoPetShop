@@ -2,52 +2,52 @@ import { sequelize } from "../connections/Sequelize";
 import { DataTypes, Model } from "sequelize";
 
 class Agendamento extends Model {
-    declare nomeDono: string;
-    declare nomeAnimal: string;
-    declare especieAnimal: string;
-    declare tipoServico: string;
-    declare horario: Date;
+    declare nomeDonoAgendamento: number; // ID do Cliente
+    declare nomeAnimalAgendamento: number; // ID do Cliente
+    declare especieAnimalAgendamento: number; // ID do Cliente
+    declare tipoServicoAgendamento: number; // ID do Serviço
+    declare horarioAgendamento: number; // ID do Horário
 }
 
 Agendamento.init(
     {
         nomeDonoAgendamento: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Cliente",
+                model: "Clientes",
                 key: "id",
             },
         },
         nomeAnimalAgendamento: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Cliente",
+                model: "Clientes",
                 key: "id",
             },
         },
         especieAnimalAgendamento: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Cliente",
+                model: "Clientes",
                 key: "id",
             },
         },
         tipoServicoAgendamento: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Servico",
+                model: "Servicos",
                 key: "id",
             },
         },
         horarioAgendamento: {
-            type: DataTypes.DATE,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Horario",
+                model: "Horarios",
                 key: "id",
             },
         },
