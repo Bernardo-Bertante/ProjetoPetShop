@@ -5,7 +5,6 @@ import session from "express-session";
 import passport from "passport";
 import flash from "express-flash";
 import { LoginRouter } from "./routes/LoginRouter";
-import { routes } from "./routes/routes";
 import { config } from "dotenv";
 
 const app = express();
@@ -47,7 +46,6 @@ app.use(
 app.use(flash());
 
 // Rotas
-app.use(routes);
 app.use(LoginRouter);
 
 // Manipulador de erro para mensagens flash

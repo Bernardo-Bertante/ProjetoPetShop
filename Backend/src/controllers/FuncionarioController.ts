@@ -4,48 +4,45 @@ import { config } from "dotenv";
 import { FuncionarioModel } from "../models/FuncionarioModel";
 import { FuncionarioType } from "../types/FuncionarioType";
 import { ValidationError } from "sequelize";
-import { ensureAuthenticated } from "../middlewares/protectedRoute";
-import passport from "../utils/passportoptions";
+//import { ensureAuthenticated } from "../middlewares/protectedRoute";
+import passport from "../utils/passport";
 
 config();
 
 const router = Router();
 
-router.post(
-    "/register",
-    async (req: Request, res: Response, next: NextFunction) => {
-        const user: FuncionarioType = {
-            nome: req.body.nome,
-            sobrenome: req.body.sobrenome,
-            cpf: req.body.cpf,
-            dataNascimento: req.body.dataNascimento,
-            password: req.body.password,
-            telefone: req.body.telefone,
-            email: req.body.email,
-            isAdmin: req.body.isAdmin,
-            secret: req.body.secret,
-        };
+router.post("/oi", async (req: Request, res: Response, next: NextFunction) => {
+    const user: FuncionarioType = {
+        nome: req.body.nome,
+        sobrenome: req.body.sobrenome,
+        cpf: req.body.cpf,
+        dataNascimento: req.body.dataNascimento,
+        password: req.body.password,
+        telefone: req.body.telefone,
+        email: req.body.email,
+        isAdmin: false,
+        secret: "secret",
+    };
 
-        //const userValidation = UserType.safeParse(user);
+    //const userValidation = UserType.safeParse(user);
 
-        // if (!userValidation.success) {
-        //     return res.status(400).send({
-        //         message: "Invalid user data",
-        //         error: userValidation.error,
-        //     });
-        // }
+    // if (!userValidation.success) {
+    //     return res.status(400).send({
+    //         message: "Invalid user data",
+    //         error: userValidation.error,
+    //     });
+    // }
 
-        try {
-            const result = await FuncionarioService.createFuncionario(user);
-            res.status(201).send({
-                message: "User registered successfully",
-                funcionario: result.nome,
-            });
-        } catch (err) {
-            next(err);
-        }
+    try {
+        const result = await FuncionarioService.createFuncionario(user);
+        res.status(201).send({
+            message: "User registered successfully",
+            funcionario: result.nome,
+        });
+    } catch (err) {
+        next(err);
     }
-);
+});
 
 // rota para deletar um funcionario
 
@@ -77,7 +74,7 @@ router.post("/login", (req, res, next) => {
             if (err) return next(err);
             // Retorna um JSON com a URL de redirecionamento para sucesso
             return res.status(200).json({
-                redirectUrl: "/account/verify",
+                redirectUrl: "/home",
                 user: user,
             });
         });
@@ -112,7 +109,6 @@ router.post(
 
 router.put(
     "/profile/edit",
-    ensureAuthenticated,
     async (req: Request, res: Response, next: NextFunction) => {
         const updates = req.body;
 
@@ -129,7 +125,7 @@ router.put(
 
 // get no profile do funcionario
 
-router.get("/profile", ensureAuthenticated, async (req, res, next) => {
+router.get("/profile", async (req, res, next) => {
     try {
         const user = await FuncionarioService.getFuncionario(req.body.email);
         return res.status(200).send({ user });
