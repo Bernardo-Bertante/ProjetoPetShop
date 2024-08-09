@@ -7,7 +7,7 @@
 O objetivo do software é gerenciar o sistema interno de serviços de um Pet Shop (Loja de serviços para Animais). Ele facilita a administração e o controle dos serviços oferecidos pelo Pet Shop, permitindo um gerenciamento eficiente dos funcionários, clientes, pets, serviços e agendamentos.
 
 ### Tecnologias Utilizadas
-- **IDE: Visual Studio Code**
+- **IDE: Visual Studio Code 1.92** 
 - **TypeScript: 5.5**
 - **JavaScript: ES2016**
 - **PostgreSQL: 16.0**
