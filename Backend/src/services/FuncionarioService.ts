@@ -27,27 +27,32 @@ const findByEmail = async (email: string) => {
         throw error;
     }
 };
-const getFuncionario = async (username: string) => {
+
+const getFuncionarios = async () => {
     try {
-        const user = await FuncionarioPersistance.getFuncionario(username);
+        const users = await FuncionarioPersistance.getFuncionarios();
+        return users;
+    } catch (error) {
+        throw error;
+    }
+};
+
+const updateFuncionario = async (id: string, updates: any) => {
+    try {
+        const user = await FuncionarioPersistance.updateFuncionario(
+            id,
+            updates
+        );
         return user;
     } catch (error) {
         throw error;
     }
 };
-//d
-const updateFuncionario = async (updates: any) => {
-    try {
-        const user = await FuncionarioPersistance.updateFuncionario(updates);
-        return user;
-    } catch (error) {
-        throw error;
-    }
-};
+
 export default {
     createFuncionario,
     deleteFuncionario,
     findByEmail,
-    getFuncionario,
+    getFuncionarios,
     updateFuncionario,
 };

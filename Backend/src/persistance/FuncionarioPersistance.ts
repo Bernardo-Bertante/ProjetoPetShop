@@ -42,42 +42,35 @@ const findEmail = async (email: string) => {
     }
 };
 
-const getFuncionario = async (username: string) => {
+const getFuncionarios = async () => {
     try {
-        const user = await FuncionarioModel.findOne({
-            where: { username: username },
-        });
-        if (!user) {
-            throw new Error("User not found");
-        }
-        return user;
+        const users = await FuncionarioModel.findAll(); // Busca todos os funcionários
+        return users;
     } catch (error) {
         throw error;
     }
 };
 
-const updateFuncionario = async (updates: any) => {
+const updateFuncionario = async (id: string, updates: any) => {
     try {
-        const user: any = await FuncionarioModel.findByPk(updates.id);
-        if (!user) {
-            throw new Error("User not found");
-        }
-
-        Object.keys(updates).forEach((key) => {
-            user[key] = updates[key] !== undefined ? updates[key] : user[key];
+        const [updatedRows] = await FuncionarioModel.update(updates, {
+            where: { id: id },
+            returning: true, // Retorna o registro atualizado
         });
-
-        await user.save();
-
-        return user;
+        if (updatedRows === 0) {
+            return null; // Nenhum registro atualizado
+        }
+        // Retorna o registro atualizado
+        return FuncionarioModel.findOne({ where: { id } });
     } catch (error) {
         throw error;
     }
 };
+
 export default {
     createFuncionario,
     deleteFuncionario,
     findEmail,
-    getFuncionario,
+    getFuncionarios,
     updateFuncionario,
 };

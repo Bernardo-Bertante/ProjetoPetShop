@@ -113,12 +113,22 @@ router.post(
 );
 
 router.put(
-    "/profile/edit",
+    "/editar/:id",
     async (req: Request, res: Response, next: NextFunction) => {
+        const id = req.params.id; // Obtém o ID da URL
         const updates = req.body;
 
         try {
-            const user = await FuncionarioService.updateFuncionario(updates);
+            // Atualiza o funcionário com base no ID e os dados recebidos
+            const user = await FuncionarioService.updateFuncionario(
+                id,
+                updates
+            );
+            if (!user) {
+                return res
+                    .status(404)
+                    .send({ message: "Funcionário não encontrado" });
+            }
             return res
                 .status(200)
                 .send({ message: "Perfil atualizado com sucesso", user });
@@ -128,12 +138,10 @@ router.put(
     }
 );
 
-// get no profile do funcionario
-
-router.get("/profile", async (req, res, next) => {
+router.get("/all", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const user = await FuncionarioService.getFuncionario(req.body.email);
-        return res.status(200).send({ user });
+        const users = await FuncionarioService.getFuncionarios();
+        return res.status(200).send(users);
     } catch (error) {
         next(error);
     }
