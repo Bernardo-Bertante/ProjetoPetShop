@@ -1,0 +1,63 @@
+import { sequelize } from "../connections/Sequelize";
+import { DataTypes, Model } from "sequelize";
+
+class Agendamento extends Model {
+    declare nomeDono: string;
+    declare nomeAnimal: string;
+    declare especieAnimal: string;
+    declare tipoServico: string;
+    declare horario: Date;
+}
+
+Agendamento.init(
+    {
+        nomeDonoAgendamento: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            references: {
+                model: "Cliente",
+                key: "id",
+            },
+        },
+        nomeAnimalAgendamento: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            references: {
+                model: "Cliente",
+                key: "id",
+            },
+        },
+        especieAnimalAgendamento: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            references: {
+                model: "Cliente",
+                key: "id",
+            },
+        },
+        tipoServicoAgendamento: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            references: {
+                model: "Servico",
+                key: "id",
+            },
+        },
+        horarioAgendamento: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            references: {
+                model: "Horario",
+                key: "id",
+            },
+        },
+    },
+    {
+        sequelize,
+        modelName: "Agendamento",
+        tableName: "Agendamentos",
+        schema: "public",
+    }
+);
+
+export { Agendamento as AgendamentoModel };
