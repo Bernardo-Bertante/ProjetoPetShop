@@ -4,8 +4,8 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "passport";
 import flash from "express-flash";
-import { routes } from "./routes/routes";
 import { LoginRouter } from "./routes/LoginRouter";
+import { routes } from "./routes/routes";
 import { config } from "dotenv";
 
 const app = express();
