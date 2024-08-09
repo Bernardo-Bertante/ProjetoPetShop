@@ -6,6 +6,7 @@ import passport from "passport";
 import flash from "express-flash";
 import { AdminRouter } from "./routes/AdminRouter";
 import { LoginRouter } from "./routes/LoginRouter";
+import { ClienteRouter } from "./routes/ClienteRouter";
 import { config } from "dotenv";
 
 const app = express();
@@ -48,6 +49,7 @@ app.use(flash());
 
 // Rotas
 app.use(AdminRouter);
+app.use(ClienteRouter);
 app.use(LoginRouter);
 
 // Manipulador de erro para mensagens flash
