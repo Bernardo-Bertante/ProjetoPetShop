@@ -4,15 +4,17 @@ import { AgendamentoType } from "../types/AgendamentoType";
 import { ClienteModel } from "../models/ClienteModel";
 import { ServicoModel } from "../models/ServicoModel";
 import { HorarioModel } from "../models/HorarioModel";
+import { Transaction } from "sequelize";
 
 const updateHorarioDisponibilidade = async (
     horarioId: number,
-    disponibilidade: boolean
+    disponibilidade: boolean,
+    transaction?: Transaction // Adiciona a transação como argumento opcional
 ) => {
     try {
         await HorarioModel.update(
             { disponibilidade },
-            { where: { id: horarioId } }
+            { where: { id: horarioId }, transaction } // Passa a transação para o update
         );
     } catch (error: any) {
         throw new Error(
@@ -31,13 +33,16 @@ const createAgendamento = async (agendamento: AgendamentoType) => {
     }
 };
 
-const deleteAgendamento = async (id: number) => {
+const deleteAgendamento = async (
+    id: number,
+    options?: { transaction?: Transaction }
+) => {
     try {
-        const agendamentoForDelete = await AgendamentoModel.findByPk(id);
-        if (!agendamentoForDelete) {
+        const agendamento = await AgendamentoModel.findByPk(id);
+        if (!agendamento) {
             throw new Error("Agendamento não encontrado.");
         }
-        await agendamentoForDelete.destroy();
+        await agendamento.destroy(options); // Passa as opções para o método destroy
         return "Agendamento deletado com sucesso!";
     } catch (error) {
         throw error;

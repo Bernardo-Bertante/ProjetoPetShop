@@ -1,6 +1,7 @@
 // services/AgendamentoService.ts
 import AgendamentoPersistance from "../persistance/AgendamentoPersistance";
 import { AgendamentoType } from "../types/AgendamentoType";
+import { sequelize } from "../connections/Sequelize";
 
 const createAgendamento = async (agendamento: AgendamentoType) => {
     try {
@@ -22,23 +23,28 @@ const createAgendamento = async (agendamento: AgendamentoType) => {
 };
 
 const deleteAgendamento = async (id: number) => {
+    const transaction = await sequelize.transaction();
+
     try {
-        // Obtém o agendamento a ser deletado
         const agendamento = await AgendamentoPersistance.getAgendamentoById(id);
         if (!agendamento) {
             throw new Error("Agendamento não encontrado.");
         }
 
-        // Atualização da disponibilidade do horário para true
         await AgendamentoPersistance.updateHorarioDisponibilidade(
             agendamento.horarioId,
-            true
+            true,
+            transaction // Passa a transação aqui
         );
 
-        // Deleta o agendamento
-        const result = await AgendamentoPersistance.deleteAgendamento(id);
+        const result = await AgendamentoPersistance.deleteAgendamento(id, {
+            transaction,
+        });
+
+        await transaction.commit();
         return result;
     } catch (error) {
+        await transaction.rollback();
         throw error;
     }
 };
