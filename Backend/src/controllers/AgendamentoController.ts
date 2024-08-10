@@ -7,7 +7,7 @@ const router = Router();
 
 // Rota para criar um novo agendamento
 router.post(
-    "/register",
+    "/create",
     errorHandler,
     async (req: Request, res: Response, next: NextFunction) => {
         const agendamento = req.body;
@@ -42,7 +42,7 @@ router.delete(
 
 // Rota para atualizar um agendamento
 router.put(
-    "/editar/:id",
+    "/update/:id",
     async (req: Request, res: Response, next: NextFunction) => {
         const id = Number(req.params.id);
         const updates = req.body;

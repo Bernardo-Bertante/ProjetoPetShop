@@ -9,7 +9,7 @@ config();
 const router = Router();
 
 router.post(
-    "/register",
+    "/create",
     errorHandler,
     async (req: Request, res: Response, next: NextFunction) => {
         const user: FuncionarioType = {
@@ -62,7 +62,7 @@ router.delete(
 );
 
 router.put(
-    "/editar/:id",
+    "/update/:id",
     async (req: Request, res: Response, next: NextFunction) => {
         const id = req.params.id; // Obtém o ID da URL
         const updates = req.body;

@@ -6,7 +6,7 @@ const router = Router();
 
 // Rota para registrar um novo cliente
 router.post(
-    "/register",
+    "/create",
     errorHandler,
     async (req: Request, res: Response, next: NextFunction) => {
         const cliente = req.body;
@@ -39,7 +39,7 @@ router.delete(
 
 // Rota para atualizar os dados de um cliente
 router.put(
-    "/editar/:id",
+    "/update/:id",
     async (req: Request, res: Response, next: NextFunction) => {
         const id = req.params.id; // Obtém o ID da URL
         const updates = req.body;
