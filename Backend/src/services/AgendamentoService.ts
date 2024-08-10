@@ -23,6 +23,19 @@ const createAgendamento = async (agendamento: AgendamentoType) => {
 
 const deleteAgendamento = async (id: number) => {
     try {
+        // Obtém o agendamento a ser deletado
+        const agendamento = await AgendamentoPersistance.getAgendamentoById(id);
+        if (!agendamento) {
+            throw new Error("Agendamento não encontrado.");
+        }
+
+        // Atualização da disponibilidade do horário para true
+        await AgendamentoPersistance.updateHorarioDisponibilidade(
+            agendamento.horarioId,
+            true
+        );
+
+        // Deleta o agendamento
         const result = await AgendamentoPersistance.deleteAgendamento(id);
         return result;
     } catch (error) {

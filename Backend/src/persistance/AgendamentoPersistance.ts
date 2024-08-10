@@ -90,10 +90,20 @@ const updateAgendamento = async (
     }
 };
 
+const getAgendamentoById = async (id: number) => {
+    try {
+        const agendamento = await AgendamentoModel.findByPk(id);
+        return agendamento;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export default {
     createAgendamento,
     deleteAgendamento,
     getAgendamentos,
     updateAgendamento,
     updateHorarioDisponibilidade,
+    getAgendamentoById,
 };
