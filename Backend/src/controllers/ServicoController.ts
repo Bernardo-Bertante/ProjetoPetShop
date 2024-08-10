@@ -24,12 +24,12 @@ router.post(
 
 // Rota para deletar um cliente
 router.delete(
-    "/delete",
+    "/delete/:id",
     async (req: Request, res: Response, next: NextFunction) => {
-        const email = req.body.email;
+        const id = req.params.id;
 
         try {
-            const result = await ServicoService.deleteServico(email);
+            const result = await ServicoService.deleteServico(id);
             res.status(200).send({ message: result });
         } catch (err) {
             next(err);

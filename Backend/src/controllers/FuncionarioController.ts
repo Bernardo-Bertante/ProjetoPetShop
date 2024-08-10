@@ -48,12 +48,12 @@ router.post(
 // rota para deletar um funcionario
 
 router.delete(
-    "/delete",
+    "/delete/:id",
     async (req: Request, res: Response, next: NextFunction) => {
-        const email = req.body.email;
+        const id = req.params.id;
 
         try {
-            const result = await FuncionarioService.deleteFuncionario(email);
+            const result = await FuncionarioService.deleteFuncionario(id);
             res.status(200).send({ message: result });
         } catch (err) {
             next(err);

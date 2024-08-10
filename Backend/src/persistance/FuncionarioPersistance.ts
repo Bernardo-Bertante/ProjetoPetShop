@@ -12,10 +12,10 @@ const createFuncionario = async (user: FuncionarioType) => {
     }
 };
 
-const deleteFuncionario = async (email: string) => {
+const deleteFuncionario = async (id: string) => {
     try {
         const userForDelete = await FuncionarioModel.findOne({
-            where: { email: email },
+            where: { email: id },
         });
         if (!userForDelete) {
             throw new Error("Funcionário não encontrado.");

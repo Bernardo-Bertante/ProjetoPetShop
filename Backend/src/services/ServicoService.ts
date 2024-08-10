@@ -10,9 +10,9 @@ const createServico = async (cliente: ServicoType) => {
     }
 };
 
-const deleteServico = async (email: string) => {
+const deleteServico = async (id: string) => {
     try {
-        const result = await ServicoPersistance.deleteServico(email);
+        const result = await ServicoPersistance.deleteServico(id);
         return result;
     } catch (error) {
         throw error;

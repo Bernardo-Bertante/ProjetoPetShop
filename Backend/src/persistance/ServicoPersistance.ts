@@ -11,10 +11,10 @@ const createServico = async (cliente: ServicoType) => {
     }
 };
 
-const deleteServico = async (email: string) => {
+const deleteServico = async (id: string) => {
     try {
         const clienteForDelete = await ServicoModel.findOne({
-            where: { email: email },
+            where: { id: id },
         });
         if (!clienteForDelete) {
             throw new Error("Cliente não encontrado.");

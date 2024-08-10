@@ -10,9 +10,9 @@ const createFuncionario = async (user: FuncionarioType) => {
     }
 };
 
-const deleteFuncionario = async (email: string) => {
+const deleteFuncionario = async (id: string) => {
     try {
-        const result = await FuncionarioPersistance.deleteFuncionario(email);
+        const result = await FuncionarioPersistance.deleteFuncionario(id);
         return result;
     } catch (error) {
         throw error;
