@@ -4,9 +4,17 @@ import { AgendamentoType } from "../types/AgendamentoType";
 
 const createAgendamento = async (agendamento: AgendamentoType) => {
     try {
+        // Criação do agendamento
         const result = await AgendamentoPersistance.createAgendamento(
             agendamento
         );
+
+        // Atualização da disponibilidade do horário
+        await AgendamentoPersistance.updateHorarioDisponibilidade(
+            agendamento.horarioId,
+            false
+        );
+
         return result;
     } catch (error) {
         throw error;

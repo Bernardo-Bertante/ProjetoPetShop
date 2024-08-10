@@ -5,6 +5,22 @@ import { ClienteModel } from "../models/ClienteModel";
 import { ServicoModel } from "../models/ServicoModel";
 import { HorarioModel } from "../models/HorarioModel";
 
+const updateHorarioDisponibilidade = async (
+    horarioId: number,
+    disponibilidade: boolean
+) => {
+    try {
+        await HorarioModel.update(
+            { disponibilidade },
+            { where: { id: horarioId } }
+        );
+    } catch (error: any) {
+        throw new Error(
+            `Erro ao atualizar disponibilidade do horário: ${error.message}`
+        );
+    }
+};
+
 const createAgendamento = async (agendamento: AgendamentoType) => {
     try {
         await AgendamentoModel.sync();
@@ -79,4 +95,5 @@ export default {
     deleteAgendamento,
     getAgendamentos,
     updateAgendamento,
+    updateHorarioDisponibilidade,
 };
