@@ -220,6 +220,28 @@ module.exports = {
             ],
             {}
         );
+
+        // Inserir dados na tabela Funcionarios
+        await queryInterface.bulkInsert(
+            "Funcionarios",
+            [
+                {
+                    id: 1,
+                    nome: "João",
+                    sobrenome: "Silva",
+                    dataNascimento: "1985-08-15",
+                    cpf: "123.456.789-01",
+                    password: "Senha@123",
+                    telefone: "(11) 98765-4321",
+                    email: "joao.silva@example.com",
+                    isAdmin: true,
+                    secret: "secret",
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+            ],
+            {}
+        );
     },
     down: async (queryInterface, Sequelize) => {
         await queryInterface.dropTable("Agendamentos");
