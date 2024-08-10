@@ -135,7 +135,7 @@ module.exports = {
             },
         });
 
-        await queryInterface.createTable("Horario", {
+        await queryInterface.createTable("Horarios", {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -167,7 +167,7 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            nomeDonoAgendamento: {
+            clienteId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
@@ -177,15 +177,7 @@ module.exports = {
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE",
             },
-            nomeAnimalAgendamento: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            especieAnimalAgendamento: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            tipoServicoAgendamento: {
+            servicoId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
@@ -195,11 +187,11 @@ module.exports = {
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE",
             },
-            horarioAgendamento: {
+            horarioId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
-                    model: "Horario",
+                    model: "Horarios",
                     key: "id",
                 },
                 onUpdate: "CASCADE",
@@ -215,9 +207,9 @@ module.exports = {
             },
         });
 
-        // Inserir dados na tabela Horario
+        // Inserir dados na tabela Horarios
         await queryInterface.bulkInsert(
-            "Horario",
+            "Horarios",
             [
                 {
                     horario: new Date("2024-08-09T15:30:00"),
@@ -234,6 +226,6 @@ module.exports = {
         await queryInterface.dropTable("Funcionarios");
         await queryInterface.dropTable("Clientes");
         await queryInterface.dropTable("Servicos");
-        await queryInterface.dropTable("Horario");
+        await queryInterface.dropTable("Horarios");
     },
 };

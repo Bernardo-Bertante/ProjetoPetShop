@@ -1,53 +1,38 @@
 import { sequelize } from "../connections/Sequelize";
 import { DataTypes, Model } from "sequelize";
+import { ClienteModel } from "./ClienteModel";
+import { ServicoModel } from "./ServicoModel";
+import { HorarioModel } from "./HorarioModel";
 
 class Agendamento extends Model {
-    declare nomeDonoAgendamento: number; // ID do Cliente
-    declare nomeAnimalAgendamento: number; // ID do Cliente
-    declare especieAnimalAgendamento: number; // ID do Cliente
-    declare tipoServicoAgendamento: number; // ID do Serviço
-    declare horarioAgendamento: number; // ID do Horário
+    declare clienteId: number;
+    declare servicoId: number;
+    declare horarioId: number;
 }
 
 Agendamento.init(
     {
-        nomeDonoAgendamento: {
+        clienteId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Clientes",
+                model: ClienteModel,
                 key: "id",
             },
         },
-        nomeAnimalAgendamento: {
+        servicoId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Clientes",
+                model: ServicoModel,
                 key: "id",
             },
         },
-        especieAnimalAgendamento: {
+        horarioId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Clientes",
-                key: "id",
-            },
-        },
-        tipoServicoAgendamento: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: "Servicos",
-                key: "id",
-            },
-        },
-        horarioAgendamento: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: "Horarios",
+                model: HorarioModel,
                 key: "id",
             },
         },
@@ -59,5 +44,10 @@ Agendamento.init(
         schema: "public",
     }
 );
+
+// Configuração das associações
+Agendamento.belongsTo(ClienteModel, { foreignKey: "clienteId", as: "cliente" });
+Agendamento.belongsTo(ServicoModel, { foreignKey: "servicoId", as: "servico" });
+Agendamento.belongsTo(HorarioModel, { foreignKey: "horarioId", as: "horario" });
 
 export { Agendamento as AgendamentoModel };

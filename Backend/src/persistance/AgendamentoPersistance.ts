@@ -1,6 +1,9 @@
 // persistance/AgendamentoPersistance.ts
 import { AgendamentoModel } from "../models/AgendamentoModel";
 import { AgendamentoType } from "../types/AgendamentoType";
+import { ClienteModel } from "../models/ClienteModel";
+import { ServicoModel } from "../models/ServicoModel";
+import { HorarioModel } from "../models/HorarioModel";
 
 const createAgendamento = async (agendamento: AgendamentoType) => {
     try {
@@ -27,7 +30,25 @@ const deleteAgendamento = async (id: number) => {
 
 const getAgendamentos = async () => {
     try {
-        const agendamentos = await AgendamentoModel.findAll();
+        const agendamentos = await AgendamentoModel.findAll({
+            include: [
+                {
+                    model: ClienteModel,
+                    as: "cliente",
+                    attributes: ["nomeDono", "nomeAnimal"], // Campos que você deseja retornar
+                },
+                {
+                    model: ServicoModel,
+                    as: "servico",
+                    attributes: ["tipoServico"],
+                },
+                {
+                    model: HorarioModel,
+                    as: "horario",
+                    attributes: ["horario"],
+                },
+            ],
+        });
         return agendamentos;
     } catch (error) {
         throw error;
