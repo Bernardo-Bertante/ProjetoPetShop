@@ -10,9 +10,9 @@ const createCliente = async (cliente: ClienteType) => {
     }
 };
 
-const deleteCliente = async (email: string) => {
+const deleteCliente = async (id: string) => {
     try {
-        const result = await ClientePersistance.deleteCliente(email);
+        const result = await ClientePersistance.deleteCliente(id);
         return result;
     } catch (error) {
         throw error;

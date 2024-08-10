@@ -11,10 +11,10 @@ const createCliente = async (cliente: ClienteType) => {
     }
 };
 
-const deleteCliente = async (email: string) => {
+const deleteCliente = async (id: string) => {
     try {
         const clienteForDelete = await ClienteModel.findOne({
-            where: { email: email },
+            where: { id: id },
         });
         if (!clienteForDelete) {
             throw new Error("Cliente não encontrado.");
