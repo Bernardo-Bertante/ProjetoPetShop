@@ -11,7 +11,7 @@ O objetivo do software é gerenciar o sistema interno de serviços de um Pet Sho
 - **TypeScript: 5.5**
 - **JavaScript: ES2016**
 - **PostgreSQL: 16.0**
-- **Node.js: v20.15.0**
+- **Node.js: v20.16.0**
 
 ### Principais Funcionalidades
 1. **Administração de Funcionários**: 
