@@ -37,7 +37,7 @@ router.post(
             const result = await FuncionarioService.createFuncionario(user);
             res.status(201).send({
                 message: "User registered successfully",
-                user: result.nome,
+                user: result,
             });
         } catch (err) {
             next(err);

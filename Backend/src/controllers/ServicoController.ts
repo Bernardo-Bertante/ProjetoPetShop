@@ -14,7 +14,7 @@ router.post(
             const result = await ServicoService.createServico(servico);
             res.status(201).send({
                 message: "Serviço registrado com sucesso",
-                servico: result.tipoServico,
+                servico: result,
             });
         } catch (err) {
             next(err);
@@ -22,7 +22,7 @@ router.post(
     }
 );
 
-// Rota para deletar um cliente
+// Rota para deletar um servico
 router.delete(
     "/delete/:id",
     async (req: Request, res: Response, next: NextFunction) => {
@@ -37,7 +37,7 @@ router.delete(
     }
 );
 
-// Rota para atualizar os dados de um cliente
+// Rota para atualizar os dados de um servico
 router.put(
     "/update/:id",
     async (req: Request, res: Response, next: NextFunction) => {
@@ -53,7 +53,7 @@ router.put(
             }
             return res.status(200).send({
                 message: "Dados do serviço atualizados com sucesso",
-                servico: servico.tipoServico,
+                servico: servico,
             });
         } catch (error) {
             next(error);
@@ -61,11 +61,11 @@ router.put(
     }
 );
 
-// Rota para listar todos os clientes
+// Rota para listar todos os servicos
 router.get("/all", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const clientes = await ServicoService.getServicos();
-        return res.status(200).send(clientes);
+        const servicos = await ServicoService.getServicos();
+        return res.status(200).send(servicos);
     } catch (error) {
         next(error);
     }

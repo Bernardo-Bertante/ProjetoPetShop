@@ -14,7 +14,7 @@ router.post(
             const result = await ClienteService.createCliente(cliente);
             res.status(201).send({
                 message: "Cliente registrado com sucesso",
-                cliente: result.nomeDono,
+                cliente: result,
             });
         } catch (err) {
             next(err);
