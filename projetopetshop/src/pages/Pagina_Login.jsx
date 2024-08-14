@@ -37,7 +37,9 @@ function Pagina_Login() {
     return (
         <section className="tela-login">
             <form className="formulario-login" onSubmit={handleSubmit}>
-
+                <div className="img-logo">
+                    <img src="" alt="" />
+                </div>
                 <div className="caixa-email"> 
                     <label htmlFor="email">Email</label>
                     <input 

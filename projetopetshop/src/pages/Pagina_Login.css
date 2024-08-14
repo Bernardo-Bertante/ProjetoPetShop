@@ -1,26 +1,56 @@
 .tela-login {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: var(--cor-marromEscuro);
+    overflow: hidden;
+}
+
+.tela-login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/img/papel_parede_patas.jpg") no-repeat center center;
+    background-size: cover;
+    filter: blur(1px); 
+    z-index: -1;
 }
 
 .formulario-login {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 20px;
     max-width: 400px;
     width: 100%;
-    background-color: var(--cor-azulClaro);
+    background-color: var(--cor-azul-claro);
     border-radius: 50px;
     max-height: 500px;
     height: 100%;
-    padding: 20px;
+    padding: 10px 20px;
+    margin: 3%;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.25);
 }
 
+.img-logo {
+    max-width: 200px;
+    width: 100%;
+    max-height: 200px;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: rgb(175, 75, 75);
+}
+.img-logo img {
+    object-fit: cover;
+}
 .caixa-email,
 .caixa-senha {
     display: flex;
@@ -28,15 +58,25 @@
     align-items: start;
     flex-direction: column;
     width: 100%;
+    max-width: 350px;
 }
 
 .caixa-email input,
 .caixa-senha input {
     border-radius: 30px;
     border: none;
-    height: 53px;
+    height: 40px;
     width: 100%;
     box-sizing: border-box;
+    padding-left: 25px;
+    font-size: 15px;
+    
+}
+
+.caixa-email input:focus,
+.caixa-senha input:focus {
+    box-shadow: 0 0 0 2.5px var(--cor-roxo);
+    outline: none;
 }
 
 .caixa-email label,
@@ -45,20 +85,24 @@
     margin-bottom: 5px;
     font-weight: 400;
     font-size: 20px;
-    line-height: 24px;
     color: #000000;
 }
 
 .btn-login {
     background: var(--cor-roxo);
     border-radius: 30px;
-    width: 179px;
-    height: 53px;
+    width: 130px;
+    height: 40px;
     border: none;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 24px;
     color: #000000;
     cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0px 1px 4px 0px #00000040;
+}
+
+.btn-login:hover {
+    background-color: #a093fa;
 }
