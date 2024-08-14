@@ -20,9 +20,9 @@ function Pagina_Login() {
         e.preventDefault();
 
         try {
-            const resposta = await axios.post("http://localhost:5173/login", login);
+            const resposta = await axios.post("http://localhost:5000/login", login);
 
-            if (resposta.data.sucess) {
+            if (resposta.status === 200) {
                 console.log("Login bem-sucedido!", resposta.data);
             }
             else {
