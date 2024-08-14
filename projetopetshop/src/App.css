@@ -1,0 +1,11 @@
+:root {
+  --cor-marromEscuro: #C3A4A4;
+  --cor-azulClaro: #DEE9FF;
+  --cor-roxo: #9584FF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+

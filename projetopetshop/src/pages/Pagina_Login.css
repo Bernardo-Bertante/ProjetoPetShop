@@ -1,0 +1,64 @@
+.tela-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--cor-marromEscuro);
+}
+
+.formulario-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    max-width: 400px;
+    width: 100%;
+    background-color: var(--cor-azulClaro);
+    border-radius: 50px;
+    max-height: 500px;
+    height: 100%;
+    padding: 20px;
+}
+
+.caixa-email,
+.caixa-senha {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    width: 100%;
+}
+
+.caixa-email input,
+.caixa-senha input {
+    border-radius: 30px;
+    border: none;
+    height: 53px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.caixa-email label,
+.caixa-senha label {
+    margin-left: 25px;
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.btn-login {
+    background: var(--cor-roxo);
+    border-radius: 30px;
+    width: 179px;
+    height: 53px;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    cursor: pointer;
+}
