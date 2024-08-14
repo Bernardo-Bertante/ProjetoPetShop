@@ -27,7 +27,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     max-width: 400px;
     width: 100%;
     background-color: var(--cor-azul-claro);
@@ -51,36 +51,61 @@
 .img-logo img {
     object-fit: cover;
 }
-.caixa-email,
-.caixa-senha {
+.caixa-campo,
+.caixa-campo {
     display: flex;
     justify-content: center;
     align-items: start;
     flex-direction: column;
     width: 100%;
     max-width: 350px;
+    position: relative;
 }
 
-.caixa-email input,
-.caixa-senha input {
+.caixa-campo input,
+.caixa-campo input {
     border-radius: 30px;
     border: none;
     height: 40px;
     width: 100%;
     box-sizing: border-box;
     padding-left: 25px;
+    padding-right: 50px;
     font-size: 15px;
     
 }
 
-.caixa-email input:focus,
-.caixa-senha input:focus {
+.caixa-campo input:focus,
+.caixa-campo input:focus {
     box-shadow: 0 0 0 2.5px var(--cor-roxo);
     outline: none;
 }
 
-.caixa-email label,
-.caixa-senha label {
+.erroInput input {
+    box-shadow: 0 0 0 2.5px red;
+}
+
+.erro-frase {
+    position: absolute;
+    font-size: 15px;
+    color: red;
+    bottom: -21px;
+    left: 25px;
+}
+
+.icone-olhinho {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+.icone-olhinho img {
+    max-width: 20px;
+    max-height: 20px;
+}
+
+.caixa-campo label,
+.caixa-campo label {
     margin-left: 25px;
     margin-bottom: 5px;
     font-weight: 400;
