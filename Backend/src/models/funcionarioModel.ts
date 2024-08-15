@@ -29,7 +29,6 @@ class Funcionario extends Model {
     declare telefone: string;
     declare email: string;
     declare isAdmin: boolean;
-    declare secret: string;
 
     public async comparePassword(enteredPassword: string): Promise<boolean> {
         return enteredPassword === this.password;
@@ -109,10 +108,6 @@ Funcionario.init(
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-        },
-        secret: {
-            type: DataTypes.STRING,
-            allowNull: true,
         },
     },
     {

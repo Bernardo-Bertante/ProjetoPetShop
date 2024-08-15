@@ -227,15 +227,14 @@ module.exports = {
             [
                 {
                     id: 1,
-                    nome: "João",
-                    sobrenome: "Silva",
+                    nome: "Admin",
+                    sobrenome: "Test",
                     dataNascimento: "1985-08-15",
                     cpf: "123.456.789-01",
                     password: "Senha@123",
                     telefone: "(11) 98765-4321",
-                    email: "joao.silva@example.com",
+                    email: "admin@example.com",
                     isAdmin: true,
-                    secret: "secret",
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },

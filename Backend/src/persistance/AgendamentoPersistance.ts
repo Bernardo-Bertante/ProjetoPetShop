@@ -56,7 +56,7 @@ const getAgendamentos = async () => {
                 {
                     model: ClienteModel,
                     as: "cliente",
-                    attributes: ["nomeDono", "nomeAnimal"], // Campos que você deseja retornar
+                    attributes: ["nomeDono", "nomeAnimal", "especieAnimal"], // Campos que você deseja retornar
                 },
                 {
                     model: ServicoModel,

@@ -21,7 +21,6 @@ router.post(
             telefone: req.body.telefone,
             email: req.body.email,
             isAdmin: false,
-            secret: "secret",
         };
 
         //const userValidation = UserType.safeParse(user);
