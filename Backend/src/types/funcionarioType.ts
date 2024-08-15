@@ -9,7 +9,6 @@ const Funcionario = z.object({
     telefone: z.string(),
     email: z.string(),
     isAdmin: z.boolean(),
-    secret: z.string(),
 });
 
 type Funcionario = z.infer<typeof Funcionario>;
