@@ -1,29 +1,37 @@
 import "./Pagina_Agendamento.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CaixaAviso from "../components/CaixaAviso";
+import { UserContext } from "../contexts/UserContext"; // ajuste o caminho conforme necessário
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
 
 function Pagina_Agendamento() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext); // acessar o estado do usuário
   const [dados, setDados] = useState([]);
   const [caixaAviso, setCaixaAviso] = useState(false);
 
   const getDados = async () => {
     try {
-      const resposta = await axios.get("http://localhost:5000/agendamento/all");
-      setDados(resposta.data.agendamento);
+      const resposta = await axios.get("/agendamento/all");
+      setDados(resposta.data || []);
+      console.log(resposta.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getDados();
-  }, []);
+    if (!user) {
+      // Redirecionar para a página inicial se não houver um usuário autenticado
+      navigate("/");
+    } else {
+      getDados();
+    }
+  }, [user, navigate]);
 
   return (
     <div className="pagina-agendamento">
@@ -34,40 +42,40 @@ function Pagina_Agendamento() {
             navigate("/pagina-principal");
           }}
         >
-          <img src="/img/seta.svg" alt="" />
+          <img src="/img/seta.svg" alt="Voltar" />
         </div>
         <button className="btn-agendar">Agendar</button>
       </nav>
 
       <section className="cards">
-        {dados.map((dado) => (
-          <div className="card" key={dado.id}>
-            <ul>
-              <li>{dado.cliente.nomeDono}</li>
-              <li>{dado.cliente.nomeAnimal}</li>
-              {/* <li>{dado.cliente.especie}</li> */}
-              <li>{dado.servico.tipoServico}</li>
-              <li>{dado.horario.horario}</li>
-            </ul>
+        {dados.length > 0 ? (
+          dados.map((dado) => (
+            <div className="card" key={dado.id}>
+              <ul>
+                <li>{dado.cliente.nomeDono}</li>
+                <li>{dado.cliente.nomeAnimal}</li>
+                <li>{dado.cliente.especie}</li>
+                <li>{dado.servico.tipoServico}</li>
+                <li>{dado.horario.horario}</li>
+              </ul>
 
-            <div className="buttons">
-              <button
-                className="btn-excluir"
-                onClick={() => {
-                  setCaixaAviso(true);
-                }}
-              >
-                Excluir
-              </button>
-              <button className="btn-atualizar">Atualizar</button>
+              <div className="buttons">
+                <button
+                  className="btn-excluir"
+                  onClick={() => {
+                    setCaixaAviso(true);
+                  }}
+                >
+                  Excluir
+                </button>
+                <button className="btn-atualizar">Atualizar</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <span className="texto-aviso">NÃO HÁ AGENDAMENTOS NO MOMENTO</span>
+        )}
       </section>
-
-      {dados.length <= 0 && (
-        <span className="texto-aviso">NÃO HÁ AGENDAMENTOS NO MOMENTO</span>
-      )}
 
       <CaixaAviso
         exibirCaixaAviso={caixaAviso}
