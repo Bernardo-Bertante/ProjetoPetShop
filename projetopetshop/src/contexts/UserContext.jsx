@@ -1,29 +1,37 @@
-import { useEffect, createContext, useState } from 'react';
+import { createContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
-export const UserContext = createContext();
+const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        const savedUser = localStorage.getItem("user");
-        if (savedUser) {
-            setUser(JSON.parse(savedUser));
-        }
-    }, []);
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
-    useEffect(() => {
-        if (user) {
-            localStorage.setItem("user", JSON.stringify(user));
-        } else {
-            localStorage.removeItem("user");
-        }
-    }, [user]);
+  const userLogin = (userData) => {
+    setUser(userData);
+    sessionStorage.setItem("user", JSON.stringify(userData));
+  };
 
-    return (
-        <UserContext.Provider value={{ user, setUser }}>
-            {children}
-        </UserContext.Provider>
-    );
+  const userLogout = () => {
+    setUser(null);
+    sessionStorage.removeItem("user");
+  };
+
+  return (
+    <UserContext.Provider value={{ user, userLogin, userLogout }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
+UserProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export { UserContext, UserProvider };
