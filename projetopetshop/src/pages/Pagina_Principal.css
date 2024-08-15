@@ -1,0 +1,32 @@
+.pagina-principal {
+    height: 100vh;
+    background-color: var(--cor-areia);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+
+.seta-volta {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+}
+
+.buttons-principal {
+    max-width: 200px;
+    width: 100%;
+    max-height: 200px;
+    height: 100%;
+    border-radius: 50px;
+    background-color: var(--cor-azul-claro);
+    font-weight: 400;
+    font-size: 25px;
+    color: #000000;
+    cursor: pointer;
+}
+
+.buttons-principal:hover {
+    background-color: #b4c9f4;
+}

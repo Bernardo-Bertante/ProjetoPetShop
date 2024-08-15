@@ -1,6 +1,7 @@
 import "./Pagina_Login.css";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Pagina_Login() {
     const [login, setLogin] = useState({
@@ -41,6 +42,8 @@ function Pagina_Login() {
         });
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -58,6 +61,7 @@ function Pagina_Login() {
             if (resposta.status === 200) {
                 console.log("Login bem-sucedido!", resposta.data);
                 setErro(true);
+                navigate("/pagina-principal", { state: { isAdmin: resposta.data.isAdmin } });
             }
             else {
                 setErro({
