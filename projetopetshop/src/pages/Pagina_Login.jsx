@@ -61,7 +61,7 @@ function Pagina_Login() {
             if (resposta.status === 200) {
                 console.log("Login bem-sucedido!", resposta.data);
                 setErro(true);
-                navigate("/pagina-principal", { state: { isAdmin: resposta.data.isAdmin } });
+                navigate("/pagina-principal", { state: { isAdmin: resposta.data.user.isAdmin } });
             }
             else {
                 setErro({

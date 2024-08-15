@@ -1,0 +1,108 @@
+.pagina-agendamento {
+    height: 100vh;
+    background-color: var(--cor-areia);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    height: 50px;
+    background-color: var(--cor-marrom-escuro);
+}
+
+.btn-voltar {
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: var(--cor-roxo);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+}
+
+.btn-voltar img {
+    max-width: 50px;
+}
+
+.btn-agendar {
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: var(--cor-roxo);
+    font-weight: 400;
+    font-size: 25px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 70px;
+    padding-left: 50px;
+}
+
+.card {
+    max-width: 250px;
+    width: 100%;
+    max-height: 200px;
+    height: 100%;
+    background-color: #F9FBFF;
+    margin-left: 30px;
+    padding: 10px 10px;
+    border-radius: 30px;
+}
+
+.card ul li {
+    list-style: none;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.card ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttons button {   
+    border-radius: 50px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-excluir {
+    width: 60px;
+    background-color: #D21F1F;
+}
+
+.btn-excluir:hover {
+    background-color: #c31e1e;
+}
+
+.btn-atualizar {
+    width: 80px;
+    background-color: #1F91D2;
+}
+
+.btn-atualizar:hover {
+    background-color: #1c87c5;
+}

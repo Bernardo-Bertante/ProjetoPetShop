@@ -11,11 +11,11 @@ function Pagina_Principal() {
     return (
         <section className="pagina-principal">
 
-            <div className="seta-volta" onClick={navigate("/")}>
+            <div className="seta-volta" onClick={() => {navigate("/")}}>
                 <img src="/img/seta.svg" alt="" />
             </div>
 
-            <button className="buttons-principal">Agendar</button>
+            <button className="buttons-principal" onClick={() => {navigate("/pagina-agendamento")}}>Agendar</button>
             <button className="buttons-principal">Cliente</button>
             <button className="buttons-principal">Serviços</button>
 
