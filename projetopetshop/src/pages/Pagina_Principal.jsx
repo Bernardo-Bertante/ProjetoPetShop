@@ -1,11 +1,11 @@
 import "./Pagina_Principal.css";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 function Pagina_Principal() {
 
-    const location = useLocation();
-    const { isAdmin } = location.state || {};
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     return (
@@ -19,7 +19,7 @@ function Pagina_Principal() {
             <button className="buttons-principal">Cliente</button>
             <button className="buttons-principal">Serviços</button>
 
-            {isAdmin && <button className="buttons-principal">Funcionário</button>}
+            {user?.isAdmin && <button className="buttons-principal">Funcionário</button>}
         </section>
     )
 }

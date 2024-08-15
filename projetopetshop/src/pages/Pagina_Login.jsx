@@ -1,9 +1,13 @@
 import "./Pagina_Login.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 function Pagina_Login() {
+
+    const { setUser } = useContext(UserContext);
+
     const [login, setLogin] = useState({
         email: '',
         password: '',
@@ -61,7 +65,8 @@ function Pagina_Login() {
             if (resposta.status === 200) {
                 console.log("Login bem-sucedido!", resposta.data);
                 setErro(true);
-                navigate("/pagina-principal", { state: { isAdmin: resposta.data.user.isAdmin } });
+                setUser(resposta.data.user);
+                navigate("/pagina-principal");
             }
             else {
                 setErro({

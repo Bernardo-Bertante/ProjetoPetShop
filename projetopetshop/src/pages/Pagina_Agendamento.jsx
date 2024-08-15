@@ -2,11 +2,13 @@ import "./Pagina_Agendamento.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import CaixaAviso from "../components/CaixaAviso";
 
 function Pagina_Agendamento() {
 
     const navigate = useNavigate();
     const [dados, setDados] = useState([]);
+    const [caixaAviso, setCaixaAviso] = useState(false);
 
     const getDados = async () => {
         try {
@@ -21,6 +23,7 @@ function Pagina_Agendamento() {
         getDados();
     }, []);
 
+    
     return (
         <div className="pagina-agendamento">
             <nav className="navbar">
@@ -31,25 +34,32 @@ function Pagina_Agendamento() {
             </nav>
 
 
-        <section className="cards">
-            {dados.map( (dado) => (
+            <section className="cards">
+                {dados.map( (dado) => (
 
-                <div className="card" key={dado.id}>
-                    <ul>
-                        <li>{dado.cliente.nomeDono}</li>
-                        <li>{dado.cliente.nomeAnimal}</li>
-                        {/* <li>{dado.cliente.especieee}</li> */}
-                        <li>{dado.servico.tipoServico}</li>
-                        <li>{dado.horario.horario}</li>
-                    </ul>
+                    <div className="card" key={dado.id}>
+                        <ul>
+                            <li>{dado.cliente.nomeDono}</li>
+                            <li>{dado.cliente.nomeAnimal}</li>
+                            {/* <li>{dado.cliente.especie}</li> */}
+                            <li>{dado.servico.tipoServico}</li>
+                            <li>{dado.horario.horario}</li>
+                        </ul>
 
-                    <div className="buttons">
-                        <button className="btn-excluir">Excluir</button>
-                        <button className="btn-atualizar">Atualizar</button>
+                        <div className="buttons">
+                            <button className="btn-excluir" onClick={ () => {setCaixaAviso(true)} }>Excluir</button>
+                            <button className="btn-atualizar">Atualizar</button>
+                        </div>
                     </div>
-                </div>
-            ))}
-        </section>
+                ))}
+            </section>
+
+            {dados.length <= 0 && <span className="texto-aviso">NÃO HÁ AGENDAMENTOS NO MOMENTO</span>}
+            
+            <CaixaAviso 
+                exibirCaixaAviso={caixaAviso}
+                ocultarCaixaAviso={() => {setCaixaAviso(false)}}
+            />
         </div>
     )
 }
