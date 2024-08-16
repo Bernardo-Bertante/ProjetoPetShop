@@ -13,13 +13,42 @@ function FormularioAgendamento() {
   const [selectedCliente, setSelectedCliente] = useState("");
   const [selectedServico, setSelectedServico] = useState("");
   const [selectedHorario, setSelectedHorario] = useState("");
+  const [animalOptions, setAnimalOptions] = useState([]);
+  const [especieOptions, setEspecieOptions] = useState([]);
+
+  useEffect(() => {
+    getClientes();
+    getServicos();
+    getHorarios();
+  }, []);
+
+  useEffect(() => {
+    console.log("Clientes carregados:", clientes);
+    if (selectedCliente) {
+      const clienteId = Number(selectedCliente); // Certifique-se de que o ID é um número
+      const cliente = clientes.find((c) => c.id === clienteId);
+      console.log("Cliente selecionado:", cliente);
+      if (cliente) {
+        setAnimalOptions([cliente.nomeAnimal]);
+        setEspecieOptions([cliente.especieAnimal]);
+        console.log("Opções de animais atualizadas:", [cliente.nomeAnimal]);
+        console.log("Opções de espécies atualizadas:", [cliente.especieAnimal]);
+      } else {
+        setAnimalOptions([]);
+        setEspecieOptions([]);
+      }
+    } else {
+      setAnimalOptions([]);
+      setEspecieOptions([]);
+    }
+  }, [selectedCliente, clientes]);
 
   const getClientes = async () => {
     try {
       const resposta = await axios.get("/cliente/all");
       setClientes(resposta.data || []);
     } catch (error) {
-      console.log(error);
+      console.log("Erro ao carregar clientes:", error);
     }
   };
 
@@ -28,7 +57,7 @@ function FormularioAgendamento() {
       const resposta = await axios.get("/servico/all");
       setServicos(resposta.data || []);
     } catch (error) {
-      console.log(error);
+      console.log("Erro ao carregar serviços:", error);
     }
   };
 
@@ -37,7 +66,7 @@ function FormularioAgendamento() {
       const resposta = await axios.get("/horario/all");
       setHorarios(resposta.data || []);
     } catch (error) {
-      console.log(error);
+      console.log("Erro ao carregar horários:", error);
     }
   };
 
@@ -48,36 +77,68 @@ function FormularioAgendamento() {
         servicoId: selectedServico,
         horarioId: selectedHorario,
       });
-      // Redirecionar para a página de agendamento após o novo agendamento
       navigate("/pagina-agendamento");
     } catch (error) {
-      console.log(error);
+      console.log("Erro ao agendar:", error);
     }
   };
-
-  useEffect(() => {
-    getClientes();
-    getServicos();
-    getHorarios();
-  }, []);
 
   return (
     <div className="formulario-agendamento">
       <h2>Agendar Novo</h2>
       <form>
         <div>
-          <label htmlFor="cliente">Cliente:</label>
+          <label htmlFor="cliente">Nome do Dono:</label>
           <select
             id="cliente"
             value={selectedCliente}
             onChange={(e) => setSelectedCliente(e.target.value)}
           >
-            <option value="">Selecione um cliente</option>
+            <option value="">Selecione um dono</option>
             {clientes.map((cliente) => (
               <option key={cliente.id} value={cliente.id}>
-                {cliente.nomeDono} - {cliente.nomeAnimal}
+                {cliente.nomeDono}
               </option>
             ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="animal">Nome do Animal:</label>
+          <select
+            id="animal"
+            disabled={!selectedCliente}
+            value={animalOptions[0] || ""}
+            onChange={(e) => setAnimalOptions([e.target.value])}
+          >
+            <option value="">Selecione um animal</option>
+            {clientes
+              .filter((cliente) => cliente.id === Number(selectedCliente))
+              .map((cliente) => (
+                <option key={cliente.nomeAnimal} value={cliente.nomeAnimal}>
+                  {cliente.nomeAnimal}
+                </option>
+              ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="especie">Espécie do Animal:</label>
+          <select
+            id="especie"
+            disabled={!selectedCliente}
+            value={especieOptions[0] || ""}
+            onChange={(e) => setEspecieOptions([e.target.value])}
+          >
+            <option value="">Selecione uma espécie</option>
+            {clientes
+              .filter((cliente) => cliente.id === Number(selectedCliente))
+              .map((cliente) => (
+                <option
+                  key={cliente.especieAnimal}
+                  value={cliente.especieAnimal}
+                >
+                  {cliente.especieAnimal}
+                </option>
+              ))}
           </select>
         </div>
         <div>
