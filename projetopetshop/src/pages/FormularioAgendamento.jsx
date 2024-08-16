@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./FormularioAgendamento.css";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -15,6 +16,14 @@ function FormularioAgendamento() {
   const [selectedHorario, setSelectedHorario] = useState("");
   const [animalOptions, setAnimalOptions] = useState([]);
   const [especieOptions, setEspecieOptions] = useState([]);
+  const [erro, setErro] = useState({
+    cliente: false,
+    animal: false,
+    especie: false,
+    servico: false,
+    horario: false,
+  });
+  
 
   useEffect(() => {
     getClientes();
@@ -71,6 +80,24 @@ function FormularioAgendamento() {
   };
 
   const handleAgendar = async () => {
+    let temErro = false;
+  
+    const novoErro = {
+      cliente: !selectedCliente,
+      animal: !animalOptions[0],
+      especie: !especieOptions[0],
+      servico: !selectedServico,
+      horario: !selectedHorario,
+    };
+  
+    setErro(novoErro);
+  
+    if (Object.values(novoErro).includes(true)) {
+      temErro = true;
+    }
+  
+    if (temErro) return;
+
     try {
       await axios.post("/agendamento/create", {
         clienteId: selectedCliente,
@@ -83,16 +110,33 @@ function FormularioAgendamento() {
     }
   };
 
+  const handleFocus = (e) => {
+    const { name } = e.target;
+
+    setErro({
+      ...erro,
+      [name]: false,
+    });
+  };
+  
   return (
-    <div className="formulario-agendamento">
-      <h2>Agendar Novo</h2>
-      <form>
-        <div>
-          <label htmlFor="cliente">Nome do Dono:</label>
+    <div className="pagina-agendar">
+      <form className="formulario-agendamento">
+        <img src="/img/seta.svg" alt="" onClick={() => {navigate("/pagina-agendamento")}}/>
+
+        <h2>FORMULÁRIO</h2>
+
+        <div className={`formulario-campo ${erro.cliente ? "erroCampo" : ""}`}>
+          <label htmlFor="cliente">Nome do Dono</label>
           <select
             id="cliente"
+            name="cliente"
             value={selectedCliente}
-            onChange={(e) => setSelectedCliente(e.target.value)}
+            onChange={(e) => {
+              setSelectedCliente(e.target.value);
+              setErro(prev => ({ ...prev, cliente: false }));
+            }}
+            onFocus={handleFocus}
           >
             <option value="">Selecione um dono</option>
             {clientes.map((cliente) => (
@@ -101,14 +145,21 @@ function FormularioAgendamento() {
               </option>
             ))}
           </select>
+          {erro.cliente && <div className="erro-mensagem">Erro</div>}
         </div>
-        <div>
-          <label htmlFor="animal">Nome do Animal:</label>
+
+        <div className={`formulario-campo ${erro.animal ? "erroCampo" : ""}`}>
+          <label htmlFor="animal">Nome do Animal</label>
           <select
             id="animal"
+            name="animal"
             disabled={!selectedCliente}
             value={animalOptions[0] || ""}
-            onChange={(e) => setAnimalOptions([e.target.value])}
+            onChange={(e) => {
+              setAnimalOptions([e.target.value]);
+              setErro(prev => ({ ...prev, animal: false }));
+            }}
+            onFocus={handleFocus}
           >
             <option value="">Selecione um animal</option>
             {clientes
@@ -119,14 +170,21 @@ function FormularioAgendamento() {
                 </option>
               ))}
           </select>
+          {erro.animal && <div className="erro-mensagem">Erro</div>}
         </div>
-        <div>
-          <label htmlFor="especie">Espécie do Animal:</label>
+
+        <div className={`formulario-campo ${erro.especie ? "erroCampo" : ""}`}>
+          <label htmlFor="especie">Espécie do Animal</label>
           <select
             id="especie"
+            name="especie"
             disabled={!selectedCliente}
             value={especieOptions[0] || ""}
-            onChange={(e) => setEspecieOptions([e.target.value])}
+            onChange={(e) => {
+              setEspecieOptions([e.target.value]);
+              setErro(prev => ({ ...prev, especie: false }));
+            }}
+            onFocus={handleFocus}
           >
             <option value="">Selecione uma espécie</option>
             {clientes
@@ -140,13 +198,20 @@ function FormularioAgendamento() {
                 </option>
               ))}
           </select>
+          {erro.especie && <div className="erro-mensagem">Erro</div>}
         </div>
-        <div>
-          <label htmlFor="servico">Serviço:</label>
+
+        <div className={`formulario-campo ${erro.servico ? "erroCampo" : ""}`}>
+          <label htmlFor="servico">Serviço</label>
           <select
             id="servico"
+            name="servico"
             value={selectedServico}
-            onChange={(e) => setSelectedServico(e.target.value)}
+            onChange={(e) => {
+              setSelectedServico(e.target.value);
+              setErro(prev => ({ ...prev, servico: false }));
+            }}
+            onFocus={handleFocus}
           >
             <option value="">Selecione um serviço</option>
             {servicos.map((servico) => (
@@ -155,13 +220,20 @@ function FormularioAgendamento() {
               </option>
             ))}
           </select>
+          {erro.servico && <div className="erro-mensagem">Erro</div>}
         </div>
-        <div>
-          <label htmlFor="horario">Horário:</label>
+
+        <div className={`formulario-campo ${erro.horario ? "erroCampo" : ""}`}>
+          <label htmlFor="horario">Horário</label>
           <select
             id="horario"
+            name="horario"
             value={selectedHorario}
-            onChange={(e) => setSelectedHorario(e.target.value)}
+            onChange={(e) => {
+              setSelectedHorario(e.target.value);
+              setErro(prev => ({ ...prev, horario: false }));
+            }}
+            onFocus={handleFocus}
           >
             <option value="">Selecione um horário</option>
             {horarios.map((horario) => (
@@ -170,13 +242,13 @@ function FormularioAgendamento() {
               </option>
             ))}
           </select>
+          {erro.horario && <div className="erro-mensagem">Erro</div>}
         </div>
-        <button type="button" onClick={handleAgendar}>
-          Confirmar Agendamento
+
+        <button className="button" type="button" onClick={handleAgendar}>
+          Agendar
         </button>
-        <button type="button" onClick={() => navigate("/pagina-agendamento")}>
-          Cancelar
-        </button>
+
       </form>
     </div>
   );
