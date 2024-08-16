@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import FuncionarioService from "../services/FuncionarioService";
 import { config } from "dotenv";
-import { FuncionarioType } from "../types/FuncionarioType";
+import { FuncionarioType } from "../types/funcionarioType";
 import errorHandler from "../middleware/errorHandler";
 
 config();

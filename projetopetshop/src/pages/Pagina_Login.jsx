@@ -8,7 +8,7 @@ axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
 
 function Pagina_Login() {
-  const { userLogin } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const [login, setLogin] = useState({
     email: "",
@@ -67,7 +67,7 @@ function Pagina_Login() {
       if (resposta.status === 200) {
         console.log("Login bem-sucedido!", resposta.data);
         setErro(true);
-        userLogin(resposta.data.user);
+        setUser(resposta.data.user);
         navigate("/pagina-principal");
       } else {
         setErro({

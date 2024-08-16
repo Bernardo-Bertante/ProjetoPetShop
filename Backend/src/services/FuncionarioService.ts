@@ -1,4 +1,4 @@
-import { FuncionarioType } from "../types/FuncionarioType";
+import { FuncionarioType } from "../types/funcionarioType";
 import FuncionarioPersistance from "../persistance/FuncionarioPersistance";
 
 const createFuncionario = async (user: FuncionarioType) => {

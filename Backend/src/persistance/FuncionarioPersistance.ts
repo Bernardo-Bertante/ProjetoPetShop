@@ -1,5 +1,5 @@
-import { FuncionarioModel } from "../models/FuncionarioModel";
-import { FuncionarioType } from "../types/FuncionarioType";
+import { FuncionarioModel } from "../models/funcionarioModel";
+import { FuncionarioType } from "../types/funcionarioType";
 
 const createFuncionario = async (user: FuncionarioType) => {
     try {

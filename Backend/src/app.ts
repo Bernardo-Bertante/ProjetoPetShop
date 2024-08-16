@@ -9,6 +9,7 @@ import { LoginRouter } from "./routes/LoginRouter";
 import { ClienteRouter } from "./routes/ClienteRouter";
 import { ServicoRouter } from "./routes/ServicoRouter";
 import { AgendamentoRouter } from "./routes/AgendamentoRouter";
+import { HorarioRouter } from "./routes/HorarioRouter";
 import { config } from "dotenv";
 
 const app = express();
@@ -55,6 +56,7 @@ app.use(ClienteRouter);
 app.use(ServicoRouter);
 app.use(AgendamentoRouter);
 app.use(LoginRouter);
+app.use(HorarioRouter);
 
 // Manipulador de erro para mensagens flash
 app.use((err: any, req: Request, res: Response, next: Function) => {

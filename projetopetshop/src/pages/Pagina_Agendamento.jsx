@@ -56,7 +56,12 @@ function Pagina_Agendamento() {
         >
           <img src="/img/seta.svg" alt="Voltar" />
         </div>
-        <button className="btn-agendar">Agendar</button>
+        <button
+          className="btn-agendar"
+          onClick={() => navigate("/formulario-agendamento")}
+        >
+          Agendar
+        </button>
       </nav>
 
       <section className="cards">
