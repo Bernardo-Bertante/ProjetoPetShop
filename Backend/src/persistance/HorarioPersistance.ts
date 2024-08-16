@@ -1,9 +1,12 @@
 import { HorarioModel } from "../models/HorarioModel";
-import { HorarioType } from "../types/HorarioType";
 
-const getHorarios = async () => {
+const getHorariosDisponiveis = async () => {
     try {
-        const horarios = await HorarioModel.findAll(); // Busca todos os funcionários
+        const horarios = await HorarioModel.findAll({
+            where: {
+                disponibilidade: true,
+            },
+        });
         return horarios;
     } catch (error) {
         throw error;
@@ -11,5 +14,5 @@ const getHorarios = async () => {
 };
 
 export default {
-    getHorarios,
+    getHorariosDisponiveis,
 };

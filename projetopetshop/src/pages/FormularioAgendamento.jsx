@@ -23,7 +23,6 @@ function FormularioAgendamento() {
     servico: false,
     horario: false,
   });
-  
 
   useEffect(() => {
     getClientes();
@@ -81,7 +80,7 @@ function FormularioAgendamento() {
 
   const handleAgendar = async () => {
     let temErro = false;
-  
+
     const novoErro = {
       cliente: !selectedCliente,
       animal: !animalOptions[0],
@@ -89,13 +88,13 @@ function FormularioAgendamento() {
       servico: !selectedServico,
       horario: !selectedHorario,
     };
-  
+
     setErro(novoErro);
-  
+
     if (Object.values(novoErro).includes(true)) {
       temErro = true;
     }
-  
+
     if (temErro) return;
 
     try {
@@ -106,7 +105,7 @@ function FormularioAgendamento() {
       });
       navigate("/pagina-agendamento");
     } catch (error) {
-      console.log("Erro ao agendar:", error);
+      console.log("Erro ao agendar:", error.response.data.error);
     }
   };
 
@@ -118,11 +117,17 @@ function FormularioAgendamento() {
       [name]: false,
     });
   };
-  
+
   return (
     <div className="pagina-agendar">
       <form className="formulario-agendamento">
-        <img src="/img/seta.svg" alt="" onClick={() => {navigate("/pagina-agendamento")}}/>
+        <img
+          src="/img/seta.svg"
+          alt=""
+          onClick={() => {
+            navigate("/pagina-agendamento");
+          }}
+        />
 
         <h2>FORMULÁRIO</h2>
 
@@ -134,16 +139,22 @@ function FormularioAgendamento() {
             value={selectedCliente}
             onChange={(e) => {
               setSelectedCliente(e.target.value);
-              setErro(prev => ({ ...prev, cliente: false }));
+              setErro((prev) => ({ ...prev, cliente: false }));
             }}
             onFocus={handleFocus}
           >
-            <option value="">Selecione um dono</option>
-            {clientes.map((cliente) => (
-              <option key={cliente.id} value={cliente.id}>
-                {cliente.nomeDono}
-              </option>
-            ))}
+            {clientes.length === 0 ? (
+              <option value="">Nenhum dono disponível</option>
+            ) : (
+              <>
+                <option value="">Selecione um dono</option>
+                {clientes.map((cliente) => (
+                  <option key={cliente.id} value={cliente.id}>
+                    {cliente.nomeDono}
+                  </option>
+                ))}
+              </>
+            )}
           </select>
           {erro.cliente && <div className="erro-mensagem">Erro</div>}
         </div>
@@ -157,7 +168,7 @@ function FormularioAgendamento() {
             value={animalOptions[0] || ""}
             onChange={(e) => {
               setAnimalOptions([e.target.value]);
-              setErro(prev => ({ ...prev, animal: false }));
+              setErro((prev) => ({ ...prev, animal: false }));
             }}
             onFocus={handleFocus}
           >
@@ -182,7 +193,7 @@ function FormularioAgendamento() {
             value={especieOptions[0] || ""}
             onChange={(e) => {
               setEspecieOptions([e.target.value]);
-              setErro(prev => ({ ...prev, especie: false }));
+              setErro((prev) => ({ ...prev, especie: false }));
             }}
             onFocus={handleFocus}
           >
@@ -209,16 +220,22 @@ function FormularioAgendamento() {
             value={selectedServico}
             onChange={(e) => {
               setSelectedServico(e.target.value);
-              setErro(prev => ({ ...prev, servico: false }));
+              setErro((prev) => ({ ...prev, servico: false }));
             }}
             onFocus={handleFocus}
           >
-            <option value="">Selecione um serviço</option>
-            {servicos.map((servico) => (
-              <option key={servico.id} value={servico.id}>
-                {servico.tipoServico}
-              </option>
-            ))}
+            {servicos.length === 0 ? (
+              <option value="">Nenhum serviço disponível</option>
+            ) : (
+              <>
+                <option value="">Selecione um serviço</option>
+                {servicos.map((servico) => (
+                  <option key={servico.id} value={servico.id}>
+                    {servico.tipoServico}
+                  </option>
+                ))}
+              </>
+            )}
           </select>
           {erro.servico && <div className="erro-mensagem">Erro</div>}
         </div>
@@ -231,16 +248,22 @@ function FormularioAgendamento() {
             value={selectedHorario}
             onChange={(e) => {
               setSelectedHorario(e.target.value);
-              setErro(prev => ({ ...prev, horario: false }));
+              setErro((prev) => ({ ...prev, horario: false }));
             }}
             onFocus={handleFocus}
           >
-            <option value="">Selecione um horário</option>
-            {horarios.map((horario) => (
-              <option key={horario.id} value={horario.id}>
-                {horario.horario}
-              </option>
-            ))}
+            {horarios.length === 0 ? (
+              <option value="">Nenhum horário disponível</option>
+            ) : (
+              <>
+                <option value="">Selecione um horário</option>
+                {horarios.map((horario) => (
+                  <option key={horario.id} value={horario.id}>
+                    {horario.horario}
+                  </option>
+                ))}
+              </>
+            )}
           </select>
           {erro.horario && <div className="erro-mensagem">Erro</div>}
         </div>
@@ -248,7 +271,6 @@ function FormularioAgendamento() {
         <button className="button" type="button" onClick={handleAgendar}>
           Agendar
         </button>
-
       </form>
     </div>
   );

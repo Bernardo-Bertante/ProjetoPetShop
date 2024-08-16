@@ -5,6 +5,14 @@ import { sequelize } from "../connections/Sequelize";
 
 const createAgendamento = async (agendamento: AgendamentoType) => {
     try {
+        // Verifica se o horário está disponível
+        const horario = await AgendamentoPersistance.getHorarioById(
+            agendamento.horarioId
+        );
+        if (!horario || !horario.disponibilidade) {
+            throw new Error("Horário indisponível para agendamento.");
+        }
+
         // Criação do agendamento
         const result = await AgendamentoPersistance.createAgendamento(
             agendamento

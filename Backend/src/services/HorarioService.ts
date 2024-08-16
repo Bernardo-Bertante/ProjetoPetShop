@@ -1,9 +1,8 @@
-import { HorarioType } from "../types/HorarioType";
 import HorarioPersistance from "../persistance/HorarioPersistance";
 
-const getHorarios = async () => {
+const getHorariosDisponiveis = async () => {
     try {
-        const horarios = await HorarioPersistance.getHorarios();
+        const horarios = await HorarioPersistance.getHorariosDisponiveis();
         return horarios;
     } catch (error) {
         throw error;
@@ -11,5 +10,5 @@ const getHorarios = async () => {
 };
 
 export default {
-    getHorarios,
+    getHorariosDisponiveis,
 };

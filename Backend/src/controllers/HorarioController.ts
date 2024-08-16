@@ -6,7 +6,7 @@ const router = Router();
 // Rota para listar todos horarios
 router.get("/all", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const horarios = await HorarioService.getHorarios();
+        const horarios = await HorarioService.getHorariosDisponiveis();
         return res.status(200).send(horarios);
     } catch (error) {
         next(error);

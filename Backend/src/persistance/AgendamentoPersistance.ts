@@ -104,6 +104,17 @@ const getAgendamentoById = async (id: number) => {
     }
 };
 
+const getHorarioById = async (horarioId: number) => {
+    try {
+        const horario = await HorarioModel.findByPk(horarioId, {
+            attributes: ["id", "disponibilidade"], // Apenas os atributos necessários
+        });
+        return horario;
+    } catch (error: any) {
+        throw new Error(`Erro ao buscar horário: ${error.message}`);
+    }
+};
+
 export default {
     createAgendamento,
     deleteAgendamento,
@@ -111,4 +122,5 @@ export default {
     updateAgendamento,
     updateHorarioDisponibilidade,
     getAgendamentoById,
+    getHorarioById,
 };
