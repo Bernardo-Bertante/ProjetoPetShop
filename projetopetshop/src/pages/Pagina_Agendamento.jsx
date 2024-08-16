@@ -44,6 +44,7 @@ function Pagina_Agendamento() {
       getDados();
     }
   }, [user, navigate]);
+  
 
   return (
     <div className="pagina-agendamento">
@@ -86,7 +87,16 @@ function Pagina_Agendamento() {
                 >
                   Excluir
                 </button>
-                <button className="btn-atualizar">Atualizar</button>
+                <button
+                    className="btn-atualizar"
+                    onClick={() => {
+                      navigate("/atualizar-agendamento", {
+                        state: { agendamento: dado } // Passando o dado do agendamento para a próxima página
+                      });
+                    }}
+                  >
+                    Atualizar
+              </button>
               </div>
             </div>
           ))

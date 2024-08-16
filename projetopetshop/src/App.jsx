@@ -5,6 +5,7 @@ import Pagina_Login from "./pages/Pagina_Login";
 import Pagina_Principal from "./pages/Pagina_Principal";
 import Pagina_Agendamento from "./pages/Pagina_Agendamento";
 import FormularioAgendamento from "./pages/FormularioAgendamento";
+import Pagina_Atualizar from "./pages/Pagina_Atualizar";
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
             path="/formulario-agendamento"
             element={<FormularioAgendamento />}
           ></Route>
+          <Route
+            path="/atualizar-agendamento"
+            element={<Pagina_Atualizar />}
+          ></Route> 
         </Routes>
       </BrowserRouter>
     </UserProvider>
