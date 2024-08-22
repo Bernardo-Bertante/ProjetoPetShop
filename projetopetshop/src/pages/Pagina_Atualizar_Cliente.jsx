@@ -39,6 +39,32 @@ function Pagina_Atualizar_Cliente() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Resetar erros
+    let hasError = false;
+    const newErro = {
+      nomeDono: !dados.nomeDono,
+      sobrenomeDono: !dados.sobrenomeDono,
+      nomeAnimal: !dados.nomeAnimal,
+      especieAnimal: !dados.especieAnimal,
+      racaAnimal: !dados.racaAnimal,
+      email: !dados.email,
+      telefone: !dados.telefone,
+    };
+  
+    setErro(newErro);
+  
+    // Verifica se há algum erro
+    for (let key in newErro) {
+      if (newErro[key]) {
+        hasError = true;
+      }
+    }
+  
+    if (hasError) {
+      return; // Não envia se houver erros
+    }
+  
     try {
       const response = await axios.put(`/cliente/update/${dados.id}`, dados);
       console.log("Cliente atualizado com sucesso:", response.data);

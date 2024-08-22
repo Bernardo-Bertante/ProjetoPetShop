@@ -244,7 +244,7 @@ function Pagina_Atualizar() {
           {erro.horario && <div className="erro-mensagem">Selecione um horário</div>}
         </div>
 
-        <button type="button" className="botao-agendar" onClick={handleAgendar}>
+        <button type="button" className="button" onClick={handleAgendar}>
           Atualizar
         </button>
       </form>
