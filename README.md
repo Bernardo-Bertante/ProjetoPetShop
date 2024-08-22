@@ -36,21 +36,151 @@ O sistema é independente e totalmente auto-contido, não necessitando interagir
 Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 
 ```
-/project-root
+/ProjetoPetShop
+├───/Backend
+│   ├───config/
+│   │   └───config.json
+│   ├───models/
+│   │   └───index.js
+│   ├───src/
+│   │   ├───connections/
+│   │   │   ├───Connection.ts
+│   │   │   └───Sequelize.ts
+│   │   ├───controllers/
+│   │   │   ├───AgendamentoController.ts
+│   │   │   ├───ClienteController.ts
+│   │   │   ├───FuncionarioController.ts
+│   │   │   ├───HorarioController.ts
+│   │   │   ├───LoginController.ts
+│   │   │   └───ServicoController.ts
+│   │   ├───middleware/
+│   │   │   ├───ensureAdmin.ts
+│   │   │   ├───ensureAuthenticated.ts
+│   │   │   └───errorHandler.ts
+│   │   ├───migrations/
+│   │   │   └───20240809181655-create-users.js
+│   │   ├───models/
+│   │   │   ├───AgendamentoModel.ts
+│   │   │   ├───clienteModel.ts
+│   │   │   ├───funcionarioModel.ts
+│   │   │   ├───horarioModel.ts
+│   │   │   └───servicoModel.ts
+│   │   ├───ModelsSequelize/
+│   │   │   └───index.js
+│   │   ├───persistance/
+│   │   │   ├───AgendamentoPersistance.ts
+│   │   │   ├───ClientePersistance.ts
+│   │   │   ├───FuncionarioPersistance.ts
+│   │   │   ├───HorarioPersistance.ts
+│   │   │   └───ServicoPersistance.ts
+│   │   ├───routes/
+│   │   │   ├───AdminRouter.ts
+│   │   │   ├───AgendamentoRouter.ts
+│   │   │   ├───ClienteRouter.ts
+│   │   │   ├───HorarioRouter.ts
+│   │   │   ├───LoginRouter.ts
+│   │   │   └───ServicoRouter.ts
+│   │   ├───services/
+│   │   │   ├───AgendamentoService.ts
+│   │   │   ├───ClienteService.ts
+│   │   │   ├───FuncionarioService.ts
+│   │   │   ├───HorarioService.ts
+│   │   │   └───ServicoService.ts
+│   │   ├───types/
+│   │   │   ├───AgendamentoType.ts
+│   │   │   ├───clienteType.ts
+│   │   │   ├───funcionarioType.ts
+│   │   │   ├───horarioType.ts
+│   │   │   └───servicoType.ts
+│   │   ├───utils/
+│   │   │   └───passport.ts
+│   │   ├───app.ts
+│   │   └───index.ts
+│   ├───.prettierrc.json
+│   ├───.sequelizerc
+│   ├───jest.config.ts
+│   ├───package-lock.json
+│   ├───package.json
+│   └───tsconfig.json
 │  
 ├───/Padrões Adotados
 │   └───Regras de Verificação e Analise de Requisitos.md
 │
+├───/projetopetshop
+│   ├───public/
+│   │   └───img/
+│   │       ├───eye-blocked.png
+│   │       ├───eye-open.png
+│   │       ├───papel_parede_patas.jpg
+│   │       ├───seta.svg
+│   │       └───triangulo-atencao.svg
+│   ├───src/
+│   │   ├───assets/
+│   │   │   └───react.svg
+│   │   ├───components/
+│   │   │   ├───CaixaAviso_Cliente.jsx
+│   │   │   ├───CaixaAviso.css
+│   │   │   └───CaixaAviso.jsx
+│   │   ├───contexts/
+│   │   │   └───UserContext.jsx
+│   │   ├───pages/
+│   │   │   ├───FormularioAgendamento.css
+│   │   │   ├───FormularioAgendamento.jsx
+│   │   │   ├───FormularioCliente.jsx
+│   │   │   ├───Pagina_Agendamento.css
+│   │   │   ├───Pagina_Agendamento.jsx
+│   │   │   ├───Pagina_Atualizar_Cliente.jsx
+│   │   │   ├───Pagina_Atualizar.jsx
+│   │   │   ├───Pagina_Cliente.jsx
+│   │   │   ├───Pagina_Login.css
+│   │   │   ├───Pagina_Login.jsx
+│   │   │   ├───Pagina_Cliente.jsx
+│   │   │   ├───Pagina_Principal.css
+│   │   │   └───Pagina_Principal.jsx
+│   │   ├───App.css
+│   │   ├───App.jsx
+│   │   ├───index.css
+│   │   └───main.jsx
+│   ├───.gitignore
+│   ├───axiosConfig.jsx
+│   ├───eslint.config.js
+│   ├───index.html
+│   ├───package-lock.json
+│   ├───package.json
+│   ├───README.md
+│   └───vite.config.js
+|
 ├───/Requisitos
+│   ├───Diagrama de Sequência/
+│   │   ├───Atualizar Agendamento.png
+│   │   ├───Atualizar Cliente.png
+│   │   ├───Atualizar Funcionário.png
+│   │   ├───Atualizar Serviço.png
+│   │   ├───Cadastrar Agendamento.png
+│   │   ├───Cadastrar Cliente.png
+│   │   ├───Cadastrar Funcionário.png
+│   │   ├───Cadastrar Serviço.png
+│   │   ├───Consultar Agendamento.png
+│   │   ├───Consultar Cliente.png
+│   │   ├───Consultar Funcionário.png
+│   │   ├───Consultar Serviço.png
+│   │   ├───Excluir Agendamento.png
+│   │   ├───Excluir Agendamento.png
+│   │   ├───Excluir Cliente.png
+│   │   ├───Excluir Funcionário.png
+│   │   └───Excluir Serviço.png
 │   ├───Diagrama de Classes.drawio.png
 │   ├───Diagrama de Pacotes.drawio.png
 │   ├───Diagrama de Sequência.drawio
 │   └───DocumentoRequisitos.docx
-│
+|
+│   .gitignore
+│   package-lock.json
 │   README.md
 │   TabelaUML.drawio
 |   TabelaUML.drawio.svg
 |   TabelaUML.png
+
 ```
 
 ## Requisitos Funcionais (Casos de Uso)
