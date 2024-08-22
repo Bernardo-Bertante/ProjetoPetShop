@@ -9,6 +9,7 @@ axios.defaults.withCredentials = true;
 
 function Pagina_Login() {
   const { setUser } = useContext(UserContext);
+  const [mensagemErro, setMensagemErro] = useState("");
 
   const [login, setLogin] = useState({
     email: "",
@@ -77,7 +78,8 @@ function Pagina_Login() {
         console.log("Senha ou email está incorreto!");
       }
     } catch (error) {
-      console.log(error);
+      setMensagemErro(error.response.data.message);
+      console.log(error.response.data.message);
     }
   };
 
@@ -86,6 +88,9 @@ function Pagina_Login() {
       <form className="formulario-login" onSubmit={handleSubmit}>
         <div className="img-logo">
           <img src="" alt="" />
+        </div>
+        <div className={`mensagem-erro ${mensagemErro ? "ativa" : ""}`}>
+          {mensagemErro}
         </div>
         <div className={`caixa-campo ${erro.email ? "erroInput" : ""}`}>
           <label htmlFor="email">Email</label>
@@ -96,7 +101,7 @@ function Pagina_Login() {
             onChange={handleChange}
             onFocus={handleFocus}
           />
-          {erro.email && <div className="erro-frase">Erro</div>}
+          {erro.email && <div className="erro-frase">O campo email é obrigatório.</div>}
         </div>
 
         <div className={`caixa-campo ${erro.password ? "erroInput" : ""}`}>
@@ -114,7 +119,7 @@ function Pagina_Login() {
               alt=""
             />
           </span>
-          {erro.password && <div className="erro-frase">Erro</div>}
+          {erro.password && <div className="erro-frase">O campo senha é obrigatório.</div>}
         </div>
 
         <button type="submit" className="btn-login">

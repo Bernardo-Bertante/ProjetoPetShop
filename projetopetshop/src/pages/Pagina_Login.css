@@ -131,3 +131,16 @@
 .btn-login:hover {
     background-color: #a093fa;
 }
+
+.mensagem-erro {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    visibility: hidden; /* Inicialmente, a mensagem de erro é invisível */
+}
+
+.mensagem-erro.ativa {
+    visibility: visible; /* Torna a mensagem visível quando ativa */
+}
+
+  
