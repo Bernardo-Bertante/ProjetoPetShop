@@ -33,7 +33,7 @@ function FormularioCliente() {
       nomeAnimal: !selectedNomeAnimal,
       especie: !selectedEspecie,
       raca: !selectedRaca,
-      email: !selectedEmail,
+      email: false,
       telefone: !selectedTelefone
     };
 
@@ -46,21 +46,22 @@ function FormularioCliente() {
     if (temErro) return;
 
     try {
-      await axios.post("/cliente/create", {
+      const response = await axios.post("/cliente/create", {
         nomeDono: selectedNomeDono,
         sobrenomeDono: selectedSobrenomeDono,
         nomeAnimal: selectedNomeAnimal,
         especieAnimal: selectedEspecie,
         racaAnimal: selectedRaca,
-        email: selectedEmail,
+        email: selectedEmail || null,
         telefone: selectedTelefone
       });
+
+      console.log("Cliente cadastrado com sucesso:", response.data);
       navigate("/pagina-cliente");
     } catch (error) {
-      console.log("Erro ao cadastrar:", error.response?.data?.message || error.message);
+      console.error("Erro ao cadastrar cliente:", error.response?.data?.message || error.message);
     }
   };
-
 
   const handleFocus = (e) => {
     const { name } = e.target;
@@ -92,7 +93,7 @@ function FormularioCliente() {
             onChange={(e) => setSelectedNomeDono(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.nomeDono && <div className="erro-mensagem">Erro</div>}
+          {erro.nomeDono && <div className="erro-mensagem">Nome do dono é obrigatório.</div>}
         </div>
 
         <div className={`formulario-campo ${erro.sobrenomeDono ? "erroCampo" : ""}`}>
@@ -105,7 +106,7 @@ function FormularioCliente() {
             onChange={(e) => setSelectedSobrenomeDono(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.sobrenomeDono && <div className="erro-mensagem">Erro</div>}
+          {erro.sobrenomeDono && <div className="erro-mensagem">Sobrenome do dono é obrigatório.</div>}
         </div>
 
         <div className={`formulario-campo ${erro.nomeAnimal ? "erroCampo" : ""}`}>
@@ -118,7 +119,7 @@ function FormularioCliente() {
             onChange={(e) => setSelectedNomeAnimal(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.nomeAnimal && <div className="erro-mensagem">Erro</div>}
+          {erro.nomeAnimal && <div className="erro-mensagem">Nome do animal é obrigatório.</div>}
         </div>
 
         <div className={`formulario-campo ${erro.especie ? "erroCampo" : ""}`}>
@@ -131,7 +132,7 @@ function FormularioCliente() {
             onChange={(e) => setSelectedEspecie(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.especie && <div className="erro-mensagem">Erro</div>}
+          {erro.especie && <div className="erro-mensagem">Espécie do animal é obrigatória.</div>}
         </div>
 
         <div className={`formulario-campo ${erro.raca ? "erroCampo" : ""}`}>
@@ -144,10 +145,10 @@ function FormularioCliente() {
             onChange={(e) => setSelectedRaca(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.raca && <div className="erro-mensagem">Erro</div>}
+          {erro.raca && <div className="erro-mensagem">Raça do animal é obrigatória.</div>}
         </div>
 
-        <div className={`formulario-campo ${erro.email ? "erroCampo" : ""}`}>
+        <div className="formulario-campo">
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -157,7 +158,6 @@ function FormularioCliente() {
             onChange={(e) => setSelectedEmail(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.email && <div className="erro-mensagem">Erro</div>}
         </div>
 
         <div className={`formulario-campo ${erro.telefone ? "erroCampo" : ""}`}>
@@ -170,7 +170,7 @@ function FormularioCliente() {
             onChange={(e) => setSelectedTelefone(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.telefone && <div className="erro-mensagem">Erro</div>}
+          {erro.telefone && <div className="erro-mensagem">Telefone é obrigatório.</div>}
         </div>
 
         <button className="button" type="button" onClick={handleCadastrar}>
