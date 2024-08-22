@@ -15,8 +15,8 @@ function Pagina_Atualizar() {
   const [selectedCliente, setSelectedCliente] = useState("");
   const [selectedServico, setSelectedServico] = useState("");
   const [selectedHorario, setSelectedHorario] = useState("");
-  const [animalOptions, setAnimalOptions] = useState([]);
-  const [especieOptions, setEspecieOptions] = useState([]);
+  const [animal, setAnimal] = useState("");
+  const [especie, setEspecie] = useState("");
   const [erro, setErro] = useState({
     cliente: false,
     animal: false,
@@ -24,7 +24,6 @@ function Pagina_Atualizar() {
     servico: false,
     horario: false,
   });
-  
 
   useEffect(() => {
     getClientes();
@@ -34,33 +33,30 @@ function Pagina_Atualizar() {
 
   useEffect(() => {
     if (location.state && location.state.agendamento) {
-      console.log("Dados recebidos no Pagina_Atualizar:", location.state.agendamento);
       const { cliente, servico, horario } = location.state.agendamento;
-      setSelectedCliente(cliente.nomeDono || '');
-      setSelectedServico(servico.tipoServico || '');
-      setSelectedHorario(horario.horario || '');
-      setAnimalOptions([cliente.nomeAnimal || '']);
-      setEspecieOptions([cliente.especie || '']);
+      setSelectedCliente(cliente.id || '');
+      setSelectedServico(servico.id || '');
+      setSelectedHorario(horario.id || '');
+      setAnimal(cliente.nomeAnimal || '');
+      setEspecie(cliente.especieAnimal || '');
     }
   }, [location.state]);
-  
 
   useEffect(() => {
     if (selectedCliente) {
-      const cliente = clientes.find((c) => c.nomeDono === selectedCliente);
+      const cliente = clientes.find((c) => c.id === Number(selectedCliente));
       if (cliente) {
-        setAnimalOptions([cliente.nomeAnimal]);
-        setEspecieOptions([cliente.especieAnimal]);
+        setAnimal(cliente.nomeAnimal);
+        setEspecie(cliente.especieAnimal);
       } else {
-        setAnimalOptions([]);
-        setEspecieOptions([]);
+        setAnimal("");
+        setEspecie("");
       }
     } else {
-      setAnimalOptions([]);
-      setEspecieOptions([]);
+      setAnimal("");
+      setEspecie("");
     }
   }, [selectedCliente, clientes]);
-  
 
   const getClientes = async () => {
     try {
@@ -90,49 +86,45 @@ function Pagina_Atualizar() {
   };
 
   const handleAgendar = async () => {
-    let temErro = false;
-  
     const novoErro = {
       cliente: !selectedCliente,
-      animal: !animalOptions[0],
-      especie: !especieOptions[0],
+      animal: !animal,
+      especie: !especie,
       servico: !selectedServico,
       horario: !selectedHorario,
     };
-  
+
     setErro(novoErro);
-  
+
     if (Object.values(novoErro).includes(true)) {
-      temErro = true;
+      return;
     }
-  
-    if (temErro) return;
 
     try {
-      await axios.post("/agendamento/create", {
+      const id = location.state?.agendamento?.id; // Pegando o ID do agendamento existente
+      await axios.put(`/agendamento/update/${id}`, {
         clienteId: selectedCliente,
         servicoId: selectedServico,
         horarioId: selectedHorario,
       });
       navigate("/pagina-agendamento");
     } catch (error) {
-      console.log("Erro ao agendar:", error);
+      console.log("Erro ao atualizar o agendamento:", error);
     }
   };
 
   const handleFocus = (e) => {
     const { name } = e.target;
-
-    setErro({
-      ...erro,
+    setErro((prevErro) => ({
+      ...prevErro,
       [name]: false,
-    });
+    }));
   };
-  
+
   return (
     <div className="pagina-agendar">
       <form className="formulario-agendamento">
-        <img src="/img/seta.svg" alt="" onClick={() => {navigate("/pagina-agendamento")}}/>
+        <img src="/img/seta.svg" alt="" onClick={() => navigate("/pagina-agendamento")} />
 
         <h2>FORMULÁRIO</h2>
 
@@ -144,7 +136,7 @@ function Pagina_Atualizar() {
             value={selectedCliente}
             onChange={(e) => {
               setSelectedCliente(e.target.value);
-              setErro(prev => ({ ...prev, cliente: false }));
+              setErro((prev) => ({ ...prev, cliente: false }));
             }}
             onFocus={handleFocus}
           >
@@ -155,7 +147,7 @@ function Pagina_Atualizar() {
               </option>
             ))}
           </select>
-          {erro.cliente && <div className="erro-mensagem">Erro</div>}
+          {erro.cliente && <div className="erro-mensagem">Selecione um dono</div>}
         </div>
 
         <div className={`formulario-campo ${erro.animal ? "erroCampo" : ""}`}>
@@ -164,10 +156,10 @@ function Pagina_Atualizar() {
             id="animal"
             name="animal"
             disabled={!selectedCliente}
-            value={animalOptions[0] || ""}
+            value={animal || ""}
             onChange={(e) => {
-              setAnimalOptions([e.target.value]);
-              setErro(prev => ({ ...prev, animal: false }));
+              setAnimal(e.target.value);
+              setErro((prev) => ({ ...prev, animal: false }));
             }}
             onFocus={handleFocus}
           >
@@ -180,7 +172,7 @@ function Pagina_Atualizar() {
                 </option>
               ))}
           </select>
-          {erro.animal && <div className="erro-mensagem">Erro</div>}
+          {erro.animal && <div className="erro-mensagem">Selecione um animal</div>}
         </div>
 
         <div className={`formulario-campo ${erro.especie ? "erroCampo" : ""}`}>
@@ -189,10 +181,10 @@ function Pagina_Atualizar() {
             id="especie"
             name="especie"
             disabled={!selectedCliente}
-            value={especieOptions[0] || ""}
+            value={especie || ""}
             onChange={(e) => {
-              setEspecieOptions([e.target.value]);
-              setErro(prev => ({ ...prev, especie: false }));
+              setEspecie(e.target.value);
+              setErro((prev) => ({ ...prev, especie: false }));
             }}
             onFocus={handleFocus}
           >
@@ -200,15 +192,12 @@ function Pagina_Atualizar() {
             {clientes
               .filter((cliente) => cliente.id === Number(selectedCliente))
               .map((cliente) => (
-                <option
-                  key={cliente.especieAnimal}
-                  value={cliente.especieAnimal}
-                >
+                <option key={cliente.especieAnimal} value={cliente.especieAnimal}>
                   {cliente.especieAnimal}
                 </option>
               ))}
           </select>
-          {erro.especie && <div className="erro-mensagem">Erro</div>}
+          {erro.especie && <div className="erro-mensagem">Selecione uma espécie</div>}
         </div>
 
         <div className={`formulario-campo ${erro.servico ? "erroCampo" : ""}`}>
@@ -219,7 +208,7 @@ function Pagina_Atualizar() {
             value={selectedServico}
             onChange={(e) => {
               setSelectedServico(e.target.value);
-              setErro(prev => ({ ...prev, servico: false }));
+              setErro((prev) => ({ ...prev, servico: false }));
             }}
             onFocus={handleFocus}
           >
@@ -230,7 +219,7 @@ function Pagina_Atualizar() {
               </option>
             ))}
           </select>
-          {erro.servico && <div className="erro-mensagem">Erro</div>}
+          {erro.servico && <div className="erro-mensagem">Selecione um serviço</div>}
         </div>
 
         <div className={`formulario-campo ${erro.horario ? "erroCampo" : ""}`}>
@@ -241,7 +230,7 @@ function Pagina_Atualizar() {
             value={selectedHorario}
             onChange={(e) => {
               setSelectedHorario(e.target.value);
-              setErro(prev => ({ ...prev, horario: false }));
+              setErro((prev) => ({ ...prev, horario: false }));
             }}
             onFocus={handleFocus}
           >
@@ -252,13 +241,12 @@ function Pagina_Atualizar() {
               </option>
             ))}
           </select>
-          {erro.horario && <div className="erro-mensagem">Erro</div>}
+          {erro.horario && <div className="erro-mensagem">Selecione um horário</div>}
         </div>
 
-        <button className="button" type="button" onClick={handleAgendar}>
-          Agendar
+        <button type="button" className="botao-agendar" onClick={handleAgendar}>
+          Atualizar
         </button>
-
       </form>
     </div>
   );
