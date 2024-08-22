@@ -1,0 +1,84 @@
+.pagina-atualizar {
+    height: 100vh;
+    background-color: var(--cor-areia-mais-clara);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario-atualizar {
+    max-width: 450px;
+    width: 100%;
+    background-color: var(--cor-azul-claro);
+    border-radius: 30px;
+    display: flex;
+    gap: 25px;
+    flex-direction: column;
+    padding: 20px 50px;
+    position: relative;
+    box-shadow: 0 0 10px 2px #c9c2f3;
+}
+
+.formulario-atualizar img {
+    position: absolute;
+    max-width: 40px;
+    left: 30px;
+    cursor: pointer;
+}
+
+.formulario-atualizar h2 {
+    margin: 0 auto;
+    font-weight: 400;
+    font-size: 25px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.formulario-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+}
+
+.formulario-campo input {
+    border-radius: 20px;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.formulario-campo input:focus {
+    box-shadow: 0 0 0 2.5px #5177c2;
+    outline: none;
+}
+
+.botao-atualizar {
+    background: var(--cor-roxo);
+    border-radius: 15px;
+    width: 130px;
+    height: 40px;
+    margin: 0 auto;
+    font-weight: 400;
+    font-size: 20px;
+    margin-top: 15px;
+    border: none;
+    color: #ffffff;
+}
+
+.botao-atualizar:hover {
+    background-color: #8c7bfa;
+    cursor: pointer;
+}
+
+.erroCampo .erro-mensagem {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.5em;
+    position: absolute;
+    bottom: -21px;
+    left: 15px;
+}
+  
+.erroCampo input {
+    box-shadow: 0 0 0 2.5px red;
+}

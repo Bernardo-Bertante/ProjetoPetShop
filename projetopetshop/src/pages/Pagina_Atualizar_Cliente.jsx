@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./atualizar.css";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -8,15 +9,15 @@ axios.defaults.withCredentials = true;
 function Pagina_Atualizar_Cliente() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { cliente } = location.state || {}; // Obtendo os dados do cliente do state passado
+  const { cliente } = location.state || {};
 
-  const [dados, setDados] = useState(cliente || {}); // Inicializa com os dados recebidos ou um objeto vazio
+  const [dados, setDados] = useState(cliente || {});
   const [erro, setErro] = useState({
     nomeDono: false,
     sobrenomeDono: false,
     nomeAnimal: false,
-    especie: false,
-    raca: false,
+    especieAnimal: false,
+    racaAnimal: false,
     email: false,
     telefone: false
   });
@@ -24,7 +25,7 @@ function Pagina_Atualizar_Cliente() {
   useEffect(() => {
     if (!cliente) {
       console.error("Dados do cliente não fornecidos.");
-      navigate("/pagina-principal"); // Redireciona se não houver dados do cliente
+      navigate("/pagina-principal");
     }
   }, [cliente, navigate]);
 
@@ -41,98 +42,111 @@ function Pagina_Atualizar_Cliente() {
     try {
       const response = await axios.put(`/cliente/update/${dados.id}`, dados);
       console.log("Cliente atualizado com sucesso:", response.data);
-      navigate("/pagina-cliente"); // Redireciona após a atualização
+      navigate("/pagina-cliente");
     } catch (error) {
       console.error("Erro ao atualizar cliente:", error);
     }
   };
 
   return (
-    <div className="pagina-atualizar-cliente">
-      <nav className="navbar">
-        <div
-          className="btn-voltar"
-          onClick={() => {
-            navigate("/pagina-cliente");
-          }}
-        >
-          <img src="/img/seta.svg" alt="Voltar" />
-        </div>
-        <h1>Atualizar Cliente</h1>
-      </nav>
-
+    <div className="pagina-atualizar">
       <form onSubmit={handleSubmit} className="formulario-atualizar">
-        <label>
-          Nome do Dono:
+        <img src="/img/seta.svg" alt="Voltar" onClick={() => navigate("/pagina-cliente")} />
+
+        <h2>Atualizar Cliente</h2>
+
+        <div className={`formulario-campo ${erro.nomeDono ? "erroCampo" : ""}`}>
+          <label htmlFor="nomeDono">Nome do Dono</label>
           <input
+            id="nomeDono"
             type="text"
             name="nomeDono"
             value={dados.nomeDono || ""}
             onChange={handleChange}
+            onFocus={() => setErro((prev) => ({ ...prev, nomeDono: false }))}
           />
-          {erro.nomeDono && <span className="erro">Nome do dono é obrigatório</span>}
-        </label>
-        <label>
-          Sobrenome do Dono:
+          {erro.nomeDono && <div className="erro-mensagem">Nome do dono é obrigatório</div>}
+        </div>
+
+        <div className={`formulario-campo ${erro.sobrenomeDono ? "erroCampo" : ""}`}>
+          <label htmlFor="sobrenomeDono">Sobrenome do Dono</label>
           <input
+            id="sobrenomeDono"
             type="text"
             name="sobrenomeDono"
             value={dados.sobrenomeDono || ""}
             onChange={handleChange}
+            onFocus={() => setErro((prev) => ({ ...prev, sobrenomeDono: false }))}
           />
-          {erro.sobrenomeDono && <span className="erro">Sobrenome do dono é obrigatório</span>}
-        </label>
-        <label>
-          Nome do Animal:
+          {erro.sobrenomeDono && <div className="erro-mensagem">Sobrenome do dono é obrigatório</div>}
+        </div>
+
+        <div className={`formulario-campo ${erro.nomeAnimal ? "erroCampo" : ""}`}>
+          <label htmlFor="nomeAnimal">Nome do Animal</label>
           <input
+            id="nomeAnimal"
             type="text"
             name="nomeAnimal"
             value={dados.nomeAnimal || ""}
             onChange={handleChange}
+            onFocus={() => setErro((prev) => ({ ...prev, nomeAnimal: false }))}
           />
-          {erro.nomeAnimal && <span className="erro">Nome do animal é obrigatório</span>}
-        </label>
-        <label>
-          Espécie:
+          {erro.nomeAnimal && <div className="erro-mensagem">Nome do animal é obrigatório</div>}
+        </div>
+
+        <div className={`formulario-campo ${erro.especieAnimal ? "erroCampo" : ""}`}>
+          <label htmlFor="especieAnimal">Espécie</label>
           <input
+            id="especieAnimal"
             type="text"
             name="especieAnimal"
             value={dados.especieAnimal || ""}
             onChange={handleChange}
+            onFocus={() => setErro((prev) => ({ ...prev, especieAnimal: false }))}
           />
-          {erro.especie && <span className="erro">Espécie é obrigatória</span>}
-        </label>
-        <label>
-          Raça:
+          {erro.especieAnimal && <div className="erro-mensagem">Espécie é obrigatória</div>}
+        </div>
+
+        <div className={`formulario-campo ${erro.racaAnimal ? "erroCampo" : ""}`}>
+          <label htmlFor="racaAnimal">Raça</label>
           <input
+            id="racaAnimal"
             type="text"
             name="racaAnimal"
             value={dados.racaAnimal || ""}
             onChange={handleChange}
+            onFocus={() => setErro((prev) => ({ ...prev, racaAnimal: false }))}
           />
-          {erro.raca && <span className="erro">Raça é obrigatória</span>}
-        </label>
-        <label>
-          Telefone:
+          {erro.racaAnimal && <div className="erro-mensagem">Raça é obrigatória</div>}
+        </div>
+
+        <div className={`formulario-campo ${erro.telefone ? "erroCampo" : ""}`}>
+          <label htmlFor="telefone">Telefone</label>
           <input
+            id="telefone"
             type="text"
             name="telefone"
             value={dados.telefone || ""}
             onChange={handleChange}
+            onFocus={() => setErro((prev) => ({ ...prev, telefone: false }))}
           />
-          {erro.telefone && <span className="erro">Telefone é obrigatório</span>}
-        </label>
-        <label>
-          Email:
+          {erro.telefone && <div className="erro-mensagem">Telefone é obrigatório</div>}
+        </div>
+
+        <div className={`formulario-campo ${erro.email ? "erroCampo" : ""}`}>
+          <label htmlFor="email">Email</label>
           <input
+            id="email"
             type="email"
             name="email"
             value={dados.email || ""}
             onChange={handleChange}
+            onFocus={() => setErro((prev) => ({ ...prev, email: false }))}
           />
-          {erro.email && <span className="erro">Email é obrigatório</span>}
-        </label>
-        <button type="submit">Atualizar</button>
+          {erro.email && <div className="erro-mensagem">Email é obrigatório</div>}
+        </div>
+
+        <button type="submit" className="botao-atualizar">Atualizar</button>
       </form>
     </div>
   );
