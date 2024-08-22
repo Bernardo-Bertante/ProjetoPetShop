@@ -23,6 +23,7 @@ function FormularioCliente() {
     email: false,
     telefone: false
   });
+  const [mensagemErro, setMensagemErro] = useState(""); // Estado para mensagem de erro
 
   const handleCadastrar = async () => {
     let temErro = false;
@@ -59,6 +60,12 @@ function FormularioCliente() {
       console.log("Cliente cadastrado com sucesso:", response.data);
       navigate("/pagina-cliente");
     } catch (error) {
+      // Atualiza a mensagem de erro com base na resposta do servidor
+      if (error.response && error.response.data) {
+        setMensagemErro(error.response.data.message || "Erro desconhecido.");
+      } else {
+        setMensagemErro("Erro ao cadastrar cliente.");
+      }
       console.error("Erro ao cadastrar cliente:", error.response?.data?.message || error.message);
     }
   };
@@ -82,6 +89,8 @@ function FormularioCliente() {
         />
 
         <h2>FORMULÁRIO</h2>
+
+        {mensagemErro && <div className="erro-mensagem">{mensagemErro}</div>} {/* Exibe a mensagem de erro */}
 
         <div className={`formulario-campo ${erro.nomeDono ? "erroCampo" : ""}`}>
           <label htmlFor="nomeDono">Nome do dono</label>
