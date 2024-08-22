@@ -91,7 +91,7 @@ function Pagina_Cliente() {
                 <button
                     className="btn-atualizar"
                     onClick={() => {
-                      navigate("/atualizar-agendamento", {
+                      navigate("/atualizar-cliente", {
                         state: { agendamento: dado } // Passando o dado do agendamento para a próxima página
                       });
                     }}

@@ -8,6 +8,7 @@ import FormularioAgendamento from "./pages/FormularioAgendamento";
 import Pagina_Atualizar from "./pages/Pagina_Atualizar";
 import Pagina_Cliente from "./pages/Pagina_Cliente";
 import FormularioCliente from "./pages/FormularioCliente";
+import Pagina_Atualizar_Cliente from "./pages/Pagina_Atualizar_Cliente";
 
 function App() {
   return (
@@ -38,7 +39,11 @@ function App() {
           <Route
             path="/formulario-cliente"
             element={<FormularioCliente />}
-          ></Route> 
+          ></Route>
+           <Route
+            path="/atualizar-cliente"
+            element={<Pagina_Atualizar_Cliente />}
+          ></Route>  
         </Routes>
       </BrowserRouter>
     </UserProvider>
