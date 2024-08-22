@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./atualizar.css";
+import "./FormularioAgendamento.css";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -49,11 +49,11 @@ function Pagina_Atualizar_Cliente() {
   };
 
   return (
-    <div className="pagina-atualizar">
-      <form onSubmit={handleSubmit} className="formulario-atualizar">
+    <div className="pagina-agendar">
+      <form onSubmit={handleSubmit} className="formulario-agendamento">
         <img src="/img/seta.svg" alt="Voltar" onClick={() => navigate("/pagina-cliente")} />
 
-        <h2>Atualizar Cliente</h2>
+        <h2>FORMULÁRIO</h2>
 
         <div className={`formulario-campo ${erro.nomeDono ? "erroCampo" : ""}`}>
           <label htmlFor="nomeDono">Nome do Dono</label>
@@ -146,7 +146,7 @@ function Pagina_Atualizar_Cliente() {
           {erro.email && <div className="erro-mensagem">Email é obrigatório</div>}
         </div>
 
-        <button type="submit" className="botao-atualizar">Atualizar</button>
+        <button type="submit" className="button">Editar</button>
       </form>
     </div>
   );
