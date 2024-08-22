@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./FormularioAgendamento.css";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -9,6 +8,7 @@ axios.defaults.withCredentials = true;
 function FormularioCliente() {
   const navigate = useNavigate();
   const [selectedNomeDono, setSelectedNomeDono] = useState("");
+  const [selectedSobrenomeDono, setSelectedSobrenomeDono] = useState("");
   const [selectedNomeAnimal, setSelectedNomeAnimal] = useState("");
   const [selectedEspecie, setSelectedEspecie] = useState("");
   const [selectedRaca, setSelectedRaca] = useState("");
@@ -16,6 +16,7 @@ function FormularioCliente() {
   const [selectedTelefone, setSelectedTelefone] = useState("");
   const [erro, setErro] = useState({
     nomeDono: false,
+    sobrenomeDono: false,
     nomeAnimal: false,
     especie: false,
     raca: false,
@@ -28,6 +29,7 @@ function FormularioCliente() {
 
     const novoErro = {
       nomeDono: !selectedNomeDono,
+      sobrenomeDono: !selectedSobrenomeDono,
       nomeAnimal: !selectedNomeAnimal,
       especie: !selectedEspecie,
       raca: !selectedRaca,
@@ -45,23 +47,28 @@ function FormularioCliente() {
 
     try {
       await axios.post("/cliente/create", {
-        clienteId: selectedNomeDono,
-        servicoId: selectedNomeAnimal,
-        horarioId: selectedEspecie,
+        nomeDono: selectedNomeDono,
+        sobrenomeDono: selectedSobrenomeDono,
+        nomeAnimal: selectedNomeAnimal,
+        especieAnimal: selectedEspecie,
+        racaAnimal: selectedRaca,
+        email: selectedEmail,
+        telefone: selectedTelefone
       });
       navigate("/pagina-cliente");
     } catch (error) {
-      console.log("Erro ao agendar:", error.response.data.error);
+      console.log("Erro ao cadastrar:", error.response?.data?.message || error.message);
     }
   };
+
 
   const handleFocus = (e) => {
     const { name } = e.target;
 
-    setErro({
-      ...erro,
+    setErro((prev) => ({
+      ...prev,
       [name]: false,
-    });
+    }));
   };
 
   return (
@@ -69,10 +76,8 @@ function FormularioCliente() {
       <form className="formulario-agendamento">
         <img
           src="/img/seta.svg"
-          alt=""
-          onClick={() => {
-            navigate("/pagina-cliente");
-          }}
+          alt="Voltar"
+          onClick={() => navigate("/pagina-cliente")}
         />
 
         <h2>FORMULÁRIO</h2>
@@ -84,13 +89,23 @@ function FormularioCliente() {
             name="nomeDono"
             type="text"
             value={selectedNomeDono}
-            onChange={(e) => {
-              setSelectedNomeDono(e.target.value);
-              setErro((prev) => ({ ...prev, nomeDono: false }));
-            }}
+            onChange={(e) => setSelectedNomeDono(e.target.value)}
             onFocus={handleFocus}
           />
           {erro.nomeDono && <div className="erro-mensagem">Erro</div>}
+        </div>
+
+        <div className={`formulario-campo ${erro.sobrenomeDono ? "erroCampo" : ""}`}>
+          <label htmlFor="sobrenomeDono">Sobrenome do dono</label>
+          <input
+            id="sobrenomeDono"
+            name="sobrenomeDono"
+            type="text"
+            value={selectedSobrenomeDono}
+            onChange={(e) => setSelectedSobrenomeDono(e.target.value)}
+            onFocus={handleFocus}
+          />
+          {erro.sobrenomeDono && <div className="erro-mensagem">Erro</div>}
         </div>
 
         <div className={`formulario-campo ${erro.nomeAnimal ? "erroCampo" : ""}`}>
@@ -100,10 +115,7 @@ function FormularioCliente() {
             name="nomeAnimal"
             type="text"
             value={selectedNomeAnimal}
-            onChange={(e) => {
-              setSelectedNomeAnimal(e.target.value);
-              setErro((prev) => ({ ...prev, nomeDono: false }));
-            }}
+            onChange={(e) => setSelectedNomeAnimal(e.target.value)}
             onFocus={handleFocus}
           />
           {erro.nomeAnimal && <div className="erro-mensagem">Erro</div>}
@@ -113,30 +125,23 @@ function FormularioCliente() {
           <label htmlFor="nomeEspecie">Espécie do animal</label>
           <input
             id="nomeEspecie"
-            name="nomeEspecie"
+            name="especie"
             type="text"
             value={selectedEspecie}
-            onChange={(e) => {
-              setSelectedEspecie(e.target.value);
-              setErro((prev) => ({ ...prev, especie: false }));
-            }}
+            onChange={(e) => setSelectedEspecie(e.target.value)}
             onFocus={handleFocus}
           />
           {erro.especie && <div className="erro-mensagem">Erro</div>}
         </div>
 
-
         <div className={`formulario-campo ${erro.raca ? "erroCampo" : ""}`}>
-          <label htmlFor="nomeEspecie">Raça do animal</label>
+          <label htmlFor="nomeRaca">Raça do animal</label>
           <input
             id="nomeRaca"
-            name="nomeRaca"
+            name="raca"
             type="text"
             value={selectedRaca}
-            onChange={(e) => {
-              setSelectedRaca(e.target.value);
-              setErro((prev) => ({ ...prev, raca: false }));
-            }}
+            onChange={(e) => setSelectedRaca(e.target.value)}
             onFocus={handleFocus}
           />
           {erro.raca && <div className="erro-mensagem">Erro</div>}
@@ -148,11 +153,8 @@ function FormularioCliente() {
             id="email"
             name="email"
             type="text"
-            value={selectedRaca}
-            onChange={(e) => {
-              setSelectedEmail(e.target.value);
-              setErro((prev) => ({ ...prev, email: false }));
-            }}
+            value={selectedEmail}
+            onChange={(e) => setSelectedEmail(e.target.value)}
             onFocus={handleFocus}
           />
           {erro.email && <div className="erro-mensagem">Erro</div>}
@@ -165,15 +167,11 @@ function FormularioCliente() {
             name="telefone"
             type="text"
             value={selectedTelefone}
-            onChange={(e) => {
-              setSelectedTelefone(e.target.value);
-              setErro((prev) => ({ ...prev, telefone: false }));
-            }}
+            onChange={(e) => setSelectedTelefone(e.target.value)}
             onFocus={handleFocus}
           />
           {erro.telefone && <div className="erro-mensagem">Erro</div>}
         </div>
-       
 
         <button className="button" type="button" onClick={handleCadastrar}>
           Cadastrar

@@ -70,12 +70,12 @@ function Pagina_Cliente() {
           dados.map((dado) => (
             <div className="card" key={dado.id}>
               <ul>
-                <li>{dado.cliente.nomeDono}</li>
-                <li>{dado.cliente.nomeAnimal}</li>
-                <li>{dado.cliente.racaAnimal}</li>
-                <li>{dado.cliente.especieAnimal}</li>
-                <li>{dado.cliente.telefone}</li>
-                <li>{dado.cliente.email}</li>
+                <li>{dado.nomeDono}</li>
+                <li>{dado.nomeAnimal}</li>
+                <li>{dado.racaAnimal}</li>
+                <li>{dado.especieAnimal}</li>
+                <li>{dado.telefone}</li>
+                <li>{dado.email}</li>
               </ul>
 
               <div className="buttons">
