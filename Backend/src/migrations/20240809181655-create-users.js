@@ -213,6 +213,24 @@ module.exports = {
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
+                {
+                    horario: new Date("2024-08-09T16:00:00"),
+                    disponibilidade: true,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    horario: new Date("2024-08-09T16:30:00"),
+                    disponibilidade: true,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    horario: new Date("2024-08-09T17:00:00"),
+                    disponibilidade: true,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
             ],
             {}
         );
@@ -234,15 +252,119 @@ module.exports = {
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
+                {
+                    id: 2,
+                    nome: "João",
+                    sobrenome: "Silva",
+                    dataNascimento: "1990-01-10",
+                    cpf: "234.567.890-12",
+                    password: "Senha@123",
+                    telefone: "(11) 98765-4322",
+                    email: "joao@example.com",
+                    isAdmin: false,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    id: 3,
+                    nome: "Maria",
+                    sobrenome: "Oliveira",
+                    dataNascimento: "1988-03-22",
+                    cpf: "345.678.901-23",
+                    password: "Senha@123",
+                    telefone: "(11) 98765-4323",
+                    email: "maria@example.com",
+                    isAdmin: false,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+            ],
+            {}
+        );
+
+        // Inserir dados na tabela Clientes
+        await queryInterface.bulkInsert(
+            "Clientes",
+            [
+                {
+                    id: 1,
+                    nomeDono: "Carlos",
+                    sobrenomeDono: "Souza",
+                    nomeAnimal: "Rex",
+                    racaAnimal: "Labrador",
+                    especieAnimal: "Cachorro",
+                    telefone: "(11) 91234-5678",
+                    email: "carlos@example.com",
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    id: 2,
+                    nomeDono: "Fernanda",
+                    sobrenomeDono: "Lima",
+                    nomeAnimal: "Mia",
+                    racaAnimal: "Persa",
+                    especieAnimal: "Gato",
+                    telefone: "(11) 91234-5679",
+                    email: "fernanda@example.com",
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    id: 3,
+                    nomeDono: "Rafael",
+                    sobrenomeDono: "Almeida",
+                    nomeAnimal: "Nina",
+                    racaAnimal: "Poodle",
+                    especieAnimal: "Cachorro",
+                    telefone: "(11) 91234-5680",
+                    email: "rafael@example.com",
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+            ],
+            {}
+        );
+
+        // Inserir dados na tabela Servicos
+        await queryInterface.bulkInsert(
+            "Servicos",
+            [
+                {
+                    id: 1,
+                    tipoServico: "Banho",
+                    preco: 50.0,
+                    duracaoServico: 60, // duração em minutos
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    id: 2,
+                    tipoServico: "Tosa",
+                    preco: 70.0,
+                    duracaoServico: 90, // duração em minutos
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
+                {
+                    id: 3,
+                    tipoServico: "Consulta Veterinária",
+                    preco: 150.0,
+                    duracaoServico: 45, // duração em minutos
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                },
             ],
             {}
         );
     },
+
     down: async (queryInterface, Sequelize) => {
+        // Remoção das tabelas
         await queryInterface.dropTable("Agendamentos");
         await queryInterface.dropTable("Funcionarios");
         await queryInterface.dropTable("Clientes");
-        await queryInterface.dropTable("Servicos");
         await queryInterface.dropTable("Horarios");
+        await queryInterface.dropTable("Servicos");
     },
 };

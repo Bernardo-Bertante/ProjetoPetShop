@@ -48,7 +48,7 @@ function Pagina_Atualizar_Cliente() {
       nomeAnimal: !dados.nomeAnimal,
       especieAnimal: !dados.especieAnimal,
       racaAnimal: !dados.racaAnimal,
-      email: !dados.email,
+      email: false,
       telefone: !dados.telefone,
     };
   
@@ -64,9 +64,14 @@ function Pagina_Atualizar_Cliente() {
     if (hasError) {
       return; // Não envia se houver erros
     }
+
+    const dadosAtualizados = {
+      ...dados,
+      email: dados.email === "" ? null : dados.email,
+    };
   
     try {
-      const response = await axios.put(`/cliente/update/${dados.id}`, dados);
+      const response = await axios.put(`/cliente/update/${dados.id}`, dadosAtualizados);
       console.log("Cliente atualizado com sucesso:", response.data);
       navigate("/pagina-cliente");
     } catch (error) {
@@ -159,7 +164,7 @@ function Pagina_Atualizar_Cliente() {
           {erro.telefone && <div className="erro-mensagem">Telefone é obrigatório</div>}
         </div>
 
-        <div className={`formulario-campo ${erro.email ? "erroCampo" : ""}`}>
+        <div className="formulario-campo">
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -167,9 +172,7 @@ function Pagina_Atualizar_Cliente() {
             name="email"
             value={dados.email || ""}
             onChange={handleChange}
-            onFocus={() => setErro((prev) => ({ ...prev, email: false }))}
           />
-          {erro.email && <div className="erro-mensagem">Email é obrigatório</div>}
         </div>
 
         <button type="submit" className="button">Editar</button>
