@@ -16,7 +16,7 @@ function Pagina_Principal() {
             </div>
 
             <button className="buttons-principal" onClick={() => {navigate("/pagina-agendamento")}}>Agendar</button>
-            <button className="buttons-principal">Cliente</button>
+            <button className="buttons-principal" onClick={() => {navigate("/pagina-cliente")}}>Cliente</button>
             <button className="buttons-principal">Serviços</button>
 
             {user?.isAdmin && <button className="buttons-principal">Funcionário</button>}
