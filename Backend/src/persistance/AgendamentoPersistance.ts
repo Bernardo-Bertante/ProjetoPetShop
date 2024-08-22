@@ -78,22 +78,25 @@ const getAgendamentos = async () => {
 
 const updateAgendamento = async (
     id: number,
-    updates: Partial<AgendamentoType>
+    updates: Partial<AgendamentoType>,
+    transaction?: Transaction
 ) => {
     try {
         const [updatedRows] = await AgendamentoModel.update(updates, {
             where: { id: id },
             returning: true, // Retorna o registro atualizado
+            transaction // Passa a transação opcional
         });
         if (updatedRows === 0) {
             return null; // Nenhum registro atualizado
         }
         // Retorna o registro atualizado
-        return AgendamentoModel.findByPk(id);
+        return AgendamentoModel.findByPk(id, { transaction });
     } catch (error) {
         throw error;
     }
 };
+
 
 const getAgendamentoById = async (id: number) => {
     try {

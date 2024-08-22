@@ -70,16 +70,43 @@ const updateAgendamento = async (
     id: number,
     updates: Partial<AgendamentoType>
 ) => {
+    const transaction = await sequelize.transaction();
+
     try {
-        const agendamento = await AgendamentoPersistance.updateAgendamento(
-            id,
-            updates
-        );
-        return agendamento;
+        // Obtenha o agendamento atual
+        const currentAgendamento = await AgendamentoPersistance.getAgendamentoById(id);
+        if (!currentAgendamento) {
+            throw new Error("Agendamento não encontrado.");
+        }
+
+        // Se o horário foi alterado, atualize a disponibilidade dos horários
+        if (updates.horarioId && updates.horarioId !== currentAgendamento.horarioId) {
+            // Atualiza a disponibilidade do horário antigo
+            await AgendamentoPersistance.updateHorarioDisponibilidade(
+                currentAgendamento.horarioId,
+                true,
+                transaction
+            );
+
+            // Atualiza a disponibilidade do novo horário
+            await AgendamentoPersistance.updateHorarioDisponibilidade(
+                updates.horarioId,
+                false,
+                transaction
+            );
+        }
+
+        // Atualiza o agendamento
+        const updatedAgendamento = await AgendamentoPersistance.updateAgendamento(id, updates, transaction);
+
+        await transaction.commit();
+        return updatedAgendamento;
     } catch (error) {
+        await transaction.rollback();
         throw error;
     }
 };
+
 
 export default {
     createAgendamento,
