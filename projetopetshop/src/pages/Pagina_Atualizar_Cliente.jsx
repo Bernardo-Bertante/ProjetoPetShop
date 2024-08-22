@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:5000";
@@ -7,14 +7,10 @@ axios.defaults.withCredentials = true;
 
 function Pagina_Atualizar_Cliente() {
   const navigate = useNavigate();
-  const { id } = useParams(); // Obtenha o ID do cliente da URL ou de outro local
-  const [selectedNomeDono, setSelectedNomeDono] = useState("");
-  const [selectedSobrenomeDono, setSelectedSobrenomeDono] = useState("");
-  const [selectedNomeAnimal, setSelectedNomeAnimal] = useState("");
-  const [selectedEspecie, setSelectedEspecie] = useState("");
-  const [selectedRaca, setSelectedRaca] = useState("");
-  const [selectedEmail, setSelectedEmail] = useState("");
-  const [selectedTelefone, setSelectedTelefone] = useState("");
+  const location = useLocation();
+  const { cliente } = location.state || {}; // Obtendo os dados do cliente do state passado
+
+  const [dados, setDados] = useState(cliente || {}); // Inicializa com os dados recebidos ou um objeto vazio
   const [erro, setErro] = useState({
     nomeDono: false,
     sobrenomeDono: false,
@@ -26,176 +22,117 @@ function Pagina_Atualizar_Cliente() {
   });
 
   useEffect(() => {
-    const fetchCliente = async () => {
-      try {
-        const response = await axios.get(`/cliente/${id}`);
-        const cliente = response.data;
-        setSelectedNomeDono(cliente.nomeDono);
-        setSelectedSobrenomeDono(cliente.sobrenomeDono);
-        setSelectedNomeAnimal(cliente.nomeAnimal);
-        setSelectedEspecie(cliente.especieAnimal);
-        setSelectedRaca(cliente.racaAnimal);
-        setSelectedEmail(cliente.email);
-        setSelectedTelefone(cliente.telefone);
-      } catch (error) {
-        console.error("Erro ao buscar cliente:", error.response?.data?.message || error.message);
-      }
-    };
-
-    fetchCliente();
-  }, [id]);
-
-  const handleAtualizar = async () => {
-    let temErro = false;
-
-    const novoErro = {
-      nomeDono: !selectedNomeDono,
-      sobrenomeDono: !selectedSobrenomeDono,
-      nomeAnimal: !selectedNomeAnimal,
-      especie: !selectedEspecie,
-      raca: !selectedRaca,
-      email: !selectedEmail,
-      telefone: !selectedTelefone
-    };
-
-    setErro(novoErro);
-
-    if (Object.values(novoErro).includes(true)) {
-      temErro = true;
+    if (!cliente) {
+      console.error("Dados do cliente não fornecidos.");
+      navigate("/pagina-principal"); // Redireciona se não houver dados do cliente
     }
+  }, [cliente, navigate]);
 
-    if (temErro) return;
-
-    try {
-      await axios.put(`/cliente/${id}`, {
-        nomeDono: selectedNomeDono,
-        sobrenomeDono: selectedSobrenomeDono,
-        nomeAnimal: selectedNomeAnimal,
-        especieAnimal: selectedEspecie,
-        racaAnimal: selectedRaca,
-        email: selectedEmail,
-        telefone: selectedTelefone
-      });
-      navigate("/pagina-cliente");
-    } catch (error) {
-      console.log("Erro ao atualizar:", error.response?.data?.message || error.message);
-    }
-  };
-
-  const handleFocus = (e) => {
-    const { name } = e.target;
-
-    setErro((prev) => ({
-      ...prev,
-      [name]: false,
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDados((prevDados) => ({
+      ...prevDados,
+      [name]: value,
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`/cliente/update/${dados.id}`, dados);
+      console.log("Cliente atualizado com sucesso:", response.data);
+      navigate("/pagina-cliente"); // Redireciona após a atualização
+    } catch (error) {
+      console.error("Erro ao atualizar cliente:", error);
+    }
+  };
+
   return (
-    <div className="pagina-agendar">
-      <form className="formulario-agendamento">
-        <img
-          src="/img/seta.svg"
-          alt="Voltar"
-          onClick={() => navigate("/pagina-cliente")}
-        />
+    <div className="pagina-atualizar-cliente">
+      <nav className="navbar">
+        <div
+          className="btn-voltar"
+          onClick={() => {
+            navigate("/pagina-cliente");
+          }}
+        >
+          <img src="/img/seta.svg" alt="Voltar" />
+        </div>
+        <h1>Atualizar Cliente</h1>
+      </nav>
 
-        <h2>FORMULÁRIO</h2>
-
-        <div className={`formulario-campo ${erro.nomeDono ? "erroCampo" : ""}`}>
-          <label htmlFor="nomeDono">Nome do dono</label>
+      <form onSubmit={handleSubmit} className="formulario-atualizar">
+        <label>
+          Nome do Dono:
           <input
-            id="nomeDono"
+            type="text"
             name="nomeDono"
-            type="text"
-            value={selectedNomeDono}
-            onChange={(e) => setSelectedNomeDono(e.target.value)}
-            onFocus={handleFocus}
+            value={dados.nomeDono || ""}
+            onChange={handleChange}
           />
-          {erro.nomeDono && <div className="erro-mensagem">Erro</div>}
-        </div>
-
-        <div className={`formulario-campo ${erro.sobrenomeDono ? "erroCampo" : ""}`}>
-          <label htmlFor="sobrenomeDono">Sobrenome do dono</label>
+          {erro.nomeDono && <span className="erro">Nome do dono é obrigatório</span>}
+        </label>
+        <label>
+          Sobrenome do Dono:
           <input
-            id="sobrenomeDono"
+            type="text"
             name="sobrenomeDono"
-            type="text"
-            value={selectedSobrenomeDono}
-            onChange={(e) => setSelectedSobrenomeDono(e.target.value)}
-            onFocus={handleFocus}
+            value={dados.sobrenomeDono || ""}
+            onChange={handleChange}
           />
-          {erro.sobrenomeDono && <div className="erro-mensagem">Erro</div>}
-        </div>
-
-        <div className={`formulario-campo ${erro.nomeAnimal ? "erroCampo" : ""}`}>
-          <label htmlFor="nomeAnimal">Nome do animal</label>
+          {erro.sobrenomeDono && <span className="erro">Sobrenome do dono é obrigatório</span>}
+        </label>
+        <label>
+          Nome do Animal:
           <input
-            id="nomeAnimal"
+            type="text"
             name="nomeAnimal"
-            type="text"
-            value={selectedNomeAnimal}
-            onChange={(e) => setSelectedNomeAnimal(e.target.value)}
-            onFocus={handleFocus}
+            value={dados.nomeAnimal || ""}
+            onChange={handleChange}
           />
-          {erro.nomeAnimal && <div className="erro-mensagem">Erro</div>}
-        </div>
-
-        <div className={`formulario-campo ${erro.especie ? "erroCampo" : ""}`}>
-          <label htmlFor="nomeEspecie">Espécie do animal</label>
+          {erro.nomeAnimal && <span className="erro">Nome do animal é obrigatório</span>}
+        </label>
+        <label>
+          Espécie:
           <input
-            id="nomeEspecie"
-            name="especie"
             type="text"
-            value={selectedEspecie}
-            onChange={(e) => setSelectedEspecie(e.target.value)}
-            onFocus={handleFocus}
+            name="especieAnimal"
+            value={dados.especieAnimal || ""}
+            onChange={handleChange}
           />
-          {erro.especie && <div className="erro-mensagem">Erro</div>}
-        </div>
-
-        <div className={`formulario-campo ${erro.raca ? "erroCampo" : ""}`}>
-          <label htmlFor="nomeRaca">Raça do animal</label>
+          {erro.especie && <span className="erro">Espécie é obrigatória</span>}
+        </label>
+        <label>
+          Raça:
           <input
-            id="nomeRaca"
-            name="raca"
             type="text"
-            value={selectedRaca}
-            onChange={(e) => setSelectedRaca(e.target.value)}
-            onFocus={handleFocus}
+            name="racaAnimal"
+            value={dados.racaAnimal || ""}
+            onChange={handleChange}
           />
-          {erro.raca && <div className="erro-mensagem">Erro</div>}
-        </div>
-
-        <div className={`formulario-campo ${erro.email ? "erroCampo" : ""}`}>
-          <label htmlFor="email">Email</label>
+          {erro.raca && <span className="erro">Raça é obrigatória</span>}
+        </label>
+        <label>
+          Telefone:
           <input
-            id="email"
-            name="email"
             type="text"
-            value={selectedEmail}
-            onChange={(e) => setSelectedEmail(e.target.value)}
-            onFocus={handleFocus}
-          />
-          {erro.email && <div className="erro-mensagem">Erro</div>}
-        </div>
-
-        <div className={`formulario-campo ${erro.telefone ? "erroCampo" : ""}`}>
-          <label htmlFor="telefone">Telefone</label>
-          <input
-            id="telefone"
             name="telefone"
-            type="text"
-            value={selectedTelefone}
-            onChange={(e) => setSelectedTelefone(e.target.value)}
-            onFocus={handleFocus}
+            value={dados.telefone || ""}
+            onChange={handleChange}
           />
-          {erro.telefone && <div className="erro-mensagem">Erro</div>}
-        </div>
-
-        <button className="button" type="button" onClick={handleAtualizar}>
-          Atualizar
-        </button>
+          {erro.telefone && <span className="erro">Telefone é obrigatório</span>}
+        </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={dados.email || ""}
+            onChange={handleChange}
+          />
+          {erro.email && <span className="erro">Email é obrigatório</span>}
+        </label>
+        <button type="submit">Atualizar</button>
       </form>
     </div>
   );

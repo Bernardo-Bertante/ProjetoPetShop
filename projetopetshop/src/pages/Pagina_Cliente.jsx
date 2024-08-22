@@ -70,7 +70,7 @@ function Pagina_Cliente() {
           dados.map((dado) => (
             <div className="card" key={dado.id}>
               <ul>
-                <li>{dado.nomeDono}</li>
+                <li>{dado.nomeDono} {dado.sobrenomeDono}</li>
                 <li>{dado.nomeAnimal}</li>
                 <li>{dado.racaAnimal}</li>
                 <li>{dado.especieAnimal}</li>
@@ -92,7 +92,7 @@ function Pagina_Cliente() {
                     className="btn-atualizar"
                     onClick={() => {
                       navigate("/atualizar-cliente", {
-                        state: { agendamento: dado } // Passando o dado do agendamento para a próxima página
+                        state: { cliente: dado } // Passando o dado do agendamento para a próxima página
                       });
                     }}
                   >
