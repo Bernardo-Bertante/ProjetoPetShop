@@ -4,6 +4,7 @@ function CaixaAviso({
   exibirCaixaAviso,
   ocultarCaixaAviso,
   confirmarExclusao,
+  fraseExclusao
 }) {
   if (!exibirCaixaAviso) return null;
 
@@ -11,7 +12,7 @@ function CaixaAviso({
     <div className="caixa-aviso">
       <div className="conteudo-caixa">
         <img src="/img/triangulo-atencao.svg" alt="" />
-        <p>Tem certeza que deseja excluir este Agendamento?</p>
+        <p>{fraseExclusao}</p>
         <div className="buttons-caixa-aviso">
           <button
             className="btn-sim"

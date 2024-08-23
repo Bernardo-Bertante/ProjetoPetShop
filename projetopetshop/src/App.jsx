@@ -5,10 +5,13 @@ import Pagina_Login from "./pages/Pagina_Login";
 import Pagina_Principal from "./pages/Pagina_Principal";
 import Pagina_Agendamento from "./pages/Pagina_Agendamento";
 import FormularioAgendamento from "./pages/FormularioAgendamento";
-import Pagina_Atualizar from "./pages/Pagina_Atualizar";
+import Pagina_Atualizar_Agendamento from "./pages/Pagina_Atualizar_Agendamento";
 import Pagina_Cliente from "./pages/Pagina_Cliente";
 import FormularioCliente from "./pages/FormularioCliente";
 import Pagina_Atualizar_Cliente from "./pages/Pagina_Atualizar_Cliente";
+import Pagina_Servico from "./pages/Pagina_Servico";
+import FormularioServico from "./pages/FormularioServico";
+import Pagina_Atualizar_Servico from "./pages/Pagina_Atualizar_Servico";
 
 function App() {
   return (
@@ -30,7 +33,7 @@ function App() {
           ></Route>
           <Route
             path="/atualizar-agendamento"
-            element={<Pagina_Atualizar />}
+            element={<Pagina_Atualizar_Agendamento />}
           ></Route> 
           <Route
             path="/pagina-cliente"
@@ -44,6 +47,18 @@ function App() {
             path="/atualizar-cliente"
             element={<Pagina_Atualizar_Cliente />}
           ></Route>  
+          <Route
+            path="/pagina-servico"
+            element={<Pagina_Servico />}
+          ></Route>
+          <Route
+            path="/formulario-servico"
+            element={<FormularioServico />}
+          ></Route>
+          <Route
+            path="/atualizar-servico"
+            element={<Pagina_Atualizar_Servico />}
+          ></Route>     
         </Routes>
       </BrowserRouter>
     </UserProvider>

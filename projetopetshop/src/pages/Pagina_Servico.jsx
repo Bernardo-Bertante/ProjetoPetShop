@@ -8,7 +8,7 @@ import { UserContext } from "../contexts/UserContext"; // ajuste o caminho confo
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
 
-function Pagina_Cliente() {
+function Pagina_Servico() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext); // acessar o estado do usuário
   const [dados, setDados] = useState([]);
@@ -17,7 +17,7 @@ function Pagina_Cliente() {
 
   const getDados = async () => {
     try {
-      const resposta = await axios.get("/cliente/all");
+      const resposta = await axios.get("/servico/all");
       setDados(resposta.data || []);
       console.log(resposta.data);
     } catch (error) {
@@ -27,7 +27,7 @@ function Pagina_Cliente() {
 
   const deleteAgendamento = async (id) => {
     try {
-      await axios.delete(`/cliente/delete/${id}`);
+      await axios.delete(`/servico/delete/${id}`);
       // Atualize o estado removendo o item excluído
       setDados(dados.filter((dado) => dado.id !== id));
       setCaixaAviso(false); // Fechar a caixa de aviso após a exclusão
@@ -59,7 +59,7 @@ function Pagina_Cliente() {
         </div>
         <button
           className="btn-agendar"
-          onClick={() => navigate("/formulario-cliente")}
+          onClick={() => navigate("/formulario-servico")}
         >
           Cadastrar
         </button>
@@ -68,14 +68,11 @@ function Pagina_Cliente() {
       <section className="cards">
         {dados.length > 0 ? (
           dados.map((dado) => (
-            <div className="card" key={dado.id}>
+            <div className="card" key={dado.id} id="card-servico">
               <ul>
-                <li>{dado.nomeDono} {dado.sobrenomeDono}</li>
-                <li>{dado.nomeAnimal}</li>
-                <li>{dado.racaAnimal}</li>
-                <li>{dado.especieAnimal}</li>
-                <li>{dado.telefone}</li>
-                <li>{dado.email}</li>
+                <li>{dado.tipoServico}</li>
+                <li>{dado.preco}</li>
+                <li>{`${dado.duracaoServico} ${dado.duracaoServico == 1 ? "hora" : "horas"}`}</li>
               </ul>
 
               <div className="buttons">
@@ -91,8 +88,8 @@ function Pagina_Cliente() {
                 <button
                     className="btn-atualizar"
                     onClick={() => {
-                      navigate("/atualizar-cliente", {
-                        state: { cliente: dado } // Passando o dado do agendamento para a próxima página
+                      navigate("/atualizar-servico", {
+                        state: { agendamento: dado } // Passando o dado do agendamento para a próxima página
                       });
                     }}
                   >
@@ -102,7 +99,7 @@ function Pagina_Cliente() {
             </div>
           ))
         ) : (
-          <span className="texto-aviso">NÃO HÁ CLIENTES CADASTRADOS</span>
+          <span className="texto-aviso">NÃO HÁ SERVIÇOS CADASTRADOS</span>
         )}
       </section>
 
@@ -116,10 +113,10 @@ function Pagina_Cliente() {
             deleteAgendamento(idToDelete); // Confirmar exclusão do agendamento
           }
         }}
-        fraseExclusao="Tem certeza que deseja excluir este Cliente?"
+        fraseExclusao="Tem certeza que deseja excluir este Serviço?"
       />
     </div>
   );
 }
 
-export default Pagina_Cliente;
+export default Pagina_Servico;

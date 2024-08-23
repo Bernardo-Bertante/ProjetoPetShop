@@ -91,6 +91,10 @@
     word-wrap: break-word;
 }
 
+.card ul li:first-child {
+    font-weight: bold;
+}
+
 .card ul {
     margin-top: 10px;
 }
@@ -111,6 +115,8 @@
     align-items: center;
     color: white;
     cursor: pointer;
+    text-shadow: 2px 2px 15px #000000;
+    font-size: 15px;
 }
 
 .btn-excluir {
@@ -129,4 +135,13 @@
 
 .btn-atualizar:hover {
     background-color: #1c87c5;
+}
+
+#card-servico {
+    min-height: 220px;
+}
+
+#card-servico ul li {
+    font-size: 23px;
+    line-height: 40px;
 }

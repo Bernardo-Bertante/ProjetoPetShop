@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import "./FormularioAgendamento.css";
+import "./Formulario.css";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
 
-function Pagina_Atualizar() {
+function Pagina_Atualizar_Agendamento() {
   const navigate = useNavigate();
   const location = useLocation();
   const [clientes, setClientes] = useState([]);
@@ -252,4 +252,4 @@ function Pagina_Atualizar() {
   );
 }
 
-export default Pagina_Atualizar;
+export default Pagina_Atualizar_Agendamento;

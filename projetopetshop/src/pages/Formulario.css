@@ -12,7 +12,7 @@
     background-color: var(--cor-azul-claro);
     border-radius: 30px;
     display: flex;
-    gap: 25px;
+    gap: 20px;
     flex-direction: column;
     padding: 20px 50px;
     position: relative;
@@ -23,6 +23,7 @@
 
 .formulario-campo label {
     margin-left: 15px;
+    font-size: 19px;
 }
 
 .formulario-campo input {
@@ -30,8 +31,8 @@
     border-radius: 20px;
     max-width: 435px;
     width: 100%;
-    height: 15px;
-    font-size: 15px;
+    height: 17px;
+    font-size: 17px;
 }
 
 .formulario-campo input:focus {
@@ -114,3 +115,4 @@
 .erroCampo input {
     box-shadow: 0 0 0 2.5px red;
 }
+

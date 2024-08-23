@@ -115,6 +115,7 @@ function Pagina_Agendamento() {
             deleteAgendamento(idToDelete); // Confirmar exclusão do agendamento
           }
         }}
+        fraseExclusao="Tem certeza que deseja excluir este Agendamento?"
       />
     </div>
   );
