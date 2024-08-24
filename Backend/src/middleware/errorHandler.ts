@@ -49,6 +49,11 @@ const errorHandler = (
                     message: "Funcionário não encontrado.",
                     error: err.message,
                 });
+            case "Servico not found":
+                return res.status(404).send({
+                    message: "Serviço não encontrado.",
+                    error: err.message,
+                });
             default:
                 return res.status(500).send({
                     message: "Erro interno do servidor",

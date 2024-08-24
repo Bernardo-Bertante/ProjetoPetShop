@@ -9,15 +9,19 @@ axios.defaults.withCredentials = true;
 function Pagina_Atualizar_Servico() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { servico } = location.state || {};  // Acessa o serviço passado pelo location.state
+  const { servico } = location.state || {}; // Acessa o serviço passado pelo location.state
 
-  const [selectedTipoServico, setSelectedTipoServico] = useState(servico?.tipoServico || "");
+  const [selectedTipoServico, setSelectedTipoServico] = useState(
+    servico?.tipoServico || ""
+  );
   const [selectedPreco, setSelectedPreco] = useState(servico?.preco || "");
-  const [selectedDuracaoServico, setSelectedDuracaoServico] = useState(servico?.duracaoServico || "");
+  const [selectedDuracaoServico, setSelectedDuracaoServico] = useState(
+    servico?.duracaoServico || ""
+  );
   const [erro, setErro] = useState({
     tipoServico: false,
     preco: false,
-    duracaoServico: false
+    duracaoServico: false,
   });
   const [mensagemErro, setMensagemErro] = useState(""); // Estado para mensagem de erro
 
@@ -30,13 +34,17 @@ function Pagina_Atualizar_Servico() {
     }
   }, [servico]);
 
+  const isValidDecimal = (value) => {
+    return /^(\d+(\.\d{1,2})?)?$/.test(value);
+  };
+
   const handleAtualizar = async () => {
     let temErro = false;
 
     const novoErro = {
       tipoServico: !selectedTipoServico,
-      preco: !selectedPreco,
-      duracaoServico: !selectedDuracaoServico
+      preco: !selectedPreco || !isValidDecimal(selectedPreco),
+      duracaoServico: !selectedDuracaoServico,
     };
 
     setErro(novoErro);
@@ -48,10 +56,10 @@ function Pagina_Atualizar_Servico() {
     if (temErro) return;
 
     try {
-      const response = await axios.put(`/cliente/update/${servico.id}`, {
+      const response = await axios.put(`/servico/update/${servico.id}`, {
         tipoServico: selectedTipoServico,
-        preco: selectedPreco,
-        duracaoServico: selectedDuracaoServico
+        preco: parseFloat(selectedPreco), // Converte para número decimal
+        duracaoServico: selectedDuracaoServico,
       });
 
       console.log("Serviço atualizado com sucesso:", response.data);
@@ -63,7 +71,10 @@ function Pagina_Atualizar_Servico() {
       } else {
         setMensagemErro("Erro ao atualizar serviço.");
       }
-      console.error("Erro ao atualizar serviço:", error.response?.data?.message || error.message);
+      console.error(
+        "Erro ao atualizar serviço:",
+        error.response?.data?.message || error.message
+      );
     }
   };
 
@@ -84,12 +95,14 @@ function Pagina_Atualizar_Servico() {
           alt="Voltar"
           onClick={() => navigate("/pagina-servico")}
         />
-
         <h2>FORMULÁRIO</h2>
-
-        {mensagemErro && <div className="erro-mensagem">{mensagemErro}</div>} {/* Exibe a mensagem de erro */}
-
-        <div className={`formulario-campo ${erro.tipoServico ? "erroCampo" : ""}`}>
+        {mensagemErro && (
+          <div className="erro-mensagem">{mensagemErro}</div>
+        )}{" "}
+        {/* Exibe a mensagem de erro */}
+        <div
+          className={`formulario-campo ${erro.tipoServico ? "erroCampo" : ""}`}
+        >
           <label htmlFor="tipoServico">Tipo de serviço</label>
           <input
             id="tipoServico"
@@ -99,9 +112,10 @@ function Pagina_Atualizar_Servico() {
             onChange={(e) => setSelectedTipoServico(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.tipoServico && <div className="erro-mensagem">Nome do serviço é obrigatório.</div>}
+          {erro.tipoServico && (
+            <div className="erro-mensagem">Nome do serviço é obrigatório.</div>
+          )}
         </div>
-
         <div className={`formulario-campo ${erro.preco ? "erroCampo" : ""}`}>
           <label htmlFor="preco">Preço</label>
           <input
@@ -112,10 +126,17 @@ function Pagina_Atualizar_Servico() {
             onChange={(e) => setSelectedPreco(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.preco && <div className="erro-mensagem">Preço é obrigatório.</div>}
+          {erro.preco && (
+            <div className="erro-mensagem">
+              O preço deve ser um número decimal válido (ex: 10.00).
+            </div>
+          )}
         </div>
-
-        <div className={`formulario-campo ${erro.duracaoServico ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${
+            erro.duracaoServico ? "erroCampo" : ""
+          }`}
+        >
           <label htmlFor="duracaoServico">Duração do serviço (em horas)</label>
           <select
             id="duracaoServico"
@@ -131,9 +152,10 @@ function Pagina_Atualizar_Servico() {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          {erro.duracaoServico && <div className="erro-mensagem">Duração é obrigatória.</div>}
+          {erro.duracaoServico && (
+            <div className="erro-mensagem">Duração é obrigatória.</div>
+          )}
         </div>
-
         <button className="button" type="button" onClick={handleAtualizar}>
           Editar
         </button>

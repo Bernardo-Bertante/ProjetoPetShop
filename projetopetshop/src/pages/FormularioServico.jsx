@@ -14,17 +14,21 @@ function FormularioServico() {
   const [erro, setErro] = useState({
     tipoServico: false,
     preco: false,
-    duracaoServico: false
+    duracaoServico: false,
   });
-  const [mensagemErro, setMensagemErro] = useState(""); // Estado para mensagem de erro
+  const [mensagemErro, setMensagemErro] = useState("");
+
+  const isValidDecimal = (value) => {
+    return /^(\d+(\.\d{1,2})?)?$/.test(value);
+  };
 
   const handleCadastrar = async () => {
     let temErro = false;
 
     const novoErro = {
       tipoServico: !selectedTipoServico,
-      preco: !selectedPreco,
-      duracaoServico: !selectedDuracaoServico
+      preco: !selectedPreco || !isValidDecimal(selectedPreco),
+      duracaoServico: !selectedDuracaoServico,
     };
 
     setErro(novoErro);
@@ -36,22 +40,32 @@ function FormularioServico() {
     if (temErro) return;
 
     try {
-      const response = await axios.post("/cliente/create", {
+      const response = await axios.post("/servico/create", {
         tipoServico: selectedTipoServico,
-        preco: selectedPreco,
-        duracaoServico: selectedDuracaoServico
+        preco: parseFloat(selectedPreco), // Converte para número decimal
+        duracaoServico: selectedDuracaoServico,
       });
 
-      console.log("Serviç cadastrado com sucesso:", response.data);
+      console.log("Serviço cadastrado com sucesso:", response.data);
       navigate("/pagina-servico");
     } catch (error) {
-      // Atualiza a mensagem de erro com base na resposta do servidor
+      // Verifica a existência de erro específico e ajusta a mensagem
       if (error.response && error.response.data) {
-        setMensagemErro(error.response.data.message || "Erro desconhecido.");
+        const mensagem = error.response.data.message;
+        if (mensagem.includes("número válido")) {
+          setMensagemErro(
+            "O preço deve ser um número decimal válido (ex: 10.00)."
+          );
+        } else {
+          setMensagemErro(mensagem || "Erro desconhecido.");
+        }
       } else {
         setMensagemErro("Erro ao cadastrar serviço.");
       }
-      console.error("Erro ao cadastrar serviço:", error.response?.data?.message || error.message);
+      console.error(
+        "Erro ao cadastrar serviço:",
+        error.response?.data?.message || error.message
+      );
     }
   };
 
@@ -72,12 +86,11 @@ function FormularioServico() {
           alt="Voltar"
           onClick={() => navigate("/pagina-servico")}
         />
-
         <h2>FORMULÁRIO</h2>
-
-        {mensagemErro && <div className="erro-mensagem">{mensagemErro}</div>} {/* Exibe a mensagem de erro */}
-
-        <div className={`formulario-campo ${erro.tipoServico ? "erroCampo" : ""}`}>
+        {mensagemErro && <div className="erro-mensagem">{mensagemErro}</div>}
+        <div
+          className={`formulario-campo ${erro.tipoServico ? "erroCampo" : ""}`}
+        >
           <label htmlFor="tipoServico">Tipo de serviço</label>
           <input
             id="tipoServico"
@@ -87,9 +100,10 @@ function FormularioServico() {
             onChange={(e) => setSelectedTipoServico(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.tipoServico && <div className="erro-mensagem">Nome do serviço é obrigatório.</div>}
+          {erro.tipoServico && (
+            <div className="erro-mensagem">Nome do serviço é obrigatório.</div>
+          )}
         </div>
-
         <div className={`formulario-campo ${erro.preco ? "erroCampo" : ""}`}>
           <label htmlFor="preco">Preço</label>
           <input
@@ -100,30 +114,41 @@ function FormularioServico() {
             onChange={(e) => setSelectedPreco(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.preco && <div className="erro-mensagem">Preço é obrigatório.</div>}
+          {erro.preco && (
+            <div className="erro-mensagem">
+              {selectedPreco === ""
+                ? "Preço é obrigatório."
+                : "Preço deve ser um número decimal válido (ex: 10.00)."}
+            </div>
+          )}
         </div>
-
-      <div className={`formulario-campo ${erro.duracaoServico ? "erroCampo" : ""}`}>
-        <label htmlFor="duracaoServico">Duração do serviço (em horas)</label>
-        <select
-          id="duracaoServico"
-          name="duracaoServico"
-          value={selectedDuracaoServico}
-          onChange={(e) => {
-            setSelectedDuracaoServico([e.target.value]);
-            setErro((prev) => ({ ...prev, duracaoServico: false }));
-          }}
-          onFocus={handleFocus}
+        <div
+          className={`formulario-campo ${
+            erro.duracaoServico ? "erroCampo" : ""
+          }`}
         >
-          <option value="">Selecione a duração</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        {erro.duracaoServico && <div className="erro-mensagem">Duração</div>}
-      </div>
+          <label htmlFor="duracaoServico">Duração do serviço (em horas)</label>
+          <select
+            id="duracaoServico"
+            name="duracaoServico"
+            value={selectedDuracaoServico}
+            onChange={(e) => {
+              setSelectedDuracaoServico(e.target.value);
+              setErro((prev) => ({ ...prev, duracaoServico: false }));
+            }}
+            onFocus={handleFocus}
+          >
+            <option value="">Selecione a duração</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          {erro.duracaoServico && (
+            <div className="erro-mensagem">Duração é obrigatória.</div>
+          )}
+        </div>
         <button className="button" type="button" onClick={handleCadastrar}>
           Cadastrar
         </button>

@@ -240,7 +240,6 @@ module.exports = {
             "Funcionarios",
             [
                 {
-                    id: 1,
                     nome: "Admin",
                     sobrenome: "Test",
                     dataNascimento: "1985-08-15",
@@ -253,7 +252,6 @@ module.exports = {
                     updatedAt: new Date(),
                 },
                 {
-                    id: 2,
                     nome: "João",
                     sobrenome: "Silva",
                     dataNascimento: "1990-01-10",
@@ -266,7 +264,6 @@ module.exports = {
                     updatedAt: new Date(),
                 },
                 {
-                    id: 3,
                     nome: "Maria",
                     sobrenome: "Oliveira",
                     dataNascimento: "1988-03-22",
@@ -357,6 +354,52 @@ module.exports = {
             ],
             {}
         );
+
+        await queryInterface.sequelize.transaction(async (t) => {
+            const [funcionarioMaxId] = await queryInterface.sequelize.query(
+                'SELECT MAX(id) FROM "Funcionarios";',
+                { transaction: t }
+            );
+            await queryInterface.sequelize.query(
+                `ALTER SEQUENCE "Funcionarios_id_seq" RESTART WITH ${
+                    funcionarioMaxId[0].max + 1
+                };`,
+                { transaction: t }
+            );
+
+            const [clienteMaxId] = await queryInterface.sequelize.query(
+                'SELECT MAX(id) FROM "Clientes";',
+                { transaction: t }
+            );
+            await queryInterface.sequelize.query(
+                `ALTER SEQUENCE "Clientes_id_seq" RESTART WITH ${
+                    clienteMaxId[0].max + 1
+                };`,
+                { transaction: t }
+            );
+
+            const [servicoMaxId] = await queryInterface.sequelize.query(
+                'SELECT MAX(id) FROM "Servicos";',
+                { transaction: t }
+            );
+            await queryInterface.sequelize.query(
+                `ALTER SEQUENCE "Servicos_id_seq" RESTART WITH ${
+                    servicoMaxId[0].max + 1
+                };`,
+                { transaction: t }
+            );
+
+            const [horarioMaxId] = await queryInterface.sequelize.query(
+                'SELECT MAX(id) FROM "Horarios";',
+                { transaction: t }
+            );
+            await queryInterface.sequelize.query(
+                `ALTER SEQUENCE "Horarios_id_seq" RESTART WITH ${
+                    horarioMaxId[0].max + 1
+                };`,
+                { transaction: t }
+            );
+        });
     },
 
     down: async (queryInterface, Sequelize) => {

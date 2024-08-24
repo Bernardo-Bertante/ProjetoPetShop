@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CaixaAviso from "../components/CaixaAviso";
-import { UserContext } from "../contexts/UserContext"; // ajuste o caminho conforme necessário
+import { UserContext } from "../contexts/UserContext";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -13,7 +13,7 @@ function Pagina_Servico() {
   const { user } = useContext(UserContext); // acessar o estado do usuário
   const [dados, setDados] = useState([]);
   const [caixaAviso, setCaixaAviso] = useState(false);
-  const [idToDelete, setIdToDelete] = useState(null); // para armazenar o ID do agendamento a ser excluído
+  const [idToDelete, setIdToDelete] = useState(null);
 
   const getDados = async () => {
     try {
@@ -44,7 +44,6 @@ function Pagina_Servico() {
       getDados();
     }
   }, [user, navigate]);
-  
 
   return (
     <div className="pagina-agendamento">
@@ -72,29 +71,31 @@ function Pagina_Servico() {
               <ul>
                 <li>{dado.tipoServico}</li>
                 <li>{dado.preco}</li>
-                <li>{`${dado.duracaoServico} ${dado.duracaoServico == 1 ? "hora" : "horas"}`}</li>
+                <li>{`${dado.duracaoServico} ${
+                  dado.duracaoServico == 1 ? "hora" : "horas"
+                }`}</li>
               </ul>
 
               <div className="buttons">
                 <button
                   className="btn-excluir"
                   onClick={() => {
-                    setIdToDelete(dado.id); // Armazenar o ID do agendamento a ser excluído
+                    setIdToDelete(dado.id);
                     setCaixaAviso(true);
                   }}
                 >
                   Excluir
                 </button>
                 <button
-                    className="btn-atualizar"
-                    onClick={() => {
-                      navigate("/atualizar-servico", {
-                        state: { agendamento: dado } // Passando o dado do agendamento para a próxima página
-                      });
-                    }}
-                  >
-                    Atualizar
-              </button>
+                  className="btn-atualizar"
+                  onClick={() => {
+                    navigate("/atualizar-servico", {
+                      state: { servico: dado },
+                    });
+                  }}
+                >
+                  Atualizar
+                </button>
               </div>
             </div>
           ))
