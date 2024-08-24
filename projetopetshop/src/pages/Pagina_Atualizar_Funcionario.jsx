@@ -9,9 +9,10 @@ axios.defaults.withCredentials = true;
 function Pagina_Atualizar_Funcionario() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { cliente } = location.state || {};
+  const { user } = location.state || {};
+  const [mensagemErro, setMensagemErro] = useState(""); // Novo estado para mensagem de erro
 
-  const [dados, setDados] = useState(cliente || {});
+  const [dados, setDados] = useState(user || {});
   const [erro, setErro] = useState({
     nome: false,
     sobrenome: false,
@@ -19,15 +20,15 @@ function Pagina_Atualizar_Funcionario() {
     dataNascimento: false,
     password: false,
     email: false,
-    telefone: false
+    telefone: false,
   });
 
   useEffect(() => {
-    if (!cliente) {
-      console.error("Dados do cliente não fornecidos.");
+    if (!user) {
+      console.error("Dados do funcionário não fornecidos.");
       navigate("/pagina-principal");
     }
-  }, [cliente, navigate]);
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +40,7 @@ function Pagina_Atualizar_Funcionario() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Resetar erros
     let hasError = false;
     const newErro = {
@@ -51,16 +52,16 @@ function Pagina_Atualizar_Funcionario() {
       telefone: !dados.telefone,
       email: !dados.email,
     };
-  
+
     setErro(newErro);
-  
+
     // Verifica se há algum erro
     for (let key in newErro) {
       if (newErro[key]) {
         hasError = true;
       }
     }
-  
+
     if (hasError) {
       return; // Não envia se houver erros
     }
@@ -69,22 +70,41 @@ function Pagina_Atualizar_Funcionario() {
       ...dados,
       email: dados.email === "" ? null : dados.email,
     };
-  
+
     try {
-      const response = await axios.put(`/funcionario/update/${dados.id}`, dadosAtualizados);
+      const response = await axios.put(
+        `/funcionario/update/${dados.id}`,
+        dadosAtualizados
+      );
       console.log("Funcionário atualizado com sucesso:", response.data);
       navigate("/pagina-funcionario");
     } catch (error) {
       console.error("Erro ao atualizar funcionário:", error);
+      // Atualiza o estado com a mensagem de erro recebida
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setMensagemErro(error.response.data.message);
+      } else {
+        setMensagemErro("Ocorreu um erro inesperado.");
+      }
     }
   };
 
   return (
     <div className="pagina-agendar">
       <form onSubmit={handleSubmit} className="formulario-agendamento">
-        <img src="/img/seta.svg" alt="Voltar" onClick={() => navigate("/pagina-cliente")} />
+        <img
+          src="/img/seta.svg"
+          alt="Voltar"
+          onClick={() => navigate("/pagina-funcionario")}
+        />
 
         <h2>FORMULÁRIO</h2>
+
+        {mensagemErro && <div>{mensagemErro}</div>}
 
         <div className={`formulario-campo ${erro.nome ? "erroCampo" : ""}`}>
           <label htmlFor="nome">Nome</label>
@@ -99,7 +119,9 @@ function Pagina_Atualizar_Funcionario() {
           {erro.nome && <div className="erro-mensagem">Nome é obrigatório</div>}
         </div>
 
-        <div className={`formulario-campo ${erro.sobrenome ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${erro.sobrenome ? "erroCampo" : ""}`}
+        >
           <label htmlFor="sobrenome">Sobrenome</label>
           <input
             id="sobrenome"
@@ -109,7 +131,9 @@ function Pagina_Atualizar_Funcionario() {
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, sobrenome: false }))}
           />
-          {erro.sobrenome && <div className="erro-mensagem">Sobrenome é obrigatório</div>}
+          {erro.sobrenome && (
+            <div className="erro-mensagem">Sobrenome é obrigatório</div>
+          )}
         </div>
 
         <div className={`formulario-campo ${erro.cpf ? "erroCampo" : ""}`}>
@@ -125,7 +149,11 @@ function Pagina_Atualizar_Funcionario() {
           {erro.cpf && <div className="erro-mensagem">CPF é obrigatório</div>}
         </div>
 
-        <div className={`formulario-campo ${erro.dataNascimento ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${
+            erro.dataNascimento ? "erroCampo" : ""
+          }`}
+        >
           <label htmlFor="dataNascimento">Data de nascimento</label>
           <input
             id="dataNascimento"
@@ -133,9 +161,15 @@ function Pagina_Atualizar_Funcionario() {
             name="dataNascimento"
             value={dados.dataNascimento || ""}
             onChange={handleChange}
-            onFocus={() => setErro((prev) => ({ ...prev, dataNascimento: false }))}
+            onFocus={() =>
+              setErro((prev) => ({ ...prev, dataNascimento: false }))
+            }
           />
-          {erro.dataNascimento && <div className="erro-mensagem">Data de nascimento é obrigatória</div>}
+          {erro.dataNascimento && (
+            <div className="erro-mensagem">
+              Data de nascimento é obrigatória
+            </div>
+          )}
         </div>
 
         <div className={`formulario-campo ${erro.password ? "erroCampo" : ""}`}>
@@ -148,7 +182,9 @@ function Pagina_Atualizar_Funcionario() {
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, password: false }))}
           />
-          {erro.password && <div className="erro-mensagem">Senha é obrigatória</div>}
+          {erro.password && (
+            <div className="erro-mensagem">Senha é obrigatória</div>
+          )}
         </div>
 
         <div className={`formulario-campo ${erro.telefone ? "erroCampo" : ""}`}>
@@ -161,7 +197,9 @@ function Pagina_Atualizar_Funcionario() {
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, telefone: false }))}
           />
-          {erro.telefone && <div className="erro-mensagem">Telefone é obrigatório</div>}
+          {erro.telefone && (
+            <div className="erro-mensagem">Telefone é obrigatório</div>
+          )}
         </div>
 
         <div className={`formulario-campo ${erro.email ? "erroCampo" : ""}`}>
@@ -174,10 +212,14 @@ function Pagina_Atualizar_Funcionario() {
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, email: false }))}
           />
-          {erro.email && <div className="erro-mensagem">Email é obrigatório</div>}
+          {erro.email && (
+            <div className="erro-mensagem">Email é obrigatório</div>
+          )}
         </div>
 
-        <button type="submit" className="button">Editar</button>
+        <button type="submit" className="button">
+          Editar
+        </button>
       </form>
     </div>
   );

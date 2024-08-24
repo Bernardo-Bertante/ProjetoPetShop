@@ -15,7 +15,7 @@ const createFuncionario = async (user: FuncionarioType) => {
 const deleteFuncionario = async (id: string) => {
     try {
         const userForDelete = await FuncionarioModel.findOne({
-            where: { email: id },
+            where: { id: id },
         });
         if (!userForDelete) {
             throw new Error("Funcionário não encontrado.");

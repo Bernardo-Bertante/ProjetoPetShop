@@ -25,9 +25,9 @@ function Pagina_Funcionario() {
     }
   };
 
-  const deleteAgendamento = async (id) => {
+  const deleteFuncionario = async (id) => {
     try {
-      await axios.delete(`/cliente/delete/${id}`);
+      await axios.delete(`/funcionario/delete/${id}`);
       // Atualize o estado removendo o item excluído
       setDados(dados.filter((dado) => dado.id !== id));
       setCaixaAviso(false); // Fechar a caixa de aviso após a exclusão
@@ -44,7 +44,6 @@ function Pagina_Funcionario() {
       getDados();
     }
   }, [user, navigate]);
-  
 
   return (
     <div className="pagina-agendamento">
@@ -70,7 +69,9 @@ function Pagina_Funcionario() {
           dados.map((dado) => (
             <div className="card" key={dado.id}>
               <ul>
-                <li>{dado.nome} {dado.sobrenome}</li>
+                <li>
+                  {dado.nome} {dado.sobrenome}
+                </li>
                 <li>{dado.cpf}</li>
                 <li>{dado.dataNascimento}</li>
                 <li>{dado.password}</li>
@@ -89,15 +90,15 @@ function Pagina_Funcionario() {
                   Excluir
                 </button>
                 <button
-                    className="btn-atualizar"
-                    onClick={() => {
-                      navigate("/atualizar-cliente", {
-                        state: { cliente: dado } // Passando o dado do agendamento para a próxima página
-                      });
-                    }}
-                  >
-                    Atualizar
-              </button>
+                  className="btn-atualizar"
+                  onClick={() => {
+                    navigate("/atualizar-funcionario", {
+                      state: { user: dado }, // Passando o dado do agendamento para a próxima página
+                    });
+                  }}
+                >
+                  Atualizar
+                </button>
               </div>
             </div>
           ))
@@ -113,7 +114,7 @@ function Pagina_Funcionario() {
         }}
         confirmarExclusao={() => {
           if (idToDelete) {
-            deleteAgendamento(idToDelete); // Confirmar exclusão do agendamento
+            deleteFuncionario(idToDelete); // Confirmar exclusão do agendamento
           }
         }}
         fraseExclusao="Tem certeza que deseja excluir este Funcionário?"
