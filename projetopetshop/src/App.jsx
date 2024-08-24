@@ -12,6 +12,9 @@ import Pagina_Atualizar_Cliente from "./pages/Pagina_Atualizar_Cliente";
 import Pagina_Servico from "./pages/Pagina_Servico";
 import FormularioServico from "./pages/FormularioServico";
 import Pagina_Atualizar_Servico from "./pages/Pagina_Atualizar_Servico";
+import Pagina_Funcionario from "./pages/Pagina_Funcionario";
+import FormularioFuncionario from "./pages/FormularioFuncionario";
+import Pagina_Atualizar_Funcionario from "./pages/Pagina_Atualizar_Funcionario";
 
 function App() {
   return (
@@ -58,7 +61,19 @@ function App() {
           <Route
             path="/atualizar-servico"
             element={<Pagina_Atualizar_Servico />}
-          ></Route>     
+          ></Route>
+          <Route
+            path="/pagina-funcionario"
+            element={<Pagina_Funcionario />}
+          ></Route>
+          <Route
+            path="/formulario-funcionario"
+            element={<FormularioFuncionario />}
+          ></Route>
+          <Route
+            path="/atualizar-funcionario"
+            element={<Pagina_Atualizar_Funcionario />}
+          ></Route>            
         </Routes>
       </BrowserRouter>
     </UserProvider>
