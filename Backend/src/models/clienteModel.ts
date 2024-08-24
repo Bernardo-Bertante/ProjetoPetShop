@@ -39,7 +39,7 @@ Cliente.init(
             unique: true,
             validate: {
                 is: {
-                    args: /^\(\d{2}\) \d{4,5}-\d{4}$/,
+                    args: /^\(\d{2}\) \d{5}-\d{4}$/,
                     msg: "O telefone deve ser válido",
                 },
             },

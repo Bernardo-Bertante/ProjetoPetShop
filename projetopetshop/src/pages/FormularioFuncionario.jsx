@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Formulario.css";
+import InputMask from "react-input-mask";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -22,7 +23,7 @@ function FormularioCliente() {
     dataNascimento: false,
     password: false,
     telefone: false,
-    email: false
+    email: false,
   });
   const [mensagemErro, setMensagemErro] = useState(""); // Estado para mensagem de erro
 
@@ -55,7 +56,7 @@ function FormularioCliente() {
         dataNascimento: selectedDataNascimento,
         password: selectedPassword,
         telefone: selectedTelefone,
-        email: selectedEmail
+        email: selectedEmail,
       });
 
       console.log("Funcionário cadastrado com sucesso:", response.data);
@@ -67,7 +68,10 @@ function FormularioCliente() {
       } else {
         setMensagemErro("Erro ao cadastrar funcionário.");
       }
-      console.error("Erro ao cadastrar funcionário:", error.response?.data?.message || error.message);
+      console.error(
+        "Erro ao cadastrar funcionário:",
+        error.response?.data?.message || error.message
+      );
     }
   };
 
@@ -88,11 +92,11 @@ function FormularioCliente() {
           alt="Voltar"
           onClick={() => navigate("/pagina-funcionario")}
         />
-
         <h2>FORMULÁRIO</h2>
-
-        {mensagemErro && <div className="erro-mensagem">{mensagemErro}</div>} {/* Exibe a mensagem de erro */}
-
+        {mensagemErro && (
+          <div className="erro-mensagem">{mensagemErro}</div>
+        )}{" "}
+        {/* Exibe a mensagem de erro */}
         <div className={`formulario-campo ${erro.nome ? "erroCampo" : ""}`}>
           <label htmlFor="nome">Nome</label>
           <input
@@ -103,10 +107,13 @@ function FormularioCliente() {
             onChange={(e) => setSelectedNome(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.nome && <div className="erro-mensagem">Nome é obrigatório.</div>}
+          {erro.nome && (
+            <div className="erro-mensagem">Nome é obrigatório.</div>
+          )}
         </div>
-
-        <div className={`formulario-campo ${erro.sobrenome ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${erro.sobrenome ? "erroCampo" : ""}`}
+        >
           <label htmlFor="sobrenome">Sobrenome</label>
           <input
             id="sobrenome"
@@ -116,35 +123,44 @@ function FormularioCliente() {
             onChange={(e) => setSelectedSobrenome(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.sobrenome && <div className="erro-mensagem">Sobrenome é obrigatório.</div>}
+          {erro.sobrenome && (
+            <div className="erro-mensagem">Sobrenome é obrigatório.</div>
+          )}
         </div>
-
         <div className={`formulario-campo ${erro.cpf ? "erroCampo" : ""}`}>
           <label htmlFor="nomeAnimal">CPF</label>
-          <input
+          <InputMask
             id="cpf"
             name="cpf"
             type="text"
             value={selectedCpf}
             onChange={(e) => setSelectedCpf(e.target.value)}
             onFocus={handleFocus}
+            mask={"999.999.999-99"}
           />
           {erro.cpf && <div className="erro-mensagem">CPF é obrigatório.</div>}
         </div>
-
-        <div className={`formulario-campo ${erro.dataNascimento ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${
+            erro.dataNascimento ? "erroCampo" : ""
+          }`}
+        >
           <label htmlFor="dataNascimento">Data de nascimento</label>
-          <input
+          <InputMask
             id="dataNascimento"
             name="dataNascimento"
             type="text"
             value={selectedDataNascimento}
             onChange={(e) => setSelectedDataNascimento(e.target.value)}
             onFocus={handleFocus}
+            mask={"99/99/9999"}
           />
-          {erro.dataNascimento && <div className="erro-mensagem">Data de nascimento é obrigatória.</div>}
+          {erro.dataNascimento && (
+            <div className="erro-mensagem">
+              Data de nascimento é obrigatória.
+            </div>
+          )}
         </div>
-
         <div className={`formulario-campo ${erro.password ? "erroCampo" : ""}`}>
           <label htmlFor="password">Senha</label>
           <input
@@ -155,24 +171,26 @@ function FormularioCliente() {
             onChange={(e) => setSelectedPassword(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.password && <div className="erro-mensagem">Senha é obrigatória.</div>}
+          {erro.password && (
+            <div className="erro-mensagem">Senha é obrigatória.</div>
+          )}
         </div>
-
         <div className={`formulario-campo ${erro.telefone ? "erroCampo" : ""}`}>
           <label htmlFor="telefone">Telefone</label>
-          <input
+          <InputMask
             id="telefone"
             name="telefone"
             type="text"
             value={selectedTelefone}
             onChange={(e) => setSelectedTelefone(e.target.value)}
             onFocus={handleFocus}
+            mask={"(99) 99999-9999"}
+            placeHolder="(xx) 9xxxx-xxxx"
           />
-          {erro.telefone && <div className="erro-mensagem">Telefone é obrigatório.</div>}
+          {erro.telefone && (
+            <div className="erro-mensagem">Telefone é obrigatório.</div>
+          )}
         </div>
-
-
-
         <div className={`formulario-campo ${erro.email ? "erroCampo" : ""}`}>
           <label htmlFor="email">Email</label>
           <input
@@ -183,9 +201,10 @@ function FormularioCliente() {
             onChange={(e) => setSelectedEmail(e.target.value)}
             onFocus={handleFocus}
           />
-          {erro.email && <div className="erro-mensagem">Email é obrigatório.</div>}
+          {erro.email && (
+            <div className="erro-mensagem">Email é obrigatório.</div>
+          )}
         </div>
-
         <button className="button" type="button" onClick={handleCadastrar}>
           Cadastrar
         </button>

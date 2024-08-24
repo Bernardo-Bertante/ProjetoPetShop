@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import InputMask from "react-input-mask";
 import "./Formulario.css";
 
 axios.defaults.baseURL = "http://localhost:5000";
@@ -19,7 +20,7 @@ function Pagina_Atualizar_Cliente() {
     especieAnimal: false,
     racaAnimal: false,
     email: false,
-    telefone: false
+    telefone: false,
   });
 
   useEffect(() => {
@@ -39,7 +40,7 @@ function Pagina_Atualizar_Cliente() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Resetar erros
     let hasError = false;
     const newErro = {
@@ -51,16 +52,16 @@ function Pagina_Atualizar_Cliente() {
       email: false,
       telefone: !dados.telefone,
     };
-  
+
     setErro(newErro);
-  
+
     // Verifica se há algum erro
     for (let key in newErro) {
       if (newErro[key]) {
         hasError = true;
       }
     }
-  
+
     if (hasError) {
       return; // Não envia se houver erros
     }
@@ -69,9 +70,12 @@ function Pagina_Atualizar_Cliente() {
       ...dados,
       email: dados.email === "" ? null : dados.email,
     };
-  
+
     try {
-      const response = await axios.put(`/cliente/update/${dados.id}`, dadosAtualizados);
+      const response = await axios.put(
+        `/cliente/update/${dados.id}`,
+        dadosAtualizados
+      );
       console.log("Cliente atualizado com sucesso:", response.data);
       navigate("/pagina-cliente");
     } catch (error) {
@@ -82,7 +86,11 @@ function Pagina_Atualizar_Cliente() {
   return (
     <div className="pagina-agendar">
       <form onSubmit={handleSubmit} className="formulario-agendamento">
-        <img src="/img/seta.svg" alt="Voltar" onClick={() => navigate("/pagina-cliente")} />
+        <img
+          src="/img/seta.svg"
+          alt="Voltar"
+          onClick={() => navigate("/pagina-cliente")}
+        />
 
         <h2>FORMULÁRIO</h2>
 
@@ -96,10 +104,16 @@ function Pagina_Atualizar_Cliente() {
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, nomeDono: false }))}
           />
-          {erro.nomeDono && <div className="erro-mensagem">Nome do dono é obrigatório</div>}
+          {erro.nomeDono && (
+            <div className="erro-mensagem">Nome do dono é obrigatório</div>
+          )}
         </div>
 
-        <div className={`formulario-campo ${erro.sobrenomeDono ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${
+            erro.sobrenomeDono ? "erroCampo" : ""
+          }`}
+        >
           <label htmlFor="sobrenomeDono">Sobrenome do Dono</label>
           <input
             id="sobrenomeDono"
@@ -107,12 +121,18 @@ function Pagina_Atualizar_Cliente() {
             name="sobrenomeDono"
             value={dados.sobrenomeDono || ""}
             onChange={handleChange}
-            onFocus={() => setErro((prev) => ({ ...prev, sobrenomeDono: false }))}
+            onFocus={() =>
+              setErro((prev) => ({ ...prev, sobrenomeDono: false }))
+            }
           />
-          {erro.sobrenomeDono && <div className="erro-mensagem">Sobrenome do dono é obrigatório</div>}
+          {erro.sobrenomeDono && (
+            <div className="erro-mensagem">Sobrenome do dono é obrigatório</div>
+          )}
         </div>
 
-        <div className={`formulario-campo ${erro.nomeAnimal ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${erro.nomeAnimal ? "erroCampo" : ""}`}
+        >
           <label htmlFor="nomeAnimal">Nome do Animal</label>
           <input
             id="nomeAnimal"
@@ -122,10 +142,16 @@ function Pagina_Atualizar_Cliente() {
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, nomeAnimal: false }))}
           />
-          {erro.nomeAnimal && <div className="erro-mensagem">Nome do animal é obrigatório</div>}
+          {erro.nomeAnimal && (
+            <div className="erro-mensagem">Nome do animal é obrigatório</div>
+          )}
         </div>
 
-        <div className={`formulario-campo ${erro.especieAnimal ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${
+            erro.especieAnimal ? "erroCampo" : ""
+          }`}
+        >
           <label htmlFor="especieAnimal">Espécie</label>
           <input
             id="especieAnimal"
@@ -133,12 +159,18 @@ function Pagina_Atualizar_Cliente() {
             name="especieAnimal"
             value={dados.especieAnimal || ""}
             onChange={handleChange}
-            onFocus={() => setErro((prev) => ({ ...prev, especieAnimal: false }))}
+            onFocus={() =>
+              setErro((prev) => ({ ...prev, especieAnimal: false }))
+            }
           />
-          {erro.especieAnimal && <div className="erro-mensagem">Espécie é obrigatória</div>}
+          {erro.especieAnimal && (
+            <div className="erro-mensagem">Espécie é obrigatória</div>
+          )}
         </div>
 
-        <div className={`formulario-campo ${erro.racaAnimal ? "erroCampo" : ""}`}>
+        <div
+          className={`formulario-campo ${erro.racaAnimal ? "erroCampo" : ""}`}
+        >
           <label htmlFor="racaAnimal">Raça</label>
           <input
             id="racaAnimal"
@@ -148,20 +180,26 @@ function Pagina_Atualizar_Cliente() {
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, racaAnimal: false }))}
           />
-          {erro.racaAnimal && <div className="erro-mensagem">Raça é obrigatória</div>}
+          {erro.racaAnimal && (
+            <div className="erro-mensagem">Raça é obrigatória</div>
+          )}
         </div>
 
         <div className={`formulario-campo ${erro.telefone ? "erroCampo" : ""}`}>
           <label htmlFor="telefone">Telefone</label>
-          <input
+          <InputMask
             id="telefone"
             type="text"
             name="telefone"
             value={dados.telefone || ""}
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, telefone: false }))}
+            mask="(99) 99999-9999"
+            placeHolder="(xx) 9xxxx-xxxx"
           />
-          {erro.telefone && <div className="erro-mensagem">Telefone é obrigatório</div>}
+          {erro.telefone && (
+            <div className="erro-mensagem">Telefone é obrigatório</div>
+          )}
         </div>
 
         <div className="formulario-campo">
@@ -175,7 +213,9 @@ function Pagina_Atualizar_Cliente() {
           />
         </div>
 
-        <button type="submit" className="button">Editar</button>
+        <button type="submit" className="button">
+          Editar
+        </button>
       </form>
     </div>
   );

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Formulario.css";
+import InputMask from "react-input-mask";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -138,13 +139,14 @@ function Pagina_Atualizar_Funcionario() {
 
         <div className={`formulario-campo ${erro.cpf ? "erroCampo" : ""}`}>
           <label htmlFor="cpf">CPF</label>
-          <input
+          <InputMask
             id="cpf"
             type="text"
             name="cpf"
             value={dados.cpf || ""}
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, cpf: false }))}
+            mask={"999.999.999-99"}
           />
           {erro.cpf && <div className="erro-mensagem">CPF é obrigatório</div>}
         </div>
@@ -155,7 +157,7 @@ function Pagina_Atualizar_Funcionario() {
           }`}
         >
           <label htmlFor="dataNascimento">Data de nascimento</label>
-          <input
+          <InputMask
             id="dataNascimento"
             type="text"
             name="dataNascimento"
@@ -164,6 +166,7 @@ function Pagina_Atualizar_Funcionario() {
             onFocus={() =>
               setErro((prev) => ({ ...prev, dataNascimento: false }))
             }
+            mask={"99/99/9999"}
           />
           {erro.dataNascimento && (
             <div className="erro-mensagem">
@@ -189,13 +192,15 @@ function Pagina_Atualizar_Funcionario() {
 
         <div className={`formulario-campo ${erro.telefone ? "erroCampo" : ""}`}>
           <label htmlFor="telefone">Telefone</label>
-          <input
+          <InputMask
             id="telefone"
             type="text"
             name="telefone"
             value={dados.telefone || ""}
             onChange={handleChange}
             onFocus={() => setErro((prev) => ({ ...prev, telefone: false }))}
+            mask={"(99) 99999-9999"}
+            placeHolder="(xx) 9xxxx-xxxx"
           />
           {erro.telefone && (
             <div className="erro-mensagem">Telefone é obrigatório</div>
