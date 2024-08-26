@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { FuncionarioModel } from "../models/funcionarioModel";
+import { FuncionarioModel } from "../models/FuncionarioModel";
 
 passport.use(
     new LocalStrategy(

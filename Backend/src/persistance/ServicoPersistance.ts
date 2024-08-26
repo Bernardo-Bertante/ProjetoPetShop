@@ -1,5 +1,5 @@
-import { ServicoModel } from "../models/servicoModel";
-import { ServicoType } from "../types/servicoType";
+import { ServicoModel } from "../models/ServicoModel";
+import { ServicoType } from "../types/ServicoType";
 
 const createServico = async (cliente: ServicoType) => {
     try {
@@ -13,14 +13,14 @@ const createServico = async (cliente: ServicoType) => {
 
 const deleteServico = async (id: string) => {
     try {
-        const clienteForDelete = await ServicoModel.findOne({
+        const servicoForDelete = await ServicoModel.findOne({
             where: { id: id },
         });
-        if (!clienteForDelete) {
-            throw new Error("Cliente não encontrado.");
+        if (!servicoForDelete) {
+            throw new Error("Servico não encontrado.");
         }
-        await clienteForDelete.destroy();
-        return "Cliente deletado com sucesso!";
+        await servicoForDelete.destroy();
+        return "Serviço deletado com sucesso!";
     } catch (error) {
         throw error;
     }

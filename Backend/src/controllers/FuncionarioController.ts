@@ -1,7 +1,7 @@
 import e, {Request, Response, NextFunction } from "express";
 import FuncionarioService from "../services/FuncionarioService";
 import { config } from "dotenv";
-import { FuncionarioType } from "../types/funcionarioType";
+import { FuncionarioType } from "../types/FuncionarioType";
 
 config();
 

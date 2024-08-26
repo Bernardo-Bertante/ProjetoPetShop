@@ -1,5 +1,5 @@
-import { ClienteModel } from "../models/clienteModel";
-import { ClienteType } from "../types/clienteType";
+import { ClienteModel } from "../models/ClienteModel";
+import { ClienteType } from "../types/ClienteType";
 
 const createCliente = async (cliente: ClienteType) => {
     try {
