@@ -19,15 +19,6 @@ const deleteFuncionario = async (id: string) => {
     }
 };
 
-const findByEmail = async (email: string) => {
-    try {
-        const result = await FuncionarioPersistance.findEmail(email);
-        return result;
-    } catch (error) {
-        throw error;
-    }
-};
-
 const getFuncionarios = async () => {
     try {
         const users = await FuncionarioPersistance.getFuncionarios();
@@ -52,7 +43,6 @@ const updateFuncionario = async (id: string, updates: any) => {
 export default {
     createFuncionario,
     deleteFuncionario,
-    findByEmail,
     getFuncionarios,
     updateFuncionario,
 };

@@ -19,14 +19,6 @@ const deleteCliente = async (id: string) => {
     }
 };
 
-const findByEmail = async (email: string) => {
-    try {
-        const result = await ClientePersistance.findEmail(email);
-        return result;
-    } catch (error) {
-        throw error;
-    }
-};
 
 const getClientes = async () => {
     try {
@@ -49,7 +41,6 @@ const updateCliente = async (id: string, updates: any) => {
 export default {
     createCliente,
     deleteCliente,
-    findByEmail,
     getClientes,
     updateCliente,
 };
