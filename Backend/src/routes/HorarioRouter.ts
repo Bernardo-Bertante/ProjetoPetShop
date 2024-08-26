@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { HorarioRoutes } from "../controllers/HorarioController";
+import { getAllHorarios } from "../controllers/HorarioController";
 import { ensureAuthenticated } from "../middleware/ensureAuthenticated";
 
 const router = Router();
-router.use("/horario", ensureAuthenticated, HorarioRoutes);
+
+router.get("/all", ensureAuthenticated, getAllHorarios);
 
 export { router as HorarioRouter };

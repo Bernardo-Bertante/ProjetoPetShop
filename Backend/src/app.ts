@@ -51,18 +51,18 @@ app.use(
 app.use(flash());
 
 // Rotas
-app.use(AdminRouter);
-app.use(ClienteRouter);
-app.use(ServicoRouter);
-app.use(AgendamentoRouter);
-app.use(LoginRouter);
-app.use(HorarioRouter);
+app.use("/funcionario", AdminRouter);
+app.use("/cliente", ClienteRouter);
+app.use("/servico", ServicoRouter);
+app.use("/agendamento", AgendamentoRouter);
+app.use("/", LoginRouter);
+app.use("/horario", HorarioRouter);
 
 // Manipulador de erro para mensagens flash
 app.use((err: any, req: Request, res: Response, next: Function) => {
     if (err) {
         req.flash("error", err.message); // Enviar mensagem flash de erro
-        res.redirect("/account/login"); // Redirecionar de volta para a página de login
+        res.redirect("/");
     }
 });
 
