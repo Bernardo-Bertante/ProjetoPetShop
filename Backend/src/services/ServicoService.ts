@@ -1,4 +1,4 @@
-import { ServicoType } from "../types/ServicoType";
+import { ServicoType } from "../types/servicoType";
 import ServicoPersistance from "../persistance/ServicoPersistance";
 
 const createServico = async (cliente: ServicoType) => {

@@ -1,5 +1,5 @@
-import { ServicoModel } from "../models/ServicoModel";
-import { ServicoType } from "../types/ServicoType";
+import { ServicoModel } from "../models/servicoModel";
+import { ServicoType } from "../types/servicoType";
 
 const createServico = async (cliente: ServicoType) => {
     try {

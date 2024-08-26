@@ -110,5 +110,5 @@
     "types": ["jest", "node"],
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "cypress/**/*.ts"],
 }
