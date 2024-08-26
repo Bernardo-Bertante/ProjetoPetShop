@@ -26,21 +26,6 @@ const deleteFuncionario = async (id: string) => {
         throw error;
     }
 };
-//d
-const findEmail = async (email: string) => {
-    try {
-        const operationResult = await FuncionarioModel.findOne({
-            where: { email: email },
-        });
-        if (!operationResult) {
-            throw new Error("User not found");
-        }
-        operationResult.save();
-        return operationResult;
-    } catch (error) {
-        throw error;
-    }
-};
 
 const getFuncionarios = async () => {
     try {
@@ -70,7 +55,6 @@ const updateFuncionario = async (id: string, updates: any) => {
 export default {
     createFuncionario,
     deleteFuncionario,
-    findEmail,
     getFuncionarios,
     updateFuncionario,
 };

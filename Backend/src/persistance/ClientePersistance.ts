@@ -26,20 +26,6 @@ const deleteCliente = async (id: string) => {
     }
 };
 
-const findEmail = async (email: string) => {
-    try {
-        const operationResult = await ClienteModel.findOne({
-            where: { email: email },
-        });
-        if (!operationResult) {
-            throw new Error("Cliente não encontrado");
-        }
-        return operationResult;
-    } catch (error) {
-        throw error;
-    }
-};
-
 const getClientes = async () => {
     try {
         const clientes = await ClienteModel.findAll(); // Busca todos os clientes
@@ -68,7 +54,6 @@ const updateCliente = async (id: string, updates: any) => {
 export default {
     createCliente,
     deleteCliente,
-    findEmail,
     getClientes,
     updateCliente,
 };
