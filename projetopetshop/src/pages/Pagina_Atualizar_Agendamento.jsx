@@ -237,7 +237,7 @@ function Pagina_Atualizar_Agendamento() {
             <option value="">Selecione um horário</option>
             {horarios.map((horario) => (
               <option key={horario.id} value={horario.id}>
-                {horario.horario}
+                {new Date(horario.horario).toLocaleString('pt-BR')}
               </option>
             ))}
           </select>

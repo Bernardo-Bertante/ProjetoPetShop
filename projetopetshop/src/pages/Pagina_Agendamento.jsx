@@ -74,7 +74,7 @@ function Pagina_Agendamento() {
                 <li>{dado.cliente.nomeAnimal}</li>
                 <li>{dado.cliente.especie}</li>
                 <li>{dado.servico.tipoServico}</li>
-                <li>{dado.horario.horario}</li>
+                <li>{new Date(dado.horario.horario).toLocaleString('pt-BR')}</li>
               </ul>
 
               <div className="buttons">

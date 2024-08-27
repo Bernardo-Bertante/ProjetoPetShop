@@ -411,3 +411,5 @@ module.exports = {
         await queryInterface.dropTable("Servicos");
     },
 };
+
+// npx sequelize-cli db:migrate
