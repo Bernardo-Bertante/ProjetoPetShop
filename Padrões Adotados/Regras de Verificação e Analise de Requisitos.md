@@ -16,9 +16,9 @@ CORRETO: O software DEVE permitir o registro de clientes <br>
 O software não DEVE permitir o registro de dois clientes com o mesmo CPF
 
 ## Evitar frases grandes
-As frases devem ser concisas, facilitando a leitura e compreensão dos requisitos. <br>
+As frases devem ser concisas, facilitando a leitura e compreensão dos requisitos. Com limite máximo de 50 palavras. <br>
 
-INCORRETO: O software DEVE permitir o registro dos clientes do nosso Pet Shop <br>
+INCORRETO: O software DEVE permitir o registro dos clientes do nosso Pet Shop, oferecendo uma interface amigável e intuitiva, onde os usuários possam inserir informações detalhadas sobre os donos e seus animais, incluindo nome, telefone, e-mail, e outras informações relevantes, garantindo a segurança e privacidade dos dados inseridos. <br>
 CORRETO: O software DEVE permitir o registro dos clientes da empresa
 
 ## Sem Ambiguidade

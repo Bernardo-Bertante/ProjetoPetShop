@@ -1,0 +1,18 @@
+:root {
+  --cor-marrom-escuro: #C3A4A4;
+  --cor-azul-claro: #DEE9FF;
+  --cor-roxo: #9584FF;
+  --cor-areia: #EDD7D7;
+  --cor-areia-clara: #E1DEDE;
+  --cor-areia-mais-clara: #FDF5F5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: Arial, sans-serif; 
+}
