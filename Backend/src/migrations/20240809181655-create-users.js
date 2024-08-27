@@ -331,7 +331,7 @@ module.exports = {
                     id: 1,
                     tipoServico: "Banho",
                     preco: 50.0,
-                    duracaoServico: 60, // duração em minutos
+                    duracaoServico: 1,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
@@ -339,7 +339,7 @@ module.exports = {
                     id: 2,
                     tipoServico: "Tosa",
                     preco: 70.0,
-                    duracaoServico: 90, // duração em minutos
+                    duracaoServico: 1,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
@@ -347,7 +347,7 @@ module.exports = {
                     id: 3,
                     tipoServico: "Consulta Veterinária",
                     preco: 150.0,
-                    duracaoServico: 45, // duração em minutos
+                    duracaoServico: 1,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },

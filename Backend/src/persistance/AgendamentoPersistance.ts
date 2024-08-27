@@ -6,6 +6,7 @@ import { ServicoModel } from "../models/ServicoModel";
 import { HorarioModel } from "../models/HorarioModel";
 import { Transaction } from "sequelize";
 
+// Adiciona a função updateHorarioDisponibilidade
 const updateHorarioDisponibilidade = async (
     horarioId: number,
     disponibilidade: boolean,
@@ -23,6 +24,7 @@ const updateHorarioDisponibilidade = async (
     }
 };
 
+// Adiciona a função createAgendamento
 const createAgendamento = async (agendamento: AgendamentoType) => {
     try {
         await AgendamentoModel.sync();
@@ -33,6 +35,7 @@ const createAgendamento = async (agendamento: AgendamentoType) => {
     }
 };
 
+// Adiciona a função deleteAgendamento
 const deleteAgendamento = async (
     id: number,
     options?: { transaction?: Transaction }
@@ -49,6 +52,7 @@ const deleteAgendamento = async (
     }
 };
 
+// Adiciona a função getAgendamentos
 const getAgendamentos = async () => {
     try {
         const agendamentos = await AgendamentoModel.findAll({
@@ -76,6 +80,7 @@ const getAgendamentos = async () => {
     }
 };
 
+// Adiciona a função updateAgendamento
 const updateAgendamento = async (
     id: number,
     updates: Partial<AgendamentoType>,
@@ -97,7 +102,7 @@ const updateAgendamento = async (
     }
 };
 
-
+// Adiciona a função getAgendamentoById
 const getAgendamentoById = async (id: number) => {
     try {
         const agendamento = await AgendamentoModel.findByPk(id);
@@ -107,6 +112,7 @@ const getAgendamentoById = async (id: number) => {
     }
 };
 
+// Adiciona a função getHorarioById
 const getHorarioById = async (horarioId: number) => {
     try {
         const horario = await HorarioModel.findByPk(horarioId, {
