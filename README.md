@@ -40,6 +40,9 @@ Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 ├───/Backend
 │   ├───config/
 │   │   └───config.json
+│   ├───cypress/
+│   │   └───e2e/
+│   │       └───servico.spec.ts
 │   ├───models/
 │   │   └───index.js
 │   ├───src/
@@ -102,7 +105,43 @@ Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 │   ├───package-lock.json
 │   ├───package.json
 │   └───tsconfig.json
-│  
+│
+├───/cypress
+│   ├───e2e/
+│   │   └───1-getting-started/
+│   │       └───todo.cy.js
+│   │   ├───2-advanced-examples/
+│   │   │   ├───actions.cy.js
+│   │   │   ├───aliasing.cy.js
+│   │   │   ├───assertions.cy.js
+│   │   │   ├───connectors.cy.js
+│   │   │   ├───cookies.cy.js
+│   │   │   ├───cypress_api.cy.js
+│   │   │   ├───files.cy.js
+│   │   │   ├───location.cy.js
+│   │   │   ├───misc.cy.js
+│   │   │   ├───navigation.cy.js
+│   │   │   ├───network_requests.cy.js
+│   │   │   ├───querying.cy.js
+│   │   │   ├───spies_stubs_clocks.cy.js
+│   │   │   ├───storage.cy.js
+│   │   │   ├───traversal.cy.js
+│   │   │   ├───utilities.cy.js
+│   │   │   ├───viewport.cy.js
+│   │   │   ├───waiting.cy.js
+│   │   │   └───window.cy.js
+│   │   ├───cadastroEsperado.png
+│   │   ├───consultaEsperada.png
+│   │   ├───exclusaoEsperado.png
+│   │   ├───pagina_servico.cy.js
+│   │   └───servico.cy.js
+│   ├───fixtures/
+│   │   └───example.json
+│   ├───support/
+│   │   ├───commands.ts
+│   │   └───e2e.ts
+│   └───tsconfig.json
+| 
 ├───/Padrões Adotados
 │   └───Regras de Verificação e Analise de Requisitos.md
 │
@@ -118,25 +157,29 @@ Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 │   │   ├───assets/
 │   │   │   └───react.svg
 │   │   ├───components/
-│   │   │   ├───CaixaAviso_Cliente.jsx
 │   │   │   ├───CaixaAviso.css
 │   │   │   └───CaixaAviso.jsx
 │   │   ├───contexts/
 │   │   │   └───UserContext.jsx
 │   │   ├───pages/
-│   │   │   ├───FormularioAgendamento.css
+│   │   │   ├───Formulario.css
 │   │   │   ├───FormularioAgendamento.jsx
 │   │   │   ├───FormularioCliente.jsx
+│   │   │   ├───FormularioFuncionario.jsx
+│   │   │   ├───FormularioServico.jsx
 │   │   │   ├───Pagina_Agendamento.css
 │   │   │   ├───Pagina_Agendamento.jsx
+│   │   │   ├───Pagina_Atualizar_Agendamento.jsx
 │   │   │   ├───Pagina_Atualizar_Cliente.jsx
-│   │   │   ├───Pagina_Atualizar.jsx
+│   │   │   ├───Pagina_Atualizar_Funcionario.jsx
+│   │   │   ├───Pagina_Atualizar_Servico.jsx
 │   │   │   ├───Pagina_Cliente.jsx
+│   │   │   ├───Pagina_Funcionario.jsx
 │   │   │   ├───Pagina_Login.css
 │   │   │   ├───Pagina_Login.jsx
-│   │   │   ├───Pagina_Cliente.jsx
 │   │   │   ├───Pagina_Principal.css
-│   │   │   └───Pagina_Principal.jsx
+│   │   │   ├───Pagina_Principal.jsx
+│   │   │   └───Pagina_Servico.jsx
 │   │   ├───App.css
 │   │   ├───App.jsx
 │   │   ├───index.css
@@ -151,31 +194,18 @@ Uma possível estrutura do projeto, visto que ainda não temos tudo definido:
 │   └───vite.config.js
 |
 ├───/Requisitos
-│   ├───Diagrama de Sequência/
-│   │   ├───Atualizar Agendamento.png
-│   │   ├───Atualizar Cliente.png
-│   │   ├───Atualizar Funcionário.png
-│   │   ├───Atualizar Serviço.png
-│   │   ├───Cadastrar Agendamento.png
-│   │   ├───Cadastrar Cliente.png
-│   │   ├───Cadastrar Funcionário.png
-│   │   ├───Cadastrar Serviço.png
-│   │   ├───Consultar Agendamento.png
-│   │   ├───Consultar Cliente.png
-│   │   ├───Consultar Funcionário.png
-│   │   ├───Consultar Serviço.png
-│   │   ├───Excluir Agendamento.png
-│   │   ├───Excluir Agendamento.png
-│   │   ├───Excluir Cliente.png
-│   │   ├───Excluir Funcionário.png
-│   │   └───Excluir Serviço.png
-│   ├───Diagrama de Classes.drawio.png
+|   ├───Diagrama de Classes.drawio.svg
+│   ├───Diagrama de Implantação.drawio.png
+│   ├───Diagrama de Implantação.drawio.svg
 │   ├───Diagrama de Pacotes.drawio.png
-│   ├───Diagrama de Sequência.drawio
-│   └───DocumentoRequisitos.docx
+│   ├───Diagrama de Sequência.drawio.svg
+│   ├───DocumentoRequisitos.docx
+│   └───TabelaTestes.drawio.svg
 |
 │   .gitignore
+│   cypress.config.ts
 │   package-lock.json
+|   package.json
 │   README.md
 │   TabelaUML.drawio
 |   TabelaUML.drawio.svg
