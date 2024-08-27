@@ -1,0 +1,181 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15" version="24.7.7">
+  <diagram name="Page-1" id="tMH6tarV7XgrCDY5XsaE">
+    <mxGraphModel dx="2311" dy="2443" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-1" value="Caso de teste" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="32" y="46" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-2" value="Funcionalidade" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="197" y="46" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-3" value="Cenário" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="362" y="46" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-4" value="Pré-Condições&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; white-space: nowrap;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22Cen%C3%A1rio%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22362%22%20y%3D%2246%22%20width%3D%22120%22%20height%3D%2260%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="527" y="46" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-5" value="Dados de Entrada" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="692" y="46" width="229" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-6" value="Resultado esperado" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="964" y="46" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-7" value="Status" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1129" y="46" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-8" value="Local" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1294" y="46" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-9" value="Observações" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1459" y="46" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-11" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;CT-001&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="32" y="149" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-12" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="197" y="149" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-13" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Criação de Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="362" y="149" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-14" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Nenhum serviço com o mesmo nome previamente existente no sistema / Usuário com acesso ao sistema.&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="527" y="149" width="120" height="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-15" value="&lt;li&gt;&lt;ol&gt;&lt;li&gt;Usuário acessa o menu principal.&lt;/li&gt;&lt;li&gt;Usuário acessa a opção&amp;nbsp;&lt;code&gt;Cadastrar Serviço&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Usuário preenche os campos&amp;nbsp;&lt;code&gt;Tipo de Serviço&lt;/code&gt;,&amp;nbsp;&lt;code&gt;Preço&lt;/code&gt;&amp;nbsp;e&amp;nbsp;&lt;code&gt;Duração do Serviço&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Usuário clica no botão&amp;nbsp;&lt;code&gt;Cadastrar&lt;/code&gt;.&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="692" y="149" width="228" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-16" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Sistema redireciona para a página do serviço e exibe &quot;novo serviço&quot;&lt;/span&gt;&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;.&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="964" y="149" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-17" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Testado Ok&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1129" y="149" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-18" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Página Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1294" y="149" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-19" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Fluxo Principal - Ciclo 1&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1459" y="149" width="138" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-20" value="Caso de teste" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="32" y="449" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-21" value="Funcionalidade" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="197" y="449" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-22" value="Cenário" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="362" y="449" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-23" value="Pré-Condições&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; white-space: nowrap;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22Cen%C3%A1rio%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22362%22%20y%3D%2246%22%20width%3D%22120%22%20height%3D%2260%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="527" y="449" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-24" value="Dados de Entrada" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="692" y="449" width="229" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-25" value="Resultado esperado" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="964" y="449" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-26" value="Status" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1129" y="449" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-27" value="Local" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1294" y="449" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-28" value="Observações" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1459" y="449" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-29" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;CT-002&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="32" y="552" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-30" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="197" y="552" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-31" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Atualização de Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="362" y="552" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-32" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Serviço existente cadastrado no sistema / Usuário com acesso ao sistema.&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="527" y="552" width="120" height="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-33" value="&lt;li&gt;&lt;ol&gt;&lt;li&gt;Usuário acessa o menu principal.&lt;/li&gt;&lt;li&gt;Usuário acessa a opção&amp;nbsp;&lt;code&gt;Atualizar Serviço&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Usuário preenche os campos&amp;nbsp;&lt;code&gt;Tipo de Serviço&lt;/code&gt;&amp;nbsp;e&amp;nbsp;&lt;code&gt;Preço&lt;/code&gt;&amp;nbsp;com novos valores.&lt;/li&gt;&lt;li&gt;Usuário clica no botão&amp;nbsp;&lt;code&gt;Cadastrar&lt;/code&gt;.&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="692" y="552" width="228" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-34" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Sistema redireciona para a página do serviço e exibe&lt;/span&gt;&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;&amp;nbsp;&quot;serviço atualizado&quot;&lt;/span&gt;&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;.&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="964" y="552" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-35" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Testado Ok&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1129" y="552" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-36" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Página Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1294" y="552" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-37" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Fluxo Principal - Ciclo 1&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1459" y="552" width="138" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-38" value="VERIFICAR SE E ESSA MENSAGEM MSM!!!" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="890" y="517" width="262" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-39" value="Caso de teste" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="38" y="839" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-40" value="Funcionalidade" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="203" y="839" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-41" value="Cenário" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="368" y="839" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-42" value="Pré-Condições&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; white-space: nowrap;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22Cen%C3%A1rio%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22362%22%20y%3D%2246%22%20width%3D%22120%22%20height%3D%2260%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="533" y="839" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-43" value="Dados de Entrada" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="698" y="839" width="229" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-44" value="Resultado esperado" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="970" y="839" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-45" value="Status" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="839" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-46" value="Local" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="839" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-47" value="Observações" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1465" y="839" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-48" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;CT-003&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="38" y="942" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-49" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="203" y="942" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-50" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Exclusão de Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="368" y="942" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-51" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Serviço existente cadastrado no sistema / Usuário com acesso ao sistema.&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="533" y="942" width="120" height="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-52" value="&lt;li&gt;&lt;ol&gt;&lt;li&gt;Usuário acessa o menu principal&lt;/li&gt;&lt;li&gt;Usuário acessa a opção&amp;nbsp;&lt;code&gt;Excluir Serviço&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Usuário confirma a exclusão do serviço&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="698" y="942" width="228" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-53" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Sistema exibe uma mensagem de confirmação e o serviço &quot;serviço teste&quot;&lt;/span&gt;&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;&amp;nbsp;não aparece mais na lista de serviços.&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="970" y="942" width="120" height="212" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-54" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Testado Ok&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="942" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-55" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Página Serviço&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="942" width="120" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-56" value="&lt;span style=&quot;text-align: start; font-size: medium;&quot;&gt;Fluxo Principal - Ciclo 1&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1465" y="942" width="138" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-57" value="VERIFICAR SE E ESSA MENSAGEM MSM!!!" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="896" y="907" width="262" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="e_UkAJYnVGM3qSoFpe9d-58" value="VERIFICAR SE E ESSA MENSAGEM MSM!!!" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="890" y="110" width="262" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
